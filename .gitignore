@@ -63,22 +63,18 @@ dmypy.json
 docs/_build/
 
 # Cache directories (data)
-data/fmp_cache/
-data/polygon_cache/
-data/fred_cache/
+data/
 
 # Logs
-logs/*.log
+logs/
 *.log
 
 # OS files
 .DS_Store
 Thumbs.db
 
-# Consulting System
-.claude/reviews/
-.claude/pending-changes.json
-.claude/session-history.md
+# Claude Code
+.claude/
 
 # Jupyter notebooks checkpoints
 .ipynb_checkpoints/
