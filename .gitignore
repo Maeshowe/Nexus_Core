@@ -1,0 +1,87 @@
+# OmniData Nexus Core - Git Ignore
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+ENV/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Documentation
+docs/_build/
+
+# Cache directories (data)
+data/fmp_cache/
+data/polygon_cache/
+data/fred_cache/
+
+# Logs
+logs/*.log
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Consulting System
+.claude/reviews/
+.claude/pending-changes.json
+.claude/session-history.md
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Secrets baseline (detect-secrets)
+.secrets.baseline

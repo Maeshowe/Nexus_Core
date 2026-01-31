@@ -1,0 +1,14 @@
+# OmniData Nexus Core - Production Dependencies
+# Python 3.9+ required
+
+# Async HTTP client
+aiohttp>=3.9.0,<4.0.0
+
+# Environment variable management
+python-dotenv>=1.0.0,<2.0.0
+
+# Data manipulation (for normalization)
+pandas>=2.0.0,<3.0.0
+
+# Type hints support
+typing-extensions>=4.0.0,<5.0.0
