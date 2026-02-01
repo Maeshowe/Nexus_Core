@@ -2354,11 +2354,19 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
 
 ### 11.3 Integrációs tesztek valós API-kkal
 **Prioritás:** Közepes | **Komplexitás:** Közepes
+**Státusz:** ✅ KÉSZ
 
-- [ ] FMP integráció tesztelése (éles API kulccsal)
-- [ ] Polygon integráció tesztelése
-- [ ] FRED integráció tesztelése
-- [ ] Cross-provider tesztek (párhuzamos lekérdezések)
+- [x] FMP integráció tesztelése (éles API kulccsal)
+- [x] Polygon integráció tesztelése
+- [x] FRED integráció tesztelése
+- [x] Cross-provider tesztek (párhuzamos lekérdezések)
+- [x] Példa szkriptek (`examples/`)
+  - 01_quickstart.py
+  - 02_multi_provider_analysis.py
+  - 03_caching_demo.py
+  - 04_error_handling.py
+  - 05_readonly_mode.py
+  - 06_parallel_fetch.py
 
 ### 11.4 További fejlesztések
 **Prioritás:** Alacsony | **Komplexitás:** Magas
