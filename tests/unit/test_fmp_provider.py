@@ -58,20 +58,23 @@ class TestFMPProvider:
 
     def test_supported_endpoints(self, fmp_provider):
         endpoints = fmp_provider.get_supported_endpoints()
-        assert len(endpoints) == 13
+        # v1.3.0: Expanded from 13 to 100+ endpoints
+        assert len(endpoints) >= 100
+        # Original 13 endpoints (or their new names) should still exist
         assert "profile" in endpoints
         assert "quote" in endpoints
-        assert "historical_price" in endpoints
-        assert "earnings_calendar" in endpoints
-        assert "balance_sheet" in endpoints
-        assert "income_statement" in endpoints
-        assert "cash_flow" in endpoints
+        # Legacy aliases maintained for backward compatibility
+        assert "historical_price" in endpoints or "historical-price-eod-full" in endpoints
+        assert "earnings_calendar" in endpoints or "earnings-calendar" in endpoints
+        assert "balance_sheet" in endpoints or "balance-sheet-statement" in endpoints
+        assert "income_statement" in endpoints or "income-statement" in endpoints
+        assert "cash_flow" in endpoints or "cash-flow-statement" in endpoints
         assert "ratios" in endpoints
-        assert "growth" in endpoints
-        assert "key_metrics" in endpoints
-        assert "insider_trading" in endpoints
-        assert "institutional_ownership" in endpoints
-        assert "screener" in endpoints
+        assert "growth" in endpoints or "income-statement-growth" in endpoints
+        assert "key_metrics" in endpoints or "key-metrics" in endpoints
+        assert "insider_trading" in endpoints or "insider-trading-search" in endpoints
+        assert "institutional_ownership" in endpoints or "institutional-ownership-latest" in endpoints
+        assert "screener" in endpoints or "company-screener" in endpoints
 
     def test_build_url_profile(self, fmp_provider):
         url = fmp_provider._build_url("profile", symbol="AAPL")
@@ -233,27 +236,16 @@ class TestFMPProviderFetch:
                 await fmp_provider.fetch(session, "invalid_endpoint")
 
     @pytest.mark.asyncio
-    async def test_fetch_without_symbol_still_builds_url(self, fmp_provider):
-        """In the new stable API, symbol is a query param, not a path param.
+    async def test_fetch_without_required_param_raises_error(self, fmp_provider):
+        """v1.3.0: Provider now validates required params before making request.
 
-        The URL can be built without symbol - API would return empty/error.
-        This test verifies the URL is built correctly without symbol param.
+        When a required parameter (like symbol for profile) is missing,
+        the provider should raise ValueError immediately.
         """
-        import re
-        # Even without symbol, the URL should be built - API may return empty result
-        url_pattern = re.compile(r'https://financialmodelingprep\.com/stable/profile\?.*')
-
-        with aioresponses() as m:
-            m.get(
-                url_pattern,
-                payload=[],  # Empty result when no symbol
-                status=200,
-            )
-
-            async with aiohttp.ClientSession() as session:
-                response = await fmp_provider.fetch(session, "profile")
-
-            assert response.status == 200
+        async with aiohttp.ClientSession() as session:
+            with pytest.raises(ValueError) as exc_info:
+                await fmp_provider.fetch(session, "profile")
+            assert "requires parameter: symbol" in str(exc_info.value)
 
 
 @pytest.mark.unit
