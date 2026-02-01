@@ -269,10 +269,7 @@ class FMPProvider(BaseDataProvider):
         if not symbol.replace(".", "").replace("-", "").isalnum():
             return False
 
-        if len(symbol) > 10:
-            return False
-
-        return True
+        return not len(symbol) > 10
 
 
 # Convenience function to create provider with minimal config

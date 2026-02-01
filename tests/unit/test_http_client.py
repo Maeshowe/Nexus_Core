@@ -4,10 +4,9 @@ Unit tests for the HTTP client layer.
 
 import asyncio
 
+import aiohttp
 import pytest
 from aioresponses import aioresponses
-
-import aiohttp
 
 from data_loader.http_client import (
     ClientError,

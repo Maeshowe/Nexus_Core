@@ -6,7 +6,6 @@ All log output automatically redacts sensitive information.
 """
 
 import logging
-import os
 import re
 from logging.handlers import RotatingFileHandler
 from pathlib import Path

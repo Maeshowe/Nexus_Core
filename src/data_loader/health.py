@@ -6,7 +6,7 @@ Tracks API status, metrics, and provides health reports for all providers.
 
 import time
 from collections import deque
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
 from threading import Lock
 from typing import Optional

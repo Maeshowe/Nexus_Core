@@ -3,7 +3,6 @@ Unit tests for the Circuit Breaker.
 """
 
 import time
-from unittest.mock import patch
 
 import pytest
 

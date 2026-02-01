@@ -182,9 +182,8 @@ class TestQoSSemaphoreRouter:
         async with router.acquire("fmp"):
             pass
 
-        async with router.acquire("fmp"):
-            async with router.acquire("fmp"):
-                pass
+        async with router.acquire("fmp"), router.acquire("fmp"):
+            pass
 
         stats = router.get_stats("fmp")
         assert stats["total_requests"] == 3

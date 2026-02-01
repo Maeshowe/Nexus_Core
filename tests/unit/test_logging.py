@@ -3,7 +3,6 @@ Unit tests for the logging module.
 """
 
 import logging
-from pathlib import Path
 
 import pytest
 
@@ -253,7 +252,7 @@ class TestSetupLogging:
             log_to_file=False,
             logger_name="test_clear",
         )
-        original_handler = logger.handlers[0]
+        logger.handlers[0]
 
         # Setup again
         logger = setup_logging(

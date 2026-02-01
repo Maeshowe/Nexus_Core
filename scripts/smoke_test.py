@@ -19,7 +19,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import aiohttp
-from data_loader import DataLoader, OperatingMode
+
+from data_loader import DataLoader
 
 
 async def test_fmp():
@@ -154,9 +155,9 @@ async def test_cache_hit():
         response2 = await loader.get_fmp_data(session, "profile", symbol="GOOG")
 
         if response2.from_cache:
-            print(f"   ✅ Cache hit confirmed!")
+            print("   ✅ Cache hit confirmed!")
         else:
-            print(f"   ⚠️  Expected cache hit, got API call")
+            print("   ⚠️  Expected cache hit, got API call")
 
     return True
 
@@ -175,12 +176,12 @@ async def test_health_report():
 
     report = loader.get_api_health_report()
 
-    print(f"\n📊 Health Report:")
+    print("\n📊 Health Report:")
     print(f"   Operating Mode: {report.get('operating_mode')}")
     print(f"   Overall Status: {report.get('overall_status')}")
 
     stats = report.get("loader_stats", {})
-    print(f"\n   📈 Stats:")
+    print("\n   📈 Stats:")
     print(f"      Total Requests: {stats.get('total_requests', 0)}")
     print(f"      Cache Hits: {stats.get('cache_hits', 0)}")
     print(f"      API Calls: {stats.get('api_calls', 0)}")

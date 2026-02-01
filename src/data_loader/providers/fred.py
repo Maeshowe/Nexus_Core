@@ -176,9 +176,8 @@ class FREDProvider(BaseDataProvider):
             raise ValueError(f"Invalid endpoint: {endpoint}")
 
         # Series endpoints require series_id
-        if endpoint in ("series", "series_info"):
-            if "series_id" not in params:
-                raise ValueError(f"Endpoint '{endpoint}' requires 'series_id' parameter")
+        if endpoint in ("series", "series_info") and "series_id" not in params:
+            raise ValueError(f"Endpoint '{endpoint}' requires 'series_id' parameter")
 
         url = self._build_url(endpoint, **params)
         query_params = self._build_params(endpoint, **params)
@@ -279,10 +278,7 @@ class FREDProvider(BaseDataProvider):
             return False
 
         # FRED series IDs are uppercase alphanumeric with some special chars
-        if not series_id.replace("_", "").isalnum():
-            return False
-
-        return True
+        return series_id.replace("_", "").isalnum()
 
     def is_supported_series(self, series_id: str) -> bool:
         """

@@ -2,17 +2,15 @@
 Unit tests for the FMP provider.
 """
 
-from unittest.mock import AsyncMock
-
-import pytest
 
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader.cache import CacheManager
 from data_loader.config import ProviderConfig
 from data_loader.health import HealthMonitor
-from data_loader.http_client import HttpClient, RateLimitError
+from data_loader.http_client import HttpClient
 from data_loader.providers.fmp import FMPProvider, create_fmp_provider
 
 

@@ -3,11 +3,9 @@ Unit tests for the Polygon provider.
 """
 
 import re
-from unittest.mock import AsyncMock
-
-import pytest
 
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader.cache import CacheManager

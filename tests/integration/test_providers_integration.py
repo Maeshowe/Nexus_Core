@@ -7,9 +7,8 @@ the caching, health monitoring, and HTTP client components.
 
 import re
 
-import pytest
-
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader.cache import CacheManager
@@ -144,7 +143,7 @@ class TestProvidersSharedHealthMonitor:
                     )
 
                 # Polygon requests - mixed results
-                for i in range(15):
+                for _i in range(15):
                     await polygon_provider.get(
                         session, "trades", symbol="SPY", use_cache=False
                     )

@@ -7,8 +7,8 @@ Shared pytest fixtures and configuration for all test types.
 import os
 import sys
 import tempfile
+from collections.abc import Generator
 from pathlib import Path
-from typing import AsyncGenerator, Generator
 from unittest.mock import MagicMock
 
 import pytest

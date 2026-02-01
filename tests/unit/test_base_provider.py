@@ -2,13 +2,12 @@
 Unit tests for the base data provider.
 """
 
-from unittest.mock import AsyncMock, MagicMock
-
-import pytest
+from unittest.mock import AsyncMock
 
 import aiohttp
+import pytest
 
-from data_loader.cache import CacheEntry, CacheManager
+from data_loader.cache import CacheManager
 from data_loader.config import ProviderConfig
 from data_loader.health import HealthMonitor
 from data_loader.http_client import (

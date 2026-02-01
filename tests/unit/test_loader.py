@@ -4,14 +4,12 @@ Unit tests for the unified DataLoader interface.
 
 import re
 
-import pytest
-
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader.cache import CacheManager
 from data_loader.circuit_breaker import (
-    CircuitBreakerConfig,
     CircuitBreakerError,
     CircuitBreakerManager,
     CircuitState,

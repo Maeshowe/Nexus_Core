@@ -6,9 +6,8 @@ Tests the complete flow through the DataLoader with all components.
 
 import re
 
-import pytest
-
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader import DataLoader, OperatingMode
@@ -303,8 +302,8 @@ class TestProviderIsolation:
         assert polygon_response.success is True
 
         # Check health shows FMP failure but Polygon OK
-        fmp_healthy = loader.is_provider_healthy("fmp")
-        polygon_healthy = loader.is_provider_healthy("polygon")
+        loader.is_provider_healthy("fmp")
+        loader.is_provider_healthy("polygon")
 
         # Both should still be "healthy" as we need more failures to trigger circuit
         # The key point is Polygon succeeded despite FMP failing

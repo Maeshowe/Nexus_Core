@@ -5,7 +5,6 @@ Implements the Circuit Breaker pattern for failure isolation and recovery.
 Prevents cascading failures by failing fast when a service is unhealthy.
 """
 
-import asyncio
 import time
 from collections import deque
 from dataclasses import dataclass

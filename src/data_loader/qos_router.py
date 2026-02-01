@@ -6,7 +6,7 @@ Ensures API rate limits are respected and resources are fairly distributed.
 """
 
 import asyncio
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any, Callable, Optional, TypeVar
 
 T = TypeVar('T')

@@ -202,24 +202,24 @@ class HttpClient:
 
                 return http_response
 
-        except asyncio.TimeoutError:
+        except asyncio.TimeoutError as e:
             elapsed_ms = (time.perf_counter() - start_time) * 1000
             raise TimeoutError(
                 f"Request timed out after {request_timeout}s",
                 url=url,
-            )
+            ) from e
 
         except aiohttp.ClientConnectorError as e:
             raise ConnectionError(
                 f"Connection failed: {e}",
                 url=url,
-            )
+            ) from e
 
         except aiohttp.ClientError as e:
             raise HttpError(
                 f"HTTP client error: {e}",
                 url=url,
-            )
+            ) from e
 
     def _check_response(self, response: HttpResponse) -> None:
         """

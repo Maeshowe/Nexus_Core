@@ -196,10 +196,7 @@ class BaseDataProvider(ABC):
         sorted_params = sorted(params.items())
         param_str = "_".join(f"{k}={v}" for k, v in sorted_params if v is not None)
 
-        if param_str:
-            key = f"{prefix}_{param_str}"
-        else:
-            key = prefix
+        key = f"{prefix}_{param_str}" if param_str else prefix
 
         # Hash if too long
         if len(key) > 200:

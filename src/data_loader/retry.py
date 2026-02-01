@@ -6,8 +6,9 @@ Implements exponential backoff with jitter for transient failure recovery.
 
 import asyncio
 import random
+from collections.abc import Sequence
 from dataclasses import dataclass, field
-from typing import Any, Callable, Optional, Sequence, Type, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 
 T = TypeVar('T')
 
@@ -148,10 +149,7 @@ class RetryHandler:
 
         # Check for non-retryable status codes
         status_code = getattr(exception, 'status_code', None)
-        if status_code and status_code in self.config.non_retryable_status_codes:
-            return False
-
-        return True
+        return not (status_code and status_code in self.config.non_retryable_status_codes)
 
     def should_retry(
         self,
@@ -286,7 +284,7 @@ def with_retry(
     max_retries: int = 3,
     base_delay: float = 1.0,
     max_delay: float = 60.0,
-    retryable_exceptions: Optional[Sequence[Type[Exception]]] = None,
+    retryable_exceptions: Optional[Sequence[type[Exception]]] = None,
 ):
     """
     Decorator for adding retry logic to async functions.

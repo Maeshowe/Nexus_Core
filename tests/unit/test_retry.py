@@ -2,14 +2,11 @@
 Unit tests for the Retry & Backoff Handler.
 """
 
-import asyncio
-from unittest.mock import AsyncMock
 
 import pytest
 
 from data_loader.retry import (
     RetryConfig,
-    RetryContext,
     RetryError,
     RetryHandler,
     RetryStats,

@@ -6,9 +6,6 @@ TIER 1 test cases TC-101 through TC-106.
 
 import json
 import logging
-import os
-import re
-from io import StringIO
 from pathlib import Path
 
 import pytest
@@ -171,7 +168,7 @@ class TestCacheSecurityTC103:
 
         cache_file = temp_cache_dir / "polygon_cache" / "meta_test.json"
         content = cache_file.read_text()
-        parsed = json.loads(content)
+        json.loads(content)
 
         # Check that no API key values are stored (not field names like 'key' for cache key)
         # The 'key' field in CacheEntry is the cache key name, not an API key
@@ -211,7 +208,7 @@ class TestGitignoreTC104:
 
         # At least one should exist if this is a properly configured project
         # This is informational - not required for tests to pass
-        env_example_exists = any(p.exists() for p in possible_paths)
+        _env_example_exists = any(p.exists() for p in possible_paths)  # noqa: F841
         # We don't assert here as the project might have different conventions
 
 
@@ -277,7 +274,7 @@ class TestErrorMessageSanitization:
         )
 
         # The URL should be stored but sanitized when displayed
-        error_str = str(error)
+        _error_str = str(error)  # noqa: F841
 
         # Note: HttpError might or might not sanitize - check implementation
         # This test documents expected behavior

@@ -15,8 +15,8 @@ Options:
     --full    Run comprehensive benchmarks (takes longer)
 """
 
-import asyncio
 import argparse
+import asyncio
 import gc
 import statistics
 import sys
@@ -29,6 +29,7 @@ from typing import Optional
 sys.path.insert(0, str(Path(__file__).parent.parent.parent / "src"))
 
 import aiohttp
+
 from data_loader import DataLoader
 
 

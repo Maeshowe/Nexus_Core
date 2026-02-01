@@ -19,6 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import aiohttp
+
 from data_loader import DataLoader
 
 
@@ -83,7 +84,7 @@ async def main():
     successful = sum(1 for r in results.values() if r.get("success"))
     from_cache = sum(1 for r in results.values() if r.get("from_cache"))
 
-    print(f"\nResults:")
+    print("\nResults:")
     for symbol, result in results.items():
         status = "OK" if result.get("success") else "FAIL"
         source = "cache" if result.get("from_cache") else "api"
@@ -92,7 +93,7 @@ async def main():
             sector = result["data"].get("sector", "N/A")
         print(f"  {symbol}: {status} ({source}) - {sector}")
 
-    print(f"\nSummary:")
+    print("\nSummary:")
     print(f"  Successful: {successful}/{len(portfolio)}")
     print(f"  From cache: {from_cache}/{successful}")
     print(f"  Total time: {elapsed:.2f}s")

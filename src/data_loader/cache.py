@@ -237,7 +237,7 @@ class CacheManager:
             return None
 
         try:
-            with open(cache_path, 'r', encoding='utf-8') as f:
+            with open(cache_path, encoding='utf-8') as f:
                 data = json.load(f)
 
             entry = CacheEntry.from_dict(data)
@@ -248,7 +248,7 @@ class CacheManager:
 
             return entry
 
-        except (json.JSONDecodeError, KeyError, IOError):
+        except (OSError, json.JSONDecodeError, KeyError):
             # Invalid or corrupted cache file
             return None
 
@@ -273,7 +273,7 @@ class CacheManager:
                 cache_path.unlink()
                 return True
             return False
-        except IOError:
+        except OSError:
             return False
 
     def clear_provider(self, provider: str) -> int:
@@ -299,7 +299,7 @@ class CacheManager:
             try:
                 cache_file.unlink()
                 count += 1
-            except IOError:
+            except OSError:
                 pass
 
         return count
@@ -344,7 +344,7 @@ class CacheManager:
 
             for cache_file in provider_dir.glob("*.json"):
                 try:
-                    with open(cache_file, 'r', encoding='utf-8') as f:
+                    with open(cache_file, encoding='utf-8') as f:
                         data = json.load(f)
 
                     entry = CacheEntry.from_dict(data)
@@ -353,12 +353,12 @@ class CacheManager:
                         cache_file.unlink()
                         count += 1
 
-                except (json.JSONDecodeError, KeyError, IOError):
+                except (OSError, json.JSONDecodeError, KeyError):
                     # Remove corrupted files
                     try:
                         cache_file.unlink()
                         count += 1
-                    except IOError:
+                    except OSError:
                         pass
 
         return count
@@ -400,7 +400,7 @@ class CacheManager:
                     prov_stats["total_size_bytes"] += cache_file.stat().st_size
 
                     try:
-                        with open(cache_file, 'r', encoding='utf-8') as f:
+                        with open(cache_file, encoding='utf-8') as f:
                             data = json.load(f)
                         entry = CacheEntry.from_dict(data)
 
@@ -409,7 +409,7 @@ class CacheManager:
                         else:
                             prov_stats["valid_entries"] += 1
 
-                    except (json.JSONDecodeError, KeyError, IOError):
+                    except (OSError, json.JSONDecodeError, KeyError):
                         prov_stats["expired_entries"] += 1
 
             stats["providers"][prov] = prov_stats

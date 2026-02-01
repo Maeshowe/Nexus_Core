@@ -5,7 +5,6 @@ Main entry point for all data retrieval operations. Orchestrates providers,
 QoS routing, circuit breaker, retry handling, and caching.
 """
 
-import asyncio
 import time
 from dataclasses import dataclass
 from typing import Any, Optional
@@ -13,7 +12,7 @@ from typing import Any, Optional
 import aiohttp
 
 from .cache import CacheManager
-from .circuit_breaker import CircuitBreakerConfig, CircuitBreakerError, CircuitBreakerManager, CircuitState
+from .circuit_breaker import CircuitBreakerConfig, CircuitBreakerError, CircuitBreakerManager
 from .config import Config, OperatingMode, load_config
 from .health import HealthMonitor, ProviderStatus
 from .http_client import HttpClient

@@ -4,9 +4,8 @@ Unit tests for the FRED provider.
 
 import re
 
-import pytest
-
 import aiohttp
+import pytest
 from aioresponses import aioresponses
 
 from data_loader.cache import CacheManager

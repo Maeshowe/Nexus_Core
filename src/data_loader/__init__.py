@@ -36,14 +36,7 @@ __version__ = "1.0.0"
 __author__ = "OmniData Nexus Core Team"
 
 # Exports - M1 Foundation components
-from .config import Config, OperatingMode, load_config
-from .http_client import HttpClient, HttpError, HttpResponse
-from .cache import CacheManager, CacheEntry
-from .health import HealthMonitor, ProviderStatus
-from .logging import setup_logging, get_logger, sanitize_message
-
-# M3 Resilience components
-from .qos_router import QoSSemaphoreRouter
+from .cache import CacheEntry, CacheManager
 from .circuit_breaker import (
     CircuitBreaker,
     CircuitBreakerConfig,
@@ -51,10 +44,17 @@ from .circuit_breaker import (
     CircuitBreakerManager,
     CircuitState,
 )
-from .retry import RetryConfig, RetryError, RetryHandler, RetryStats
+from .config import Config, OperatingMode, load_config
+from .health import HealthMonitor, ProviderStatus
+from .http_client import HttpClient, HttpError, HttpResponse
 
 # Unified DataLoader interface
 from .loader import DataLoader, DataLoaderStats, ReadOnlyError, create_data_loader
+from .logging import get_logger, sanitize_message, setup_logging
+
+# M3 Resilience components
+from .qos_router import QoSSemaphoreRouter
+from .retry import RetryConfig, RetryError, RetryHandler, RetryStats
 
 __all__ = [
     "__version__",

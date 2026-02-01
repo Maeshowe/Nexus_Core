@@ -119,6 +119,8 @@ strict_optional = true
 [tool.ruff]
 target-version = "py39"
 line-length = 100
+
+[tool.ruff.lint]
 select = [
     "E",    # pycodestyle errors
     "W",    # pycodestyle warnings
@@ -131,9 +133,14 @@ select = [
     "SIM",  # flake8-simplify
 ]
 ignore = [
-    "E501",  # line too long (handled by formatter)
-    "B008",  # do not perform function calls in argument defaults
+    "E501",   # line too long (handled by formatter)
+    "B008",   # do not perform function calls in argument defaults
+    "SIM102", # nested if - often more readable
+    "SIM103", # return condition directly - style preference
+    "SIM108", # ternary operator - style preference
+    "ARG001", # unused function argument - fixtures have side effects
+    "ARG002", # unused method argument - fixtures have side effects
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["data_loader"]

@@ -23,10 +23,12 @@ PROVIDERS DETECTED:
 - FRED (stlouisfed.org)
 """
 
+import contextlib
 import re
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Optional
 
 import pandas as pd
 
@@ -109,9 +111,9 @@ class EndpointHealth:
         return "unknown"
 
     @classmethod
-    def parse_lines(cls, lines: Iterable[str]) -> List[ApiEvent]:
+    def parse_lines(cls, lines: Iterable[str]) -> list[ApiEvent]:
         """Parse log lines and extract API events."""
-        events: List[ApiEvent] = []
+        events: list[ApiEvent] = []
 
         for line in lines:
             line = line.rstrip("\n")
@@ -157,22 +159,20 @@ class EndpointHealth:
         return events
 
     @staticmethod
-    def load_logs(paths: List[str]) -> List[str]:
+    def load_logs(paths: list[str]) -> list[str]:
         """Load log content from multiple files."""
-        all_lines: List[str] = []
+        all_lines: list[str] = []
         for p in paths:
             fp = Path(p)
             if fp.is_file():
-                try:
+                with contextlib.suppress(Exception):
                     all_lines.extend(fp.read_text(errors="ignore").splitlines())
-                except Exception:
-                    pass
         return all_lines
 
     @staticmethod
-    def find_recent_logs() -> List[str]:
+    def find_recent_logs() -> list[str]:
         """Find recent log files automatically."""
-        candidates: List[str] = []
+        candidates: list[str] = []
 
         # Main log files
         for name in ["moneyflows.log", "nexus.log", "data_loader.log"]:
@@ -191,7 +191,7 @@ class EndpointHealth:
         return candidates
 
     @staticmethod
-    def to_dataframe(events: List[ApiEvent]) -> pd.DataFrame:
+    def to_dataframe(events: list[ApiEvent]) -> pd.DataFrame:
         """Convert ApiEvent list to DataFrame."""
         if not events:
             return pd.DataFrame(
@@ -208,7 +208,7 @@ class EndpointHealth:
         } for e in events])
 
     @staticmethod
-    def summarize(df: pd.DataFrame) -> Dict[str, Any]:
+    def summarize(df: pd.DataFrame) -> dict[str, Any]:
         """Generate summary statistics from event DataFrame."""
         if df.empty:
             return {
@@ -267,7 +267,7 @@ class EndpointHealth:
         print("\nENDPOINT HEALTH (top offenders)")
         print("-" * 78)
 
-        status_cols = [c for c in h.columns]
+        status_cols = list(h.columns)
         header = ["provider", "endpoint"] + [str(c) for c in status_cols]
         print(" | ".join([f"{x:<18}" for x in header]))
         print("-" * 78)
@@ -283,7 +283,7 @@ class EndpointHealth:
 
         print("-" * 78)
 
-    def run_from_paths(self, paths: List[str]) -> Dict[str, Any]:
+    def run_from_paths(self, paths: list[str]) -> dict[str, Any]:
         """Analyze logs from specific file paths."""
         lines = self.load_logs(paths)
         events = self.parse_lines(lines)
@@ -291,7 +291,7 @@ class EndpointHealth:
         summary = self.summarize(df)
         return {"df": df, **summary}
 
-    def run_auto(self) -> Dict[str, Any]:
+    def run_auto(self) -> dict[str, Any]:
         """Automatically find and analyze recent logs."""
         paths = self.find_recent_logs()
         return self.run_from_paths(paths)

@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 import aiohttp
+
 from data_loader import DataLoader, OperatingMode, ReadOnlyError
 
 
@@ -60,11 +61,11 @@ async def main():
                 session, "profile", symbol="UNUSUAL_SYMBOL_12345"
             )
             if response.success:
-                print(f"    Unexpectedly succeeded!")
+                print("    Unexpectedly succeeded!")
             else:
                 print(f"    Failed as expected: {response.error}")
-        except ReadOnlyError as e:
-            print(f"    ReadOnlyError (expected): Data not in cache")
+        except ReadOnlyError:
+            print("    ReadOnlyError (expected): Data not in cache")
 
         # Switch back to LIVE mode
         print("\n[5] Switching back to LIVE mode...")

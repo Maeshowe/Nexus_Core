@@ -15,8 +15,8 @@ All providers inherit from BaseDataProvider and implement:
 # Exports
 from .base import BaseDataProvider, ProviderResponse
 from .fmp import FMPProvider, create_fmp_provider
-from .polygon import PolygonProvider, create_polygon_provider
 from .fred import FREDProvider, create_fred_provider
+from .polygon import PolygonProvider, create_polygon_provider
 
 __all__ = [
     "BaseDataProvider",

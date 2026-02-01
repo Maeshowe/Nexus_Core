@@ -5,7 +5,7 @@ Tests QoS Router, Circuit Breaker, and Retry Handler working together.
 """
 
 import asyncio
-import time
+import contextlib
 
 import pytest
 
@@ -131,7 +131,7 @@ class TestCircuitBreakerWithRetry:
                 result = await retry_handler.execute(api_call)
                 cb.record_success()
                 return result
-            except Exception as e:
+            except Exception:
                 cb.record_failure()
                 raise
 
@@ -207,10 +207,8 @@ class TestCircuitBreakerWithRetry:
 
         # Multiple failed attempts
         for _ in range(3):
-            try:
+            with contextlib.suppress(RetryError):
                 await with_both()
-            except RetryError:
-                pass
 
         # Circuit should now be open
         assert cb.state == CircuitState.OPEN
