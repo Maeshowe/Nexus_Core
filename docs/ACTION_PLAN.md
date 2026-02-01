@@ -2317,16 +2317,17 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
 
 ### 11.1 Dokumentáció kiegészítése
 **Prioritás:** Magas | **Komplexitás:** Közepes
+**Státusz:** ✅ KÉSZ
 
-- [ ] README.md frissítése
+- [x] README.md frissítése
   - Telepítési útmutató
   - Használati példák (basic, advanced)
   - API referencia összefoglaló
   - Troubleshooting szekció
-- [ ] API dokumentáció generálása
-  - Sphinx vagy mkdocs választás
-  - Docstring-ek ellenőrzése
-  - Hosted docs (GitHub Pages / ReadTheDocs)
+- [x] API dokumentáció generálása
+  - MkDocs + Material theme
+  - mkdocstrings Python autodoc
+  - GitHub Pages deployment (`mkdocs gh-deploy`)
 
 ### 11.2 CI/CD és PyPI publikálás
 **Prioritás:** Magas | **Komplexitás:** Közepes
@@ -2368,7 +2369,23 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
   - 05_readonly_mode.py
   - 06_parallel_fetch.py
 
-### 11.4 További fejlesztések
+### 11.4 Performance benchmarkok
+**Prioritás:** Közepes | **Komplexitás:** Közepes
+**Státusz:** ✅ KÉSZ
+
+- [x] API latency mérés providerenként
+- [x] Cache teljesítmény benchmark
+- [x] Concurrent request throughput
+- [x] Benchmark tool: `tools/benchmarks/benchmark.py`
+  - Quick mode: `python tools/benchmarks/benchmark.py`
+  - Full mode: `python tools/benchmarks/benchmark.py --full`
+
+Eredmények:
+- Cache reads: ~7,000-26,000 req/sec
+- API cold calls: ~5-12 req/sec (provider függő)
+- Concurrent scaling: linear
+
+### 11.5 További fejlesztések
 **Prioritás:** Alacsony | **Komplexitás:** Magas
 
 - [ ] Új provider: Alpha Vantage
@@ -2376,7 +2393,7 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
 - [ ] Rate limiting finomhangolás (adaptive)
 - [ ] Webhook/callback támogatás
 
-### 11.5 Production használat
+### 11.6 Production használat
 **Státusz:** ✅ KÉSZEN ÁLL
 
 A projekt production-ready:
@@ -2395,3 +2412,4 @@ A projekt production-ready:
 |---------|------|--------|---------|
 | 1.0 | 2026-01-31 | Lead Agent | Initial action plan with realistic effort estimates |
 | 1.1 | 2026-01-31 | Claude | Updated status: M1-M4 COMPLETE, added Next Steps section |
+| 1.2 | 2026-02-01 | Claude | 11.1 docs ✅, 11.3 examples ✅, 11.4 benchmarks ✅ |
