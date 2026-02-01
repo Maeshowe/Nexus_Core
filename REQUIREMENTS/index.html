@@ -1,0 +1,2316 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular, asynchronous DataLoader framework for financial data">
+      
+      
+      
+        <link rel="canonical" href="https://maeshowe.github.io/Nexus_Core/REQUIREMENTS/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Requirements Specification - OmniData Nexus Core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#requirements-specification" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OmniData Nexus Core" class="md-header__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OmniData Nexus Core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Requirements Specification
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OmniData Nexus Core" class="md-nav__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OmniData Nexus Core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/dataloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/health/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEST_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-executive-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Executive Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Problem Statement
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Problem Statement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-current-situation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Current Situation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Problem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-impact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Impact
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stakeholders" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Stakeholders
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-functional-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Functional Requirements
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Functional Requirements">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-core-mvp-must" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Core (MVP) - MUST
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-important-should" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Important - SHOULD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-nice-to-have-could" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Nice to Have - COULD
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-out-of-scope-wont-this-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Out of Scope - WON'T (this version)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-non-functional-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Non-Functional Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-user-stories" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. User Stories
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. User Stories">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#us-001-fetch-company-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-001: Fetch Company Fundamentals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-002-fetch-multi-source-data-in-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-002: Fetch Multi-Source Data in Parallel
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-003-monitor-api-health" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-003: Monitor API Health
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-004-work-offline-with-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-004: Work Offline with Cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-005-handle-rate-limits-gracefully" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-005: Handle Rate Limits Gracefully
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-006-fetch-fred-macroeconomic-series" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-006: Fetch FRED Macroeconomic Series
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#us-007-extend-with-new-data-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        US-007: Extend with New Data Source
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Constraints
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Constraints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-technical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Technical
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-business" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Business
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-api-specific" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 API-Specific
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-glossary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Glossary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-a-complete-endpoint-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Appendix A: Complete Endpoint Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Appendix A: Complete Endpoint Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-fmp-endpoints-13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.1 FMP Endpoints (13)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-polygon-endpoints-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.2 Polygon Endpoints (4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-fred-series-32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A.3 FRED Series (32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="requirements-specification">Requirements Specification<a class="headerlink" href="#requirements-specification" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Project:</strong> OmniData Nexus Core
+<strong>Version:</strong> 1.0
+<strong>Date:</strong> 2026-01-31
+<strong>Status:</strong> Draft
+<strong>Based on:</strong> MoneyFlows Data Loader v2.7.0</p>
+</blockquote>
+<hr />
+<h2 id="1-executive-summary">1. Executive Summary<a class="headerlink" href="#1-executive-summary" title="Permanent link">&para;</a></h2>
+<p>OmniData Nexus Core is a modular, asynchronous Python framework serving as a centralized Data Access Layer for aggregating financial and macroeconomic data from multiple API sources. Built upon the proven MoneyFlows Data Loader architecture, it provides a unified interface for <strong>50 endpoints</strong> across FMP Ultimate (13), Polygon (4), and FRED (33) APIs. The framework features intelligent caching, circuit breaker patterns, rate limit management via QoS Semaphore Router, and comprehensive health monitoring.</p>
+<hr />
+<h2 id="2-problem-statement">2. Problem Statement<a class="headerlink" href="#2-problem-statement" title="Permanent link">&para;</a></h2>
+<h3 id="21-current-situation">2.1 Current Situation<a class="headerlink" href="#21-current-situation" title="Permanent link">&para;</a></h3>
+<p>Quantitative finance research requires data from multiple specialized APIs:
+- <strong>FMP Ultimate</strong>: Fundamental data (financials, ratios, metrics, insider trading)
+- <strong>Polygon.io</strong>: Market data (daily aggregates, trades, options snapshots)
+- <strong>FRED</strong>: Macroeconomic indicators (32 key series across inflation, employment, growth)</p>
+<p>Each API has different authentication, response formats, rate limits, and availability patterns.</p>
+<h3 id="22-problem">2.2 Problem<a class="headerlink" href="#22-problem" title="Permanent link">&para;</a></h3>
+<p>There is no unified framework that:
+- Provides a single interface for heterogeneous financial data sources
+- Implements production-grade resilience (circuit breaker, exponential backoff)
+- Manages concurrent requests with provider-specific limits
+- Caches responses intelligently with atomic writes
+- Monitors API health and rate limit consumption automatically</p>
+<h3 id="23-impact">2.3 Impact<a class="headerlink" href="#23-impact" title="Permanent link">&para;</a></h3>
+<p>Without this framework:
+- Slow data acquisition (sequential fetching)
+- Brittle code prone to API-specific failures
+- Rate limit violations leading to throttling/bans
+- Inconsistent error handling across sources
+- Time spent on infrastructure instead of analysis</p>
+<hr />
+<h2 id="3-stakeholders">3. Stakeholders<a class="headerlink" href="#3-stakeholders" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Stakeholder</th>
+<th>Role</th>
+<th>Primary Need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantitative Researcher</td>
+<td>Primary User</td>
+<td>Fast, reliable access to normalized financial data</td>
+</tr>
+<tr>
+<td>API Providers (FMP, Polygon, FRED)</td>
+<td>External Services</td>
+<td>Compliance with rate limits and ToS</td>
+</tr>
+<tr>
+<td>Future Contributors</td>
+<td>Developers</td>
+<td>Clear extension points for new data sources</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-functional-requirements">4. Functional Requirements<a class="headerlink" href="#4-functional-requirements" title="Permanent link">&para;</a></h2>
+<h3 id="41-core-mvp-must">4.1 Core (MVP) - MUST<a class="headerlink" href="#41-core-mvp-must" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>Description</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-001</td>
+<td>Unified DataLoader Interface</td>
+<td>Central <code>DataLoader</code> class with <code>get_fmp_data()</code>, <code>get_polygon_data()</code>, <code>get_fred_data()</code> methods</td>
+<td>- Consistent method signatures<br>- Returns normalized data structures<br>- Supports all 50 endpoints</td>
+</tr>
+<tr>
+<td>FR-002</td>
+<td>FMP Ultimate Integration (13 endpoints)</td>
+<td>Async client for all FMP endpoints</td>
+<td>- screener, profile, quote, historical_price<br>- earnings_calendar, balance_sheet, income_statement<br>- ratios, growth, key_metrics, cash_flow<br>- insider_trading, institutional_ownership</td>
+</tr>
+<tr>
+<td>FR-003</td>
+<td>Polygon Integration (4 endpoints)</td>
+<td>Async client for Polygon API</td>
+<td>- aggs_daily: <code>/v2/aggs/ticker/{symbol}/range/1/day/{start}/{end}</code><br>- trades: <code>/v3/trades/{symbol}</code><br>- options_snapshot: <code>/v3/snapshot/options/{symbol}</code><br>- market_snapshot: <code>/v2/snapshot/locale/us/markets/stocks/tickers</code></td>
+</tr>
+<tr>
+<td>FR-004</td>
+<td>FRED Integration (32 series)</td>
+<td>Async client for FRED API</td>
+<td>- Inflation: CPIAUCSL, CPILFESL, PCEPI, PCEPILFE<br>- Labor: UNRATE, PAYEMS, CES0500000003, ECIWAG, CIVPART<br>- Growth: GDPC1, GPDI, PNFI + equipment/R&amp;D<br>- Housing: HOUST, PERMIT, HSN1F, CSUSHPINSA<br>- Rates: DGS10, FEDFUNDS, MORTGAGE30US<br>- LEI: AWHMAN, DGORDER, ICSA, IC4WSA<br>- Sentiment: UMCSENT, UMCSENTEXP</td>
+</tr>
+<tr>
+<td>FR-005</td>
+<td>QoS Semaphore Router</td>
+<td>Provider-specific concurrency limits</td>
+<td>- FMP: max 3 concurrent requests<br>- Polygon: max 10 concurrent requests<br>- FRED: max 1 concurrent request<br>- Configurable via <code>api.concurrency.*</code></td>
+</tr>
+<tr>
+<td>FR-006</td>
+<td>Intelligent Caching</td>
+<td>Multi-strategy cache with atomic writes</td>
+<td>- FMP: <code>data/fmp_cache/{endpoint}/{date}/{symbol}.json</code><br>- Polygon: <code>data/polygon_cache/{endpoint}/{hash}.json</code><br>- TTL: 7 days default<br>- Atomic writes (temp file + rename)</td>
+</tr>
+<tr>
+<td>FR-007</td>
+<td>Circuit Breaker</td>
+<td>Automatic request halting on high error rate</td>
+<td>- Opens when error rate &gt; 20%<br>- Half-open state for recovery testing<br>- Closed state for normal operation<br>- Per-provider circuit state</td>
+</tr>
+<tr>
+<td>FR-008</td>
+<td>Exponential Backoff with Jitter</td>
+<td>Retry strategy for transient failures</td>
+<td>- Configurable max retries (default: 3)<br>- Exponential delay (1s, 2s, 4s...)<br>- Random jitter to prevent thundering herd<br>- Only retry 5xx and timeouts</td>
+</tr>
+<tr>
+<td>FR-009</td>
+<td>Rate Limit Handling</td>
+<td>HTTP 429 response management</td>
+<td>- Provider-specific cooldown times<br>- Parse Retry-After headers<br>- Warning at 80% consumption<br>- Automatic request throttling</td>
+</tr>
+<tr>
+<td>FR-010</td>
+<td>Health Check System</td>
+<td>API availability monitoring</td>
+<td>- <code>get_api_health_report()</code> method<br>- Returns: total_requests, errors, error_rate, circuit_breaker state<br>- Per-provider status (UP/DOWN/DEGRADED)</td>
+</tr>
+<tr>
+<td>FR-011</td>
+<td>Schema-based Validation</td>
+<td>Response structure verification</td>
+<td>- Validate against expected schemas<br>- Return <code>None</code> + warning on invalid<br>- Log validation failures</td>
+</tr>
+<tr>
+<td>FR-012</td>
+<td>Operating Modes</td>
+<td>LIVE vs READ-ONLY operation</td>
+<td>- LIVE: API as primary, write-through cache<br>- READ-ONLY: Cache only, 0 API calls guaranteed</td>
+</tr>
+<tr>
+<td>FR-013</td>
+<td>Configuration Management</td>
+<td>External config for credentials and settings</td>
+<td>- Environment variables: <code>FMP_KEY</code>, <code>POLYGON_KEY</code>, <code>FRED_KEY</code><br>- <code>.env</code> file support<br>- <code>core.config_manager</code> integration</td>
+</tr>
+<tr>
+<td>FR-014</td>
+<td>API Key Sanitization</td>
+<td>Security in logging</td>
+<td>- Automatic removal of API keys from logs<br>- No keys in error messages<br>- No keys in cache files</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-important-should">4.2 Important - SHOULD<a class="headerlink" href="#42-important-should" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>Description</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-101</td>
+<td>Cache TTL Configuration</td>
+<td>Per-endpoint cache expiration</td>
+<td>- Configurable TTL per data type<br>- Override defaults via config<br>- Automatic cache invalidation</td>
+</tr>
+<tr>
+<td>FR-102</td>
+<td>Request Batching</td>
+<td>Combine similar requests</td>
+<td>- Batch within time window<br>- Respect API batch limits<br>- Transparent to caller</td>
+</tr>
+<tr>
+<td>FR-103</td>
+<td>Metrics Export</td>
+<td>Operational telemetry</td>
+<td>- Request count per source<br>- Response times (p50, p95, p99)<br>- Cache hit/miss rates</td>
+</tr>
+<tr>
+<td>FR-104</td>
+<td>Graceful Degradation</td>
+<td>Partial success handling</td>
+<td>- Return available data on partial failure<br>- Log failed sources<br>- Clear error attribution</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-nice-to-have-could">4.3 Nice to Have - COULD<a class="headerlink" href="#43-nice-to-have-could" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-201</td>
+<td>Plugin Architecture</td>
+<td>Dynamic loading of new data source implementations</td>
+</tr>
+<tr>
+<td>FR-202</td>
+<td>Dark Pool Detection</td>
+<td>Block trade identification (min_block_size: 10000, min_notional configurable)</td>
+</tr>
+<tr>
+<td>FR-203</td>
+<td>Data Export</td>
+<td>Export to Parquet/HDF5 formats</td>
+</tr>
+<tr>
+<td>FR-204</td>
+<td>CLI Tool</td>
+<td>Command-line interface for manual queries</td>
+</tr>
+<tr>
+<td>FR-205</td>
+<td>Async Iterator Support</td>
+<td>Stream large datasets without full memory load</td>
+</tr>
+</tbody>
+</table>
+<h3 id="44-out-of-scope-wont-this-version">4.4 Out of Scope - WON'T (this version)<a class="headerlink" href="#44-out-of-scope-wont-this-version" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GUI Dashboard</td>
+<td>Focus on programmatic API</td>
+</tr>
+<tr>
+<td>Database Persistence</td>
+<td>Caller responsible for storage</td>
+</tr>
+<tr>
+<td>Data Analysis/Modeling</td>
+<td>Framework provides data, not analytics</td>
+</tr>
+<tr>
+<td>Multi-user Authentication</td>
+<td>Single-user research tool</td>
+</tr>
+<tr>
+<td>WebSocket Streaming</td>
+<td>REST endpoints sufficient for research</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-non-functional-requirements">5. Non-Functional Requirements<a class="headerlink" href="#5-non-functional-requirements" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Category</th>
+<th>Requirement</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NFR-001</td>
+<td>Performance</td>
+<td>Single API request latency</td>
+<td>&lt;2s p95</td>
+<td>Timed fetch operations</td>
+</tr>
+<tr>
+<td>NFR-002</td>
+<td>Performance</td>
+<td>Parallel fetch speedup</td>
+<td>&gt;3x for 10 concurrent vs sequential</td>
+<td>Benchmark comparison</td>
+</tr>
+<tr>
+<td>NFR-003</td>
+<td>Reliability</td>
+<td>Successful request rate</td>
+<td>&gt;95% (excluding API outages)</td>
+<td>Success/total ratio</td>
+</tr>
+<tr>
+<td>NFR-004</td>
+<td>Reliability</td>
+<td>Retry recovery rate</td>
+<td>&gt;80% of retryable failures</td>
+<td>Retry success tracking</td>
+</tr>
+<tr>
+<td>NFR-005</td>
+<td>Reliability</td>
+<td>Circuit breaker threshold</td>
+<td>Opens at &gt;20% error rate</td>
+<td>Error rate monitoring</td>
+</tr>
+<tr>
+<td>NFR-006</td>
+<td>Maintainability</td>
+<td>Code test coverage</td>
+<td>&gt;80% line coverage</td>
+<td>pytest-cov report</td>
+</tr>
+<tr>
+<td>NFR-007</td>
+<td>Security</td>
+<td>API key protection</td>
+<td>No keys in code, logs, git, cache</td>
+<td>Audit + grep verification</td>
+</tr>
+<tr>
+<td>NFR-008</td>
+<td>Scalability</td>
+<td>Concurrent requests</td>
+<td>50+ simultaneous (within QoS limits)</td>
+<td>Load testing</td>
+</tr>
+<tr>
+<td>NFR-009</td>
+<td>Usability</td>
+<td>Setup time</td>
+<td>&lt;5 minutes to first fetch</td>
+<td>Timed installation</td>
+</tr>
+<tr>
+<td>NFR-010</td>
+<td>Compatibility</td>
+<td>Python version</td>
+<td>3.9+</td>
+<td>CI matrix testing</td>
+</tr>
+<tr>
+<td>NFR-011</td>
+<td>Data Integrity</td>
+<td>Cache atomicity</td>
+<td>No partial/corrupt cache files</td>
+<td>Concurrent write tests</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-user-stories">6. User Stories<a class="headerlink" href="#6-user-stories" title="Permanent link">&para;</a></h2>
+<h3 id="us-001-fetch-company-fundamentals">US-001: Fetch Company Fundamentals<a class="headerlink" href="#us-001-fetch-company-fundamentals" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>AS A quantitative researcher
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>I WANT to fetch financial fundamentals for a stock symbol
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>SO THAT I can analyze company financial health
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>- [ ] Can call loader.get_fmp_data(session, &quot;profile&quot;, symbol=&quot;AAPL&quot;)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>- [ ] Can fetch balance_sheet, income_statement, cash_flow, ratios
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>- [ ] Data normalized with consistent field names
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>- [ ] Circuit breaker protects against API failures
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>- [ ] Response cached for 7 days by default
+</code></pre></div>
+<h3 id="us-002-fetch-multi-source-data-in-parallel">US-002: Fetch Multi-Source Data in Parallel<a class="headerlink" href="#us-002-fetch-multi-source-data-in-parallel" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>AS A quantitative researcher
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>I WANT to fetch FMP + Polygon + FRED data concurrently
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>SO THAT I can correlate fundamental, market, and macro data efficiently
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>- [ ] All requests execute in parallel (respecting QoS limits)
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>- [ ] Total time ≈ slowest single request
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>- [ ] Partial success handled (return what succeeds, log failures)
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>- [ ] Results unified in consistent structure
+</code></pre></div>
+<h3 id="us-003-monitor-api-health">US-003: Monitor API Health<a class="headerlink" href="#us-003-monitor-api-health" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>AS A quantitative researcher
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>I WANT to check API health before running batch jobs
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>SO THAT I can avoid wasted time on failing APIs
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>- [ ] Can call loader.get_api_health_report()
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>- [ ] Returns per-provider: total_requests, errors, error_rate, circuit_breaker state
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>- [ ] Circuit breaker state visible: CLOSED/OPEN/HALF-OPEN
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>- [ ] Rate limit consumption visible
+</code></pre></div>
+<h3 id="us-004-work-offline-with-cache">US-004: Work Offline with Cache<a class="headerlink" href="#us-004-work-offline-with-cache" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>AS A quantitative researcher
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>I WANT to run analysis using only cached data
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>SO THAT I can work without API calls (airplane mode, rate limit exhausted)
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>- [ ] Can set operating mode to READ-ONLY
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>- [ ] Guarantees 0 API calls in READ-ONLY mode
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>- [ ] Returns cached data if available
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>- [ ] Clear error if cache miss in READ-ONLY mode
+</code></pre></div>
+<h3 id="us-005-handle-rate-limits-gracefully">US-005: Handle Rate Limits Gracefully<a class="headerlink" href="#us-005-handle-rate-limits-gracefully" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>AS A quantitative researcher
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>I WANT the system to manage rate limits automatically
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>SO THAT I don&#39;t get blocked by API providers
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>- [ ] QoS Semaphore limits concurrent requests (FMP:3, Polygon:10, FRED:1)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>- [ ] HTTP 429 triggers provider-specific cooldown
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>- [ ] Warning logged at 80% rate limit consumption
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>- [ ] Request automatically delayed if limit would be exceeded
+</code></pre></div>
+<h3 id="us-006-fetch-fred-macroeconomic-series">US-006: Fetch FRED Macroeconomic Series<a class="headerlink" href="#us-006-fetch-fred-macroeconomic-series" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>AS A quantitative researcher
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>I WANT to fetch key macroeconomic indicators
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>SO THAT I can incorporate macro factors in my models
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>- [ ] Can fetch all 32 FRED series (see Appendix A)
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>- [ ] Inflation: CPIAUCSL, CPILFESL, PCEPI, PCEPILFE
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>- [ ] Labor: UNRATE, PAYEMS, CIVPART
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>- [ ] Rates: DGS10, FEDFUNDS, MORTGAGE30US
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>- [ ] Housing: HOUST, CSUSHPINSA
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>- [ ] Data normalized to consistent time series format
+</code></pre></div>
+<h3 id="us-007-extend-with-new-data-source">US-007: Extend with New Data Source<a class="headerlink" href="#us-007-extend-with-new-data-source" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>AS A quantitative researcher
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>I WANT to add a new API (e.g., Alpha Vantage) easily
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>SO THAT I can expand data coverage as needed
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>ACCEPTANCE CRITERIA:
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>- [ ] Clear base class/interface to implement
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>- [ ] New source inherits circuit breaker, caching, QoS
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>- [ ] Documentation shows extension example
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>- [ ] No core code modification required
+</code></pre></div>
+<hr />
+<h2 id="7-constraints">7. Constraints<a class="headerlink" href="#7-constraints" title="Permanent link">&para;</a></h2>
+<h3 id="71-technical">7.1 Technical<a class="headerlink" href="#71-technical" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python 3.9+ required (asyncio improvements)</li>
+<li>aiohttp for async HTTP</li>
+<li>Concurrency limits: FMP (3), Polygon (10), FRED (1)</li>
+<li>No API keys in version control or logs</li>
+<li>Atomic cache writes (temp + rename pattern)</li>
+</ul>
+<h3 id="72-business">7.2 Business<a class="headerlink" href="#72-business" title="Permanent link">&para;</a></h3>
+<ul>
+<li>API access limited by subscription tier (FMP Ultimate required)</li>
+<li>Solo developer project</li>
+<li>Research use only</li>
+</ul>
+<h3 id="73-api-specific">7.3 API-Specific<a class="headerlink" href="#73-api-specific" title="Permanent link">&para;</a></h3>
+<ul>
+<li>FMP: Rate limits vary by plan</li>
+<li>Polygon: 5 req/min (free tier), higher on paid</li>
+<li>FRED: No official limit, recommend 120 req/min max</li>
+</ul>
+<hr />
+<h2 id="8-assumptions">8. Assumptions<a class="headerlink" href="#8-assumptions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Assumption</th>
+<th>Impact if Wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-001</td>
+<td>Internet connectivity reliable</td>
+<td>Need offline queue mode</td>
+</tr>
+<tr>
+<td>A-002</td>
+<td>API schemas remain stable</td>
+<td>Manual normalization updates needed</td>
+</tr>
+<tr>
+<td>A-003</td>
+<td>User has valid API keys for all 3 sources</td>
+<td>Source unavailable; handle gracefully</td>
+</tr>
+<tr>
+<td>A-004</td>
+<td>Data fits in memory</td>
+<td>Need streaming/pagination</td>
+</tr>
+<tr>
+<td>A-005</td>
+<td>POSIX environment (macOS/Linux)</td>
+<td>Windows path adjustments needed</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-dependencies">9. Dependencies<a class="headerlink" href="#9-dependencies" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Dependency</th>
+<th>Type</th>
+<th>Version</th>
+<th>Risk</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>D-001</td>
+<td>aiohttp</td>
+<td>PyPI</td>
+<td>≥3.8</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>D-002</td>
+<td>asyncio</td>
+<td>Built-in</td>
+<td>-</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>D-003</td>
+<td>core.config_manager</td>
+<td>Internal</td>
+<td>-</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>D-004</td>
+<td>python-dotenv</td>
+<td>PyPI</td>
+<td>≥0.19</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>D-005</td>
+<td>FMP API</td>
+<td>External Service</td>
+<td>-</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>D-006</td>
+<td>Polygon API</td>
+<td>External Service</td>
+<td>-</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>D-007</td>
+<td>FRED API</td>
+<td>External Service</td>
+<td>-</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>D-008</td>
+<td>pytest / pytest-cov</td>
+<td>PyPI (dev)</td>
+<td>-</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-glossary">10. Glossary<a class="headerlink" href="#10-glossary" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DataLoader</td>
+<td>Central class providing unified access to all data sources</td>
+</tr>
+<tr>
+<td>Circuit Breaker</td>
+<td>Pattern that stops requests when error rate exceeds threshold (20%)</td>
+</tr>
+<tr>
+<td>QoS Semaphore Router</td>
+<td>Concurrency limiter enforcing per-provider request limits</td>
+</tr>
+<tr>
+<td>Exponential Backoff</td>
+<td>Retry strategy with increasing delays (1s, 2s, 4s...) + jitter</td>
+</tr>
+<tr>
+<td>TTL</td>
+<td>Time To Live - cache validity duration (default 7 days)</td>
+</tr>
+<tr>
+<td>Atomic Write</td>
+<td>File write pattern using temp file + rename to prevent corruption</td>
+</tr>
+<tr>
+<td>LIVE Mode</td>
+<td>Operating mode where API is primary source with write-through cache</td>
+</tr>
+<tr>
+<td>READ-ONLY Mode</td>
+<td>Operating mode serving only from cache (0 API calls)</td>
+</tr>
+<tr>
+<td>FMP</td>
+<td>Financial Modeling Prep - fundamental data provider</td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td>Market data provider for equities, options, indices</td>
+</tr>
+<tr>
+<td>FRED</td>
+<td>Federal Reserve Economic Data - macroeconomic indicators</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appendix-a-complete-endpoint-reference">Appendix A: Complete Endpoint Reference<a class="headerlink" href="#appendix-a-complete-endpoint-reference" title="Permanent link">&para;</a></h2>
+<h3 id="a1-fmp-endpoints-13">A.1 FMP Endpoints (13)<a class="headerlink" href="#a1-fmp-endpoints-13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>URL Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>screener</td>
+<td><code>/stable/company-screener</code></td>
+<td>Stock screener</td>
+</tr>
+<tr>
+<td>profile</td>
+<td><code>/stable/profile</code></td>
+<td>Company profile</td>
+</tr>
+<tr>
+<td>quote</td>
+<td><code>/stable/quote</code></td>
+<td>Current price</td>
+</tr>
+<tr>
+<td>historical_price</td>
+<td><code>/stable/historical-price-eod/full</code></td>
+<td>Historical EOD prices</td>
+</tr>
+<tr>
+<td>earnings_calendar</td>
+<td><code>/stable/earnings-calendar</code></td>
+<td>Earnings dates</td>
+</tr>
+<tr>
+<td>balance_sheet</td>
+<td><code>/stable/balance-sheet-statement</code></td>
+<td>Balance sheet</td>
+</tr>
+<tr>
+<td>income_statement</td>
+<td><code>/stable/income-statement</code></td>
+<td>Income statement</td>
+</tr>
+<tr>
+<td>cash_flow</td>
+<td><code>/stable/cash-flow-statement</code></td>
+<td>Cash flow statement</td>
+</tr>
+<tr>
+<td>ratios</td>
+<td><code>/stable/ratios</code></td>
+<td>Financial ratios</td>
+</tr>
+<tr>
+<td>growth</td>
+<td><code>/stable/financial-growth</code></td>
+<td>Growth metrics</td>
+</tr>
+<tr>
+<td>key_metrics</td>
+<td><code>/stable/key-metrics</code></td>
+<td>Key metrics</td>
+</tr>
+<tr>
+<td>insider_trading</td>
+<td><code>/stable/insider-trading/search</code></td>
+<td>Insider transactions</td>
+</tr>
+<tr>
+<td>institutional_ownership</td>
+<td><code>/stable/institutional-ownership/latest</code></td>
+<td>Institutional holdings</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a2-polygon-endpoints-4">A.2 Polygon Endpoints (4)<a class="headerlink" href="#a2-polygon-endpoints-4" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Endpoint</th>
+<th>URL Pattern</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aggs_daily</td>
+<td><code>/v2/aggs/ticker/{symbol}/range/1/day/{start}/{end}</code></td>
+<td>Daily OHLCV</td>
+</tr>
+<tr>
+<td>trades</td>
+<td><code>/v3/trades/{symbol}</code></td>
+<td>Individual trades</td>
+</tr>
+<tr>
+<td>options_snapshot</td>
+<td><code>/v3/snapshot/options/{symbol}</code></td>
+<td>Options snapshot</td>
+</tr>
+<tr>
+<td>market_snapshot</td>
+<td><code>/v2/snapshot/locale/us/markets/stocks/tickers</code></td>
+<td>Full market snapshot</td>
+</tr>
+</tbody>
+</table>
+<h3 id="a3-fred-series-32">A.3 FRED Series (32)<a class="headerlink" href="#a3-fred-series-32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Series IDs</th>
+<th>Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inflation</td>
+<td>CPIAUCSL, CPILFESL, PCEPI, PCEPILFE</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Labor Market</td>
+<td>UNRATE, PAYEMS, CES0500000003, ECIWAG, CIVPART</td>
+<td>Monthly/Quarterly</td>
+</tr>
+<tr>
+<td>Growth</td>
+<td>GDPC1, GPDI, PNFI, Y033RC1Q027SBEA, Y006RC1Q027SBEA</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Trade</td>
+<td>EXPGS, IMPGS, NETEXP</td>
+<td>Quarterly</td>
+</tr>
+<tr>
+<td>Housing</td>
+<td>HOUST, PERMIT, HSN1F, EXHOSLUSM495S, CSUSHPINSA</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Interest Rates</td>
+<td>DGS10, FEDFUNDS, MORTGAGE30US</td>
+<td>Daily/Monthly/Weekly</td>
+</tr>
+<tr>
+<td>Leading Indicators</td>
+<td>AWHMAN, DGORDER, ICSA, IC4WSA</td>
+<td>Monthly/Weekly</td>
+</tr>
+<tr>
+<td>Sentiment</td>
+<td>UMCSENT, UMCSENTEXP</td>
+<td>Monthly</td>
+</tr>
+<tr>
+<td>Policy</td>
+<td>USEPUINDXD</td>
+<td>Monthly</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total: 50 endpoints</strong> (13 FMP + 4 Polygon + 1 FRED base + 32 FRED series)</p>
+<hr />
+<h2 id="approval">Approval<a class="headerlink" href="#approval" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Analyst Agent</td>
+<td>2026-01-31</td>
+<td>✅ Generated</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>MoneyFlows Data Loader v2.7.0</td>
+<td>-</td>
+<td>✅ Integrated</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Solo Developer</td>
+<td></td>
+<td>☐ Pending</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="revision-history">Revision History<a class="headerlink" href="#revision-history" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.1</td>
+<td>2026-01-31</td>
+<td>Analyst Agent</td>
+<td>Initial draft</td>
+</tr>
+<tr>
+<td>0.2</td>
+<td>2026-01-31</td>
+<td>Analyst Agent</td>
+<td>Integrated MoneyFlows Data Loader v2.7.0 specs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Based on MoneyFlows Data Loader v2.7.0 Technical Documentation</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Maeshowe/Nexus_Core" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

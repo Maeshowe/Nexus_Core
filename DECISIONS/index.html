@@ -1,0 +1,2741 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular, asynchronous DataLoader framework for financial data">
+      
+      
+      
+        <link rel="canonical" href="https://maeshowe.github.io/Nexus_Core/DECISIONS/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Project Decisions - OmniData Nexus Core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#project-decisions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OmniData Nexus Core" class="md-header__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OmniData Nexus Core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Project Decisions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OmniData Nexus Core" class="md-nav__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OmniData Nexus Core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/dataloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/health/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEST_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-project-identity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Project Identity
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-team-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Team Context
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-problem-solution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Problem &amp; Solution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Problem &amp; Solution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-from-requirementsmd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Problem (from REQUIREMENTS.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-from-architecturemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution (from ARCHITECTURE.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-key-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Key Decisions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Key Decisions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-technology-stack-from-architecturemd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Technology Stack (from ARCHITECTURE.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-architecture-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Architecture Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-security-decisions-from-securitymd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Security Decisions (from SECURITY.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-quality-decisions-from-test_strategymd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 Quality Decisions (from TEST_STRATEGY.md)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-scope-boundaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Scope Boundaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Scope Boundaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#in-scope-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        In Scope (MVP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explicitly-out-of-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explicitly Out of Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deferred-post-mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deferred (Post-MVP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-known-issues-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Known Issues &amp; Risks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Known Issues &amp; Risks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#technical-risks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Risks
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues-accepted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues (Accepted)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Security Exceptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Standards
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Standards">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coding-standards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coding Standards
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Git Conventions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Organization
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Quality Gates
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-excluded-paths" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Excluded Paths
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-agent-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Agent Instructions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-trade-offs-accepted" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Trade-offs Accepted
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-document-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Document References
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-concurrency-limits-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Concurrency Limits Reference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-endpoint-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Endpoint Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-success-criteria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Success Criteria
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="project-decisions">Project Decisions<a class="headerlink" href="#project-decisions" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Project:</strong> OmniData Nexus Core
+<strong>Version:</strong> 1.0
+<strong>Date:</strong> 2026-01-31
+<strong>Status:</strong> Draft
+<strong>Synthesized by:</strong> Synthesizer Agent</p>
+</blockquote>
+<hr />
+<h2 id="1-project-identity">1. Project Identity<a class="headerlink" href="#1-project-identity" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>OmniData Nexus Core</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Modular asynchronous Python framework providing unified Data Access Layer for financial and macroeconomic data aggregation</td>
+</tr>
+<tr>
+<td><strong>Type</strong></td>
+<td>Personal Research Tool</td>
+</tr>
+<tr>
+<td><strong>Phase</strong></td>
+<td>DEVELOPMENT</td>
+</tr>
+<tr>
+<td><strong>Based On</strong></td>
+<td>MoneyFlows Data Loader v2.7.0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-team-context">2. Team Context<a class="headerlink" href="#2-team-context" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Value</th>
+<th>Implications</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Team Size</td>
+<td>1 (Solo Developer)</td>
+<td>Prioritize simplicity over abstraction; avoid over-engineering; single failure domain acceptable</td>
+</tr>
+<tr>
+<td>AI Assisted</td>
+<td>Yes</td>
+<td>CLAUDE.md important for context; documentation supports AI collaboration</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>Research-driven</td>
+<td>No hard deadlines; quality over speed</td>
+</tr>
+<tr>
+<td>Sustainable Pace</td>
+<td>Flexible</td>
+<td>Personal tool allows adaptive scheduling; no external commitments</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Implications:</strong>
+- Modular Monolith architecture (not microservices) - no operational overhead
+- Scale-appropriate security (not enterprise) - <code>.env</code> + <code>.gitignore</code> sufficient
+- Manual processes acceptable (dependency updates, key rotation)
+- ~200 tests target (not thousands)</p>
+<hr />
+<h2 id="3-problem-solution">3. Problem &amp; Solution<a class="headerlink" href="#3-problem-solution" title="Permanent link">&para;</a></h2>
+<h3 id="problem-from-requirementsmd">Problem (from REQUIREMENTS.md)<a class="headerlink" href="#problem-from-requirementsmd" title="Permanent link">&para;</a></h3>
+<p>Quantitative finance research requires data from multiple specialized APIs (FMP Ultimate, Polygon.io, FRED), each with different authentication, response formats, rate limits, and availability patterns. There is no unified framework that:</p>
+<ul>
+<li>Provides a single interface for heterogeneous financial data sources</li>
+<li>Implements production-grade resilience (circuit breaker, exponential backoff)</li>
+<li>Manages concurrent requests with provider-specific limits</li>
+<li>Caches responses intelligently with atomic writes</li>
+<li>Monitors API health and rate limit consumption automatically</li>
+</ul>
+<h3 id="solution-from-architecturemd">Solution (from ARCHITECTURE.md)<a class="headerlink" href="#solution-from-architecturemd" title="Permanent link">&para;</a></h3>
+<p>A <strong>Modular Monolith with Plugin Architecture</strong> that provides:</p>
+<ul>
+<li><strong>DataLoader</strong> - Unified entry point with <code>get_fmp_data()</code>, <code>get_polygon_data()</code>, <code>get_fred_data()</code> methods</li>
+<li><strong>QoS Semaphore Router</strong> - Provider-specific concurrency limits (FMP:3, Polygon:10, FRED:1)</li>
+<li><strong>Circuit Breaker Manager</strong> - Per-provider failure isolation with 20% error threshold</li>
+<li><strong>Intelligent Cache</strong> - Filesystem JSON with atomic writes (temp + rename pattern)</li>
+<li><strong>Health Monitor</strong> - Request/error tracking with per-provider status</li>
+</ul>
+<p><strong>50 Endpoints Total:</strong> 13 FMP + 4 Polygon + 32 FRED series + 1 FRED base</p>
+<hr />
+<h2 id="4-key-decisions">4. Key Decisions<a class="headerlink" href="#4-key-decisions" title="Permanent link">&para;</a></h2>
+<h3 id="41-technology-stack-from-architecturemd">4.1 Technology Stack (from ARCHITECTURE.md)<a class="headerlink" href="#41-technology-stack-from-architecturemd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Language</td>
+<td>Python 3.9+</td>
+<td>Async/await improvements; widespread in quant research; asyncio stability</td>
+</tr>
+<tr>
+<td>Async HTTP</td>
+<td>aiohttp (&gt;=3.8)</td>
+<td>Production-ready async client; connection pooling; timeout control</td>
+</tr>
+<tr>
+<td>Environment</td>
+<td>python-dotenv (&gt;=0.19)</td>
+<td>Standard .env file loading; keeps secrets out of code</td>
+</tr>
+<tr>
+<td>Testing</td>
+<td>pytest (&gt;=7.0) + pytest-cov (&gt;=3.0) + pytest-asyncio (&gt;=0.21)</td>
+<td>Industry standard; excellent async support</td>
+</tr>
+<tr>
+<td>HTTP Mocking</td>
+<td>aioresponses (&gt;=0.7)</td>
+<td>Mocks aiohttp.ClientSession for testing</td>
+</tr>
+<tr>
+<td>Type Checking</td>
+<td>mypy (&gt;=1.0)</td>
+<td>Static type analysis</td>
+</tr>
+<tr>
+<td>Linting</td>
+<td>ruff / flake8</td>
+<td>Fast Python linter</td>
+</tr>
+<tr>
+<td>Caching</td>
+<td>Filesystem (JSON)</td>
+<td>Simple, human-readable, no DB overhead</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No Database Dependencies</strong> - Filesystem cache sufficient for research workload.</p>
+<h3 id="42-architecture-decisions">4.2 Architecture Decisions<a class="headerlink" href="#42-architecture-decisions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Source</th>
+<th>Consequences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AD-001</td>
+<td>Modular Monolith over Microservices</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Simple deployment, fast iteration, no network overhead; (-) All components share failure domain</td>
+</tr>
+<tr>
+<td>AD-002</td>
+<td>Filesystem JSON cache (not Redis/DB)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Zero external dependencies, inspectable; (-) No TTL auto-expiration, manual cleanup needed</td>
+</tr>
+<tr>
+<td>AD-003</td>
+<td>Provider-specific concurrency limits (QoS Semaphore)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Prevents rate limit violations, maximizes throughput; (-) Requires tuning per API subscription tier</td>
+</tr>
+<tr>
+<td>AD-004</td>
+<td>Circuit Breaker per provider (not global)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Isolates failures, allows partial service; (-) More complex state management</td>
+</tr>
+<tr>
+<td>AD-005</td>
+<td>Atomic cache writes (temp + rename)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Guarantees consistency, prevents corruption; (-) Extra filesystem operation per write</td>
+</tr>
+<tr>
+<td>AD-006</td>
+<td>Plugin architecture (BaseDataProvider)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Extensibility, separation of concerns; (-) Slight abstraction overhead</td>
+</tr>
+<tr>
+<td>AD-007</td>
+<td>Exponential backoff with jitter (not linear)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Prevents thundering herd, faster recovery; (-) More complex retry logic</td>
+</tr>
+<tr>
+<td>AD-008</td>
+<td>Operating modes (LIVE vs READ-ONLY)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Explicit control, enables airplane mode; (-) Mode management adds complexity</td>
+</tr>
+<tr>
+<td>AD-009</td>
+<td>Schema validation (warn, don't fail)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Robustness to API changes; (-) May mask breaking changes</td>
+</tr>
+<tr>
+<td>AD-010</td>
+<td>Async/await (not threading)</td>
+<td>ARCHITECTURE.md</td>
+<td>(+) Efficient concurrency, single-threaded simplicity; (-) All code must be async-compatible</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-security-decisions-from-securitymd">4.3 Security Decisions (from SECURITY.md)<a class="headerlink" href="#43-security-decisions-from-securitymd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Risk Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SD-001</td>
+<td>API keys stored in <code>.env</code> file (plaintext) with chmod 600 + .gitignore</td>
+<td>LOW (appropriate for single-user local tool)</td>
+</tr>
+<tr>
+<td>SD-002</td>
+<td>No encryption at rest for cache (public financial data)</td>
+<td>NEGLIGIBLE</td>
+</tr>
+<tr>
+<td>SD-003</td>
+<td>No user authentication (single-user system)</td>
+<td>NONE (appropriate for use case)</td>
+</tr>
+<tr>
+<td>SD-004</td>
+<td>Manual dependency updates (not automated)</td>
+<td>LOW (weekly pip audit schedule)</td>
+</tr>
+<tr>
+<td>SD-005</td>
+<td>TLS 1.2+ enforced via aiohttp (HTTPS only)</td>
+<td>N/A (standard security)</td>
+</tr>
+<tr>
+<td>SD-006</td>
+<td>API key sanitization in logs (regex-based redaction)</td>
+<td>N/A (required control)</td>
+</tr>
+<tr>
+<td>SD-007</td>
+<td>Pre-commit hook for secret scanning</td>
+<td>N/A (required control)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Security Philosophy:</strong> Proportionate security for personal research tool. Focus on API key protection. NOT requiring OAuth, RBAC, SIEM, or enterprise-grade controls.</p>
+<h3 id="44-quality-decisions-from-test_strategymd">4.4 Quality Decisions (from TEST_STRATEGY.md)<a class="headerlink" href="#44-quality-decisions-from-test_strategymd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Target</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>QD-001</td>
+<td>Overall line coverage</td>
+<td>&gt;80%</td>
+</tr>
+<tr>
+<td>QD-002</td>
+<td>TIER 1 coverage (Circuit Breaker, QoS, Security, Cache Atomic)</td>
+<td>&gt;90%</td>
+</tr>
+<tr>
+<td>QD-003</td>
+<td>TIER 2 coverage (DataLoader, Providers, Retry, Health)</td>
+<td>&gt;80%</td>
+</tr>
+<tr>
+<td>QD-004</td>
+<td>TIER 3 coverage (Config, Cache read, HTTP wrapper)</td>
+<td>60%</td>
+</tr>
+<tr>
+<td>QD-005</td>
+<td>Test pass rate</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>QD-006</td>
+<td>Test suite execution time</td>
+<td>&lt;2 minutes</td>
+</tr>
+<tr>
+<td>QD-007</td>
+<td>Test pyramid ratio</td>
+<td>75% unit / 20% integration / 5% E2E</td>
+</tr>
+<tr>
+<td>QD-008</td>
+<td>Total test target</td>
+<td>~200 tests</td>
+</tr>
+<tr>
+<td>QD-009</td>
+<td>All external APIs mocked in CI</td>
+<td>Yes (no real API calls)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="5-scope-boundaries">5. Scope Boundaries<a class="headerlink" href="#5-scope-boundaries" title="Permanent link">&para;</a></h2>
+<h3 id="in-scope-mvp">In Scope (MVP)<a class="headerlink" href="#in-scope-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Feature</th>
+<th>Source</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-001</td>
+<td>Unified DataLoader Interface</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-002</td>
+<td>FMP Ultimate Integration (13 endpoints)</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-003</td>
+<td>Polygon Integration (4 endpoints)</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-004</td>
+<td>FRED Integration (32 series)</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-005</td>
+<td>QoS Semaphore Router</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-006</td>
+<td>Intelligent Caching</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-007</td>
+<td>Circuit Breaker</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-008</td>
+<td>Exponential Backoff with Jitter</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-009</td>
+<td>Rate Limit Handling</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-010</td>
+<td>Health Check System</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-011</td>
+<td>Schema-based Validation</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-012</td>
+<td>Operating Modes (LIVE/READ-ONLY)</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-013</td>
+<td>Configuration Management</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-014</td>
+<td>API Key Sanitization</td>
+<td>REQUIREMENTS.md</td>
+<td>MUST</td>
+</tr>
+<tr>
+<td>FR-101</td>
+<td>Cache TTL Configuration</td>
+<td>REQUIREMENTS.md</td>
+<td>SHOULD</td>
+</tr>
+<tr>
+<td>FR-102</td>
+<td>Request Batching</td>
+<td>REQUIREMENTS.md</td>
+<td>SHOULD</td>
+</tr>
+<tr>
+<td>FR-103</td>
+<td>Metrics Export</td>
+<td>REQUIREMENTS.md</td>
+<td>SHOULD</td>
+</tr>
+<tr>
+<td>FR-104</td>
+<td>Graceful Degradation</td>
+<td>REQUIREMENTS.md</td>
+<td>SHOULD</td>
+</tr>
+</tbody>
+</table>
+<h3 id="explicitly-out-of-scope">Explicitly Out of Scope<a class="headerlink" href="#explicitly-out-of-scope" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Reason</th>
+<th>Revisit When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GUI Dashboard</td>
+<td>Focus on programmatic API</td>
+<td>User requests UI</td>
+</tr>
+<tr>
+<td>Database Persistence</td>
+<td>Caller responsible for storage</td>
+<td>Multi-user requirement</td>
+</tr>
+<tr>
+<td>Data Analysis/Modeling</td>
+<td>Framework provides data, not analytics</td>
+<td>Never (separate concern)</td>
+</tr>
+<tr>
+<td>Multi-user Authentication</td>
+<td>Single-user research tool</td>
+<td>Multi-user requirement</td>
+</tr>
+<tr>
+<td>WebSocket Streaming</td>
+<td>REST endpoints sufficient for research</td>
+<td>Real-time requirement</td>
+</tr>
+<tr>
+<td>Cross-platform (Windows)</td>
+<td>POSIX assumed (macOS/Linux)</td>
+<td>User requests Windows support</td>
+</tr>
+<tr>
+<td>Enterprise Security (Vault, OAuth, RBAC)</td>
+<td>Overkill for personal tool</td>
+<td>Commercial deployment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="deferred-post-mvp">Deferred (Post-MVP)<a class="headerlink" href="#deferred-post-mvp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Effort</th>
+<th>Trigger</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-201: Plugin Discovery Registry</td>
+<td>8h</td>
+<td>Adding 3+ new data sources</td>
+</tr>
+<tr>
+<td>FR-202: Dark Pool Detection</td>
+<td>8h</td>
+<td>Research requires block trade analysis</td>
+</tr>
+<tr>
+<td>FR-203: Data Export (Parquet/HDF5)</td>
+<td>12h</td>
+<td>Data persistence needs grow</td>
+</tr>
+<tr>
+<td>FR-204: CLI Tool</td>
+<td>8h</td>
+<td>Manual query frequency increases</td>
+</tr>
+<tr>
+<td>FR-205: Async Iterator Support</td>
+<td>20h</td>
+<td>Memory limits hit with large datasets</td>
+</tr>
+<tr>
+<td>Prometheus Metrics Export</td>
+<td>12h</td>
+<td>Operational monitoring needed</td>
+</tr>
+<tr>
+<td>Database Cache Backend</td>
+<td>24h</td>
+<td>Multi-process access required</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-known-issues-risks">6. Known Issues &amp; Risks<a class="headerlink" href="#6-known-issues-risks" title="Permanent link">&para;</a></h2>
+<h3 id="technical-risks">Technical Risks<a class="headerlink" href="#technical-risks" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Probability</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API schema breaking change</td>
+<td>Medium</td>
+<td>High</td>
+<td>Schema validation with warnings; graceful degradation; version pinning in provider</td>
+</tr>
+<tr>
+<td>Rate limit exhaustion</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>QoS semaphore enforces limits; 429 handling; warning at 80% consumption</td>
+</tr>
+<tr>
+<td>API service outage</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Circuit breaker halts requests; cache serves stale data; clear error messages</td>
+</tr>
+<tr>
+<td>Cache corruption</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Atomic writes (temp+rename); validate JSON before write</td>
+</tr>
+<tr>
+<td>Dependency vulnerability</td>
+<td>Low</td>
+<td>Medium</td>
+<td>Minimal dependencies; regular pip audit; version pinning</td>
+</tr>
+<tr>
+<td>Thundering herd on recovery</td>
+<td>Low</td>
+<td>Low</td>
+<td>Exponential backoff with jitter; circuit breaker half-open state</td>
+</tr>
+<tr>
+<td>Memory exhaustion (large datasets)</td>
+<td>Low</td>
+<td>High</td>
+<td>NOT mitigated in v1.0; future: streaming/pagination; document memory limits</td>
+</tr>
+<tr>
+<td>API key leakage</td>
+<td>Low</td>
+<td>Critical</td>
+<td>.gitignore for .env; sanitization in logs; pre-commit hook validation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="known-issues-accepted">Known Issues (Accepted)<a class="headerlink" href="#known-issues-accepted" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Location</th>
+<th>Why Accepted</th>
+<th>Review Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>No TTL auto-expiration</td>
+<td>Cache Manager</td>
+<td>Filesystem cache simplicity; manual cleanup acceptable</td>
+<td>2026-07-31</td>
+</tr>
+<tr>
+<td>No multi-process cache access</td>
+<td>Cache Manager</td>
+<td>Single-user system; document limitation</td>
+<td>When multi-process needed</td>
+</tr>
+<tr>
+<td>7-day stale data tolerance</td>
+<td>Cache TTL</td>
+<td>Research workload tolerates; user configurable</td>
+<td>User feedback</td>
+</tr>
+<tr>
+<td>Windows compatibility unknown</td>
+<td>POSIX assumption</td>
+<td>macOS/Linux primary environments</td>
+<td>User request</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-exceptions">Security Exceptions<a class="headerlink" href="#security-exceptions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Exception</th>
+<th>Reason</th>
+<th>Risk</th>
+<th>Approved By</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Keys in Plaintext (.env)</td>
+<td>Single-user local system; encrypted secret store overkill</td>
+<td>LOW (file permissions + .gitignore)</td>
+<td>Solo Developer</td>
+</tr>
+<tr>
+<td>No Encryption at Rest (Cache)</td>
+<td>Public financial data; no confidentiality requirement</td>
+<td>NEGLIGIBLE</td>
+<td>Solo Developer</td>
+</tr>
+<tr>
+<td>No User Authentication</td>
+<td>Single-user system; no network exposure</td>
+<td>NONE</td>
+<td>Solo Developer</td>
+</tr>
+<tr>
+<td>Manual Dependency Updates</td>
+<td>Automated updates risk breaking changes</td>
+<td>LOW (weekly pip audit)</td>
+<td>Solo Developer</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-standards">7. Standards<a class="headerlink" href="#7-standards" title="Permanent link">&para;</a></h2>
+<h3 id="coding-standards">Coding Standards<a class="headerlink" href="#coding-standards" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Standard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style</td>
+<td>ruff / flake8 (0 errors required)</td>
+</tr>
+<tr>
+<td>Type Hints</td>
+<td>mypy strict mode (0 type errors required)</td>
+</tr>
+<tr>
+<td>Docstrings</td>
+<td>Google style (Sphinx-ready)</td>
+</tr>
+<tr>
+<td>Naming</td>
+<td>snake_case (functions/variables), PascalCase (classes)</td>
+</tr>
+<tr>
+<td>Comments</td>
+<td>Required for complex logic; not for obvious code</td>
+</tr>
+<tr>
+<td>Max Line Length</td>
+<td>120 characters (ruff default)</td>
+</tr>
+<tr>
+<td>Imports</td>
+<td>Sorted (isort compatible)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="git-conventions">Git Conventions<a class="headerlink" href="#git-conventions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branch naming</td>
+<td><code>feature/FR-XXX-description</code>, <code>fix/issue-description</code>, <code>refactor/component-name</code></td>
+</tr>
+<tr>
+<td>Commit messages</td>
+<td>Imperative mood: "Add circuit breaker recovery logic" (not "Added...")</td>
+</tr>
+<tr>
+<td>Commit scope</td>
+<td>Small, focused commits (one logical change per commit)</td>
+</tr>
+<tr>
+<td>Main branch</td>
+<td><code>main</code> (protected, requires passing CI)</td>
+</tr>
+<tr>
+<td>Merge strategy</td>
+<td>Squash merge for feature branches</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-organization">File Organization<a class="headerlink" href="#file-organization" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>src/
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  data_loader/
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    __init__.py
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    loader.py              # DataLoader (unified interface)
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    qos_router.py          # QoS Semaphore Router
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    circuit_breaker.py     # Circuit Breaker Manager
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    retry.py               # Retry &amp; Backoff Handler
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    cache.py               # Cache Manager
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    health.py              # Health Monitor
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    config.py              # Config Manager
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    http_client.py         # HTTP Client Layer
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    providers/
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>      __init__.py
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>      base.py              # BaseDataProvider (abstract)
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>      fmp.py               # FMP Provider
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>      polygon.py           # Polygon Provider
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>      fred.py              # FRED Provider
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>tests/
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>  conftest.py              # Shared fixtures
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>  fixtures/                # Mock API responses
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>  unit/                    # Unit tests (75%)
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  integration/             # Integration tests (20%)
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>  e2e/                     # End-to-end tests (5%)
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>docs/
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>  REQUIREMENTS.md
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>  ARCHITECTURE.md
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>  SECURITY.md
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>  TEST_STRATEGY.md
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>  DECISIONS.md             # This document
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>data/
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>  fmp_cache/
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>  polygon_cache/
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>  fred_cache/
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>logs/
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>  nexus_core.log
+</code></pre></div>
+<hr />
+<h2 id="8-quality-gates">8. Quality Gates<a class="headerlink" href="#8-quality-gates" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Threshold</th>
+<th>Blocking?</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lint (ruff/flake8)</td>
+<td>0 errors</td>
+<td>YES</td>
+<td>Standards</td>
+</tr>
+<tr>
+<td>Type Check (mypy)</td>
+<td>0 type errors</td>
+<td>YES</td>
+<td>Standards</td>
+</tr>
+<tr>
+<td>Unit Tests</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>Integration Tests</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>E2E Tests</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>Overall Coverage</td>
+<td>&gt;=80%</td>
+<td>YES</td>
+<td>TEST_STRATEGY.md (NFR-006)</td>
+</tr>
+<tr>
+<td>TIER 1 Coverage</td>
+<td>&gt;=90%</td>
+<td>YES</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>TIER 2 Coverage</td>
+<td>&gt;=80%</td>
+<td>NO (warning)</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>Secret Scanning</td>
+<td>0 API keys found</td>
+<td>YES</td>
+<td>SECURITY.md</td>
+</tr>
+<tr>
+<td>Test Execution Time</td>
+<td>&lt;2 minutes</td>
+<td>NO (warning)</td>
+<td>TEST_STRATEGY.md</td>
+</tr>
+<tr>
+<td>Security Vulnerabilities (pip audit)</td>
+<td>0 HIGH/CRITICAL</td>
+<td>YES</td>
+<td>SECURITY.md</td>
+</tr>
+</tbody>
+</table>
+<p><strong>CI Pipeline Order:</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[Commit] -&gt; [Lint] -&gt; [Type Check] -&gt; [Unit] -&gt; [Integration] -&gt; [E2E] -&gt; [Coverage] -&gt; [Secret Scan] -&gt; [Pass]
+</code></pre></div></p>
+<hr />
+<h2 id="9-excluded-paths">9. Excluded Paths<a class="headerlink" href="#9-excluded-paths" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Agents will NOT analyze these paths during ANALYSIS phase.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>data/</code></td>
+<td>Large cache files; not source code</td>
+</tr>
+<tr>
+<td><code>data/fmp_cache/</code></td>
+<td>Generated cache data</td>
+</tr>
+<tr>
+<td><code>data/polygon_cache/</code></td>
+<td>Generated cache data</td>
+</tr>
+<tr>
+<td><code>data/fred_cache/</code></td>
+<td>Generated cache data</td>
+</tr>
+<tr>
+<td><code>__pycache__/</code></td>
+<td>Python bytecode (generated)</td>
+</tr>
+<tr>
+<td><code>.git/</code></td>
+<td>Version control metadata</td>
+</tr>
+<tr>
+<td><code>*.pyc</code></td>
+<td>Python bytecode files</td>
+</tr>
+<tr>
+<td><code>.env</code></td>
+<td>Secret file (should not be analyzed)</td>
+</tr>
+<tr>
+<td><code>.env.*</code></td>
+<td>Environment variants</td>
+</tr>
+<tr>
+<td><code>venv/</code></td>
+<td>Virtual environment</td>
+</tr>
+<tr>
+<td><code>*.egg-info/</code></td>
+<td>Package metadata</td>
+</tr>
+<tr>
+<td><code>htmlcov/</code></td>
+<td>Coverage report output</td>
+</tr>
+<tr>
+<td><code>logs/</code></td>
+<td>Runtime logs</td>
+</tr>
+<tr>
+<td><code>.pytest_cache/</code></td>
+<td>Test cache</td>
+</tr>
+<tr>
+<td><code>.mypy_cache/</code></td>
+<td>Type checker cache</td>
+</tr>
+<tr>
+<td><code>tests/fixtures/</code></td>
+<td>Static test data (JSON mocks)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-agent-instructions">10. Agent Instructions<a class="headerlink" href="#10-agent-instructions" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Special instructions for agents during ANALYSIS phase.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>security</strong></td>
+<td>Focus on API key protection (SR-001 through SR-007). This is a personal tool - do NOT flag missing enterprise controls (Vault, OAuth, RBAC) as issues. Verify .gitignore includes .env. Check for key sanitization in logging.</td>
+</tr>
+<tr>
+<td><strong>qa</strong></td>
+<td>Verify coverage targets: &gt;80% overall, &gt;90% TIER 1. All tests must mock external APIs (no real HTTP calls in CI). Test pyramid: 75% unit / 20% integration / 5% E2E.</td>
+</tr>
+<tr>
+<td><strong>architect</strong></td>
+<td>Validate Modular Monolith approach. Check BaseDataProvider abstraction for extensibility. Verify circuit breaker is per-provider (not global). Confirm atomic write pattern in cache.</td>
+</tr>
+<tr>
+<td><strong>analyst</strong></td>
+<td>Verify all 50 endpoints documented: 13 FMP + 4 Polygon + 32 FRED series + 1 FRED base. Check NFRs are measurable. Validate MUST/SHOULD/COULD prioritization.</td>
+</tr>
+<tr>
+<td><strong>dx</strong></td>
+<td>Check setup time target (&lt;5 minutes). Verify installation instructions are complete. Validate .env.example exists. Check error messages are actionable.</td>
+</tr>
+<tr>
+<td><strong>all</strong></td>
+<td>Project phase is DEVELOPMENT (not LIVE). Scale-appropriate for solo developer. Avoid suggesting enterprise-grade solutions for personal tool.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-trade-offs-accepted">11. Trade-offs Accepted<a class="headerlink" href="#11-trade-offs-accepted" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Trade-off</th>
+<th>Our Choice</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simplicity vs Scalability</td>
+<td><strong>Simplicity</strong></td>
+<td>Solo dev, personal tool; no multi-user, no distributed deployment</td>
+</tr>
+<tr>
+<td>Coverage vs Speed</td>
+<td><strong>Balance</strong></td>
+<td>TIER 1 = 90%, TIER 3 = 60%; risk-based prioritization</td>
+</tr>
+<tr>
+<td>Automation vs Control</td>
+<td><strong>Control</strong></td>
+<td>Manual dependency updates to prevent breaking changes</td>
+</tr>
+<tr>
+<td>Security Depth vs Overhead</td>
+<td><strong>Proportionate</strong></td>
+<td>.env + .gitignore, not Vault; appropriate for threat model</td>
+</tr>
+<tr>
+<td>Real-time vs Batch</td>
+<td><strong>Batch</strong></td>
+<td>Research workload; REST sufficient, no WebSocket</td>
+</tr>
+<tr>
+<td>Persistence vs Simplicity</td>
+<td><strong>Simplicity</strong></td>
+<td>Filesystem cache; no database overhead</td>
+</tr>
+<tr>
+<td>Cross-platform vs POSIX</td>
+<td><strong>POSIX</strong></td>
+<td>macOS/Linux primary; Windows deferred</td>
+</tr>
+<tr>
+<td>Stale Data vs Freshness</td>
+<td><strong>7-day TTL</strong></td>
+<td>Research tolerates stale; configurable if needed</td>
+</tr>
+<tr>
+<td>Fail-fast vs Resilience</td>
+<td><strong>Resilience</strong></td>
+<td>Schema validation warns (not fails); partial data preferred</td>
+</tr>
+<tr>
+<td>Single Process vs Multi-process</td>
+<td><strong>Single</strong></td>
+<td>No file locking complexity; document limitation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-document-references">12. Document References<a class="headerlink" href="#12-document-references" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Status</th>
+<th>Key Sections</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REQUIREMENTS.md</td>
+<td>Approved</td>
+<td>Section 4: Functional Requirements (14 MUST, 4 SHOULD); Section 5: NFRs; Appendix A: 50 Endpoints</td>
+</tr>
+<tr>
+<td>ARCHITECTURE.md</td>
+<td>Approved</td>
+<td>Section 3: Component Architecture; Section 6: Architecture Decisions (10 ADRs); Section 9: Quality Attributes</td>
+</tr>
+<tr>
+<td>SECURITY.md</td>
+<td>Approved</td>
+<td>Section 2: Threat Model; Section 4: Security Controls; Section 12: Risk Register (7 risks)</td>
+</tr>
+<tr>
+<td>TEST_STRATEGY.md</td>
+<td>Approved</td>
+<td>Section 3: Risk-Based Tiers; Section 6: Quality Gates; Section 8: Critical Test Cases</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-concurrency-limits-reference">13. Concurrency Limits Reference<a class="headerlink" href="#13-concurrency-limits-reference" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Quick reference for QoS Semaphore Router configuration.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Concurrent Requests</th>
+<th>Rate Limit</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FMP</td>
+<td>3</td>
+<td>Plan-dependent</td>
+<td>REQUIREMENTS.md FR-005</td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td>10</td>
+<td>5 req/min (free tier)</td>
+<td>REQUIREMENTS.md FR-005</td>
+</tr>
+<tr>
+<td>FRED</td>
+<td>1</td>
+<td>~120 req/min recommended</td>
+<td>REQUIREMENTS.md FR-005</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="14-endpoint-summary">14. Endpoint Summary<a class="headerlink" href="#14-endpoint-summary" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>50 total endpoints across 3 providers.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Count</th>
+<th>Endpoints</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FMP Ultimate</strong></td>
+<td>13</td>
+<td>screener, profile, quote, historical_price, earnings_calendar, balance_sheet, income_statement, cash_flow, ratios, growth, key_metrics, insider_trading, institutional_ownership</td>
+</tr>
+<tr>
+<td><strong>Polygon</strong></td>
+<td>4</td>
+<td>aggs_daily, trades, options_snapshot, market_snapshot</td>
+</tr>
+<tr>
+<td><strong>FRED</strong></td>
+<td>32 series + 1 base</td>
+<td>CPIAUCSL, CPILFESL, PCEPI, PCEPILFE, UNRATE, PAYEMS, CES0500000003, ECIWAG, CIVPART, GDPC1, GPDI, PNFI, Y033RC1Q027SBEA, Y006RC1Q027SBEA, EXPGS, IMPGS, NETEXP, HOUST, PERMIT, HSN1F, EXHOSLUSM495S, CSUSHPINSA, DGS10, FEDFUNDS, MORTGAGE30US, AWHMAN, DGORDER, ICSA, IC4WSA, UMCSENT, UMCSENTEXP, USEPUINDXD</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="15-success-criteria">15. Success Criteria<a class="headerlink" href="#15-success-criteria" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Definition of "Done" for v1.0.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All MUST requirements implemented</td>
+<td>14/14</td>
+<td>Code review</td>
+</tr>
+<tr>
+<td>Overall test coverage</td>
+<td>&gt;80%</td>
+<td>pytest-cov</td>
+</tr>
+<tr>
+<td>TIER 1 coverage</td>
+<td>&gt;90%</td>
+<td>pytest-cov (filtered)</td>
+</tr>
+<tr>
+<td>CI pipeline passing</td>
+<td>Green</td>
+<td>GitHub Actions</td>
+</tr>
+<tr>
+<td>All critical test cases</td>
+<td>Pass</td>
+<td>TC-001 through TC-106</td>
+</tr>
+<tr>
+<td>Setup time</td>
+<td>&lt;5 minutes</td>
+<td>Timed installation</td>
+</tr>
+<tr>
+<td>Single API request latency</td>
+<td>&lt;2s p95</td>
+<td>Benchmark</td>
+</tr>
+<tr>
+<td>No API keys in logs/cache/git</td>
+<td>0 found</td>
+<td>Secret scan</td>
+</tr>
+<tr>
+<td>Documentation complete</td>
+<td>All 5 docs</td>
+<td>Review</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="approval">Approval<a class="headerlink" href="#approval" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Synthesizer Agent</td>
+<td>2026-01-31</td>
+<td>Generated</td>
+</tr>
+<tr>
+<td>Requirements</td>
+<td>Analyst Agent</td>
+<td>2026-01-31</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>Architecture</td>
+<td>Architect Agent</td>
+<td>2026-01-31</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>Security</td>
+<td>Security Agent</td>
+<td>2026-01-31</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>Quality</td>
+<td>QA Agent</td>
+<td>2026-01-31</td>
+<td>Approved</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Solo Developer</td>
+<td></td>
+<td>Pending</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="revision-history">Revision History<a class="headerlink" href="#revision-history" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-01-31</td>
+<td>Synthesizer Agent</td>
+<td>Initial synthesis from REQUIREMENTS.md, ARCHITECTURE.md, SECURITY.md, TEST_STRATEGY.md</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Unified project decisions synthesized from approved documentation. This document serves as the single source of truth for project scope, standards, and trade-offs.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Maeshowe/Nexus_Core" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

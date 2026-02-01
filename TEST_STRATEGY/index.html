@@ -1,0 +1,3532 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular, asynchronous DataLoader framework for financial data">
+      
+      
+      
+        <link rel="canonical" href="https://maeshowe.github.io/Nexus_Core/TEST_STRATEGY/">
+      
+      
+        <link rel="prev" href="../ARCHITECTURE/">
+      
+      
+        <link rel="next" href="../contributing/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Testing - OmniData Nexus Core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-strategy" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OmniData Nexus Core" class="md-header__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OmniData Nexus Core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OmniData Nexus Core" class="md-nav__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OmniData Nexus Core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/dataloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/health/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quality-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Quality Objectives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test Pyramid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-risk-based-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Risk-Based Tiers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Risk-Based Tiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Test Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Unit Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Integration Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-e2e-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 E2E Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-test-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test Environment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Quality Gates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Quality Gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-automation-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Automation Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-critical-test-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Critical Test Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Critical Test Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-resilience-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Resilience Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-security-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Security Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-cache-integrity-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Cache Integrity Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-provider-tests-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Provider Tests (TIER 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-end-to-end-tests-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 End-to-End Tests (TIER 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-execution-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Execution Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Reporting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-test-pyramid-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Test Pyramid Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Test Pyramid Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-tests-150-tests-20s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Tests (~150 tests, ~20s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests-40-tests-60s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Tests (~40 tests, ~60s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e2e-tests-10-tests-30s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E2E Tests (~10 tests, ~30s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-what-this-test-strategy-doesnt-cover-and-why-thats-ok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. What This Test Strategy Doesn't Cover (And Why That's OK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. What This Test Strategy Doesn&#39;t Cover (And Why That&#39;s OK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excluded-from-testing-proportionate-to-solo-developer-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excluded from Testing (Proportionate to Solo Developer Tool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-test-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Test Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Test Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pytest-markers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pytest Markers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-test-maintenance-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Test Maintenance Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Test Maintenance Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-to-update-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Update Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-fixture-refresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Fixture Refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Success Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Scope
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-quality-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Quality Objectives
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-test-pyramid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Test Pyramid
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-risk-based-tiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Risk-Based Tiers
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Risk-Based Tiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-classification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Classification
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-test-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Test Types
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Test Types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-unit-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Unit Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-integration-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Integration Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-e2e-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 E2E Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-test-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Test Environment
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-quality-gates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Quality Gates
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Quality Gates">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cicd-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CI/CD Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gate-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gate Definitions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-automation-scope" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Automation Scope
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-critical-test-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Critical Test Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Critical Test Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-resilience-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.1 Resilience Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-security-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.2 Security Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-cache-integrity-tests-tier-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.3 Cache Integrity Tests (TIER 1)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#84-provider-tests-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.4 Provider Tests (TIER 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-end-to-end-tests-tier-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8.5 End-to-End Tests (TIER 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#test-execution-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Execution Commands
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#coverage-reporting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage Reporting
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-test-pyramid-breakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Test Pyramid Breakdown
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Test Pyramid Breakdown">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-tests-150-tests-20s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit Tests (~150 tests, ~20s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-tests-40-tests-60s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Tests (~40 tests, ~60s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e2e-tests-10-tests-30s-execution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        E2E Tests (~10 tests, ~30s execution)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-what-this-test-strategy-doesnt-cover-and-why-thats-ok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. What This Test Strategy Doesn't Cover (And Why That's OK)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. What This Test Strategy Doesn&#39;t Cover (And Why That&#39;s OK)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#excluded-from-testing-proportionate-to-solo-developer-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Excluded from Testing (Proportionate to Solo Developer Tool)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-test-organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Test Organization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Test Organization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Structure
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pytest-markers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pytest Markers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-test-maintenance-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Test Maintenance Strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Test Maintenance Strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#when-to-update-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When to Update Tests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test-fixture-refresh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Test Fixture Refresh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-success-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Success Metrics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="test-strategy">Test Strategy<a class="headerlink" href="#test-strategy" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Project:</strong> OmniData Nexus Core
+<strong>Version:</strong> 1.0
+<strong>Date:</strong> 2026-01-31
+<strong>Status:</strong> Draft
+<strong>Phase:</strong> DEVELOPMENT (not yet live)</p>
+</blockquote>
+<hr />
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<h3 id="11-scope">1.1 Scope<a class="headerlink" href="#11-scope" title="Permanent link">&para;</a></h3>
+<p><strong>In Scope:</strong>
+- Unit tests for all core components (DataLoader, QoS Router, Circuit Breaker, Providers, Cache Manager)
+- Integration tests for provider API interactions (mocked)
+- End-to-end tests for critical user workflows
+- Security tests for API key sanitization and HTTPS enforcement
+- Resilience tests for circuit breaker, retry logic, and rate limiting</p>
+<p><strong>Out of Scope:</strong>
+- Real API calls in CI/CD (all external API interactions will be mocked)
+- Performance/load testing beyond basic concurrency validation (personal tool, not production service)
+- UI testing (no graphical interface)
+- Multi-user/concurrent process testing (single-user system)
+- Network security penetration testing (local-only deployment)</p>
+<h3 id="12-quality-objectives">1.2 Quality Objectives<a class="headerlink" href="#12-quality-objectives" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Objective</th>
+<th>Target</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overall line coverage</td>
+<td>&gt;80%</td>
+<td>pytest-cov</td>
+</tr>
+<tr>
+<td>TIER 1 coverage</td>
+<td>&gt;90%</td>
+<td>pytest-cov (filtered by component)</td>
+</tr>
+<tr>
+<td>TIER 2 coverage</td>
+<td>&gt;80%</td>
+<td>pytest-cov (filtered by component)</td>
+</tr>
+<tr>
+<td>Test pass rate</td>
+<td>100%</td>
+<td>CI pipeline</td>
+</tr>
+<tr>
+<td>Test suite execution time</td>
+<td>&lt;2 minutes</td>
+<td>CI pipeline</td>
+</tr>
+<tr>
+<td>Security test coverage</td>
+<td>100% critical cases</td>
+<td>Manual verification</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-test-pyramid">2. Test Pyramid<a class="headerlink" href="#2-test-pyramid" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                    ┌─────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                   ╱   E2E    ╲        ← 5%: Critical user workflows
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                  ╱   (~10)    ╲          (cache miss→API→cache write)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                 ╱───────────────╲
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                ╱   Integration   ╲    ← 20%: Provider mocking, retries
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>               ╱      (~40)       ╲      (aioresponses for HTTP mocking)
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>              ╱─────────────────────╲
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>             ╱        Unit           ╲  ← 75%: Isolated component logic
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>            ╱       (~150)            ╲    (pure functions, state machines)
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>           ╱───────────────────────────╲
+</code></pre></div>
+<p><strong>Rationale for Pyramid:</strong>
+- <strong>Unit (75%):</strong> Fast feedback loop; isolates bugs to specific components; enables TDD workflow
+- <strong>Integration (20%):</strong> Validates provider-specific behavior (HTTP mocking); verifies retry/backoff logic
+- <strong>E2E (5%):</strong> Ensures critical paths work end-to-end; validates component orchestration</p>
+<p><strong>Scale-Appropriate for Solo Developer:</strong>
+- Target ~200 total tests (not thousands)
+- Focus on high-risk areas (Circuit Breaker, Cache integrity, API key sanitization)
+- Accept manual testing for low-risk utilities</p>
+<hr />
+<h2 id="3-risk-based-tiers">3. Risk-Based Tiers<a class="headerlink" href="#3-risk-based-tiers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Components</th>
+<th>Coverage Target</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TIER 1</strong></td>
+<td>Circuit Breaker, QoS Semaphore Router, API Key Sanitization, Atomic Cache Writes</td>
+<td>90%+</td>
+<td>High risk: System resilience, security, data integrity</td>
+</tr>
+<tr>
+<td><strong>TIER 2</strong></td>
+<td>DataLoader, Providers (FMP/Polygon/FRED), Retry Handler, Health Monitor</td>
+<td>80%</td>
+<td>Medium risk: Core business logic, user-facing API</td>
+</tr>
+<tr>
+<td><strong>TIER 3</strong></td>
+<td>Config Manager, Cache Manager (non-atomic methods), Logging utilities</td>
+<td>60%</td>
+<td>Low risk: Wrappers, simple utilities</td>
+</tr>
+<tr>
+<td><strong>TIER 4</strong></td>
+<td>Example scripts, one-off tools</td>
+<td>Manual testing OK</td>
+<td>Minimal risk: Not part of core framework</td>
+</tr>
+</tbody>
+</table>
+<h3 id="component-classification">Component Classification<a class="headerlink" href="#component-classification" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Tier</th>
+<th>Rationale</th>
+<th>Priority Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Circuit Breaker Manager</strong></td>
+<td>1</td>
+<td>Prevents cascading failures; critical resilience pattern</td>
+<td>- State transitions (CLOSED→OPEN→HALF-OPEN)<br>- Error rate threshold (20%)<br>- Recovery logic</td>
+</tr>
+<tr>
+<td><strong>QoS Semaphore Router</strong></td>
+<td>1</td>
+<td>Prevents rate limit violations; quota management</td>
+<td>- Concurrency limits (FMP:3, Polygon:10, FRED:1)<br>- Acquire/release semantics<br>- Timeout handling</td>
+</tr>
+<tr>
+<td><strong>API Key Sanitization</strong></td>
+<td>1</td>
+<td>Security: Prevents credential leakage</td>
+<td>- Keys not in logs (regex test)<br>- Keys not in error messages<br>- Keys not in cache files</td>
+</tr>
+<tr>
+<td><strong>Cache Atomic Writes</strong></td>
+<td>1</td>
+<td>Data integrity: Prevents corruption</td>
+<td>- Concurrent writes (no partial JSON)<br>- Temp file + rename pattern<br>- Rollback on error</td>
+</tr>
+<tr>
+<td><strong>DataLoader</strong></td>
+<td>2</td>
+<td>Unified interface; orchestrates all components</td>
+<td>- Mode switching (LIVE/READ-ONLY)<br>- Provider routing<br>- Health report aggregation</td>
+</tr>
+<tr>
+<td><strong>FMP Provider</strong></td>
+<td>2</td>
+<td>13 endpoints; most complex provider</td>
+<td>- Endpoint coverage (screener, profile, financials)<br>- Normalization logic<br>- Cache key generation</td>
+</tr>
+<tr>
+<td><strong>Polygon Provider</strong></td>
+<td>2</td>
+<td>4 endpoints; options complexity</td>
+<td>- aggs_daily, trades, options_snapshot<br>- Hash-based cache keys<br>- Response validation</td>
+</tr>
+<tr>
+<td><strong>FRED Provider</strong></td>
+<td>2</td>
+<td>32 series; time series data</td>
+<td>- Series fetch (CPIAUCSL, UNRATE, DGS10)<br>- Date range handling<br>- Data normalization</td>
+</tr>
+<tr>
+<td><strong>Retry Handler</strong></td>
+<td>2</td>
+<td>Exponential backoff + jitter</td>
+<td>- Retry only 5xx/timeout<br>- Max retries (3)<br>- Jitter randomization</td>
+</tr>
+<tr>
+<td><strong>Health Monitor</strong></td>
+<td>2</td>
+<td>Metrics tracking</td>
+<td>- Request/error counters<br>- Error rate calculation<br>- Per-provider stats</td>
+</tr>
+<tr>
+<td><strong>Config Manager</strong></td>
+<td>3</td>
+<td>Environment variable loading</td>
+<td>- .env file parsing<br>- Default values<br>- Validation</td>
+</tr>
+<tr>
+<td><strong>Cache Manager (read)</strong></td>
+<td>3</td>
+<td>Simple file I/O</td>
+<td>- get_cached() logic<br>- TTL expiration check<br>- Missing file handling</td>
+</tr>
+<tr>
+<td><strong>HTTP Client Layer</strong></td>
+<td>3</td>
+<td>Thin wrapper over aiohttp</td>
+<td>- Timeout configuration<br>- Connection pooling<br>- TLS enforcement</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-test-types">4. Test Types<a class="headerlink" href="#4-test-types" title="Permanent link">&para;</a></h2>
+<h3 id="41-unit-tests">4.1 Unit Tests<a class="headerlink" href="#41-unit-tests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>Framework</th>
+<th>Mocking Approach</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Circuit Breaker state machine</td>
+<td>pytest</td>
+<td>Mock time.time() for threshold testing</td>
+<td><code>test_circuit_breaker_opens_at_20_percent_error_rate()</code></td>
+</tr>
+<tr>
+<td>QoS Semaphore limits</td>
+<td>pytest-asyncio</td>
+<td>No mocking (test semaphore directly)</td>
+<td><code>test_qos_router_enforces_fmp_limit_3()</code></td>
+</tr>
+<tr>
+<td>Provider normalization</td>
+<td>pytest</td>
+<td>Mock HTTP responses (aioresponses)</td>
+<td><code>test_fmp_profile_normalizes_response()</code></td>
+</tr>
+<tr>
+<td>Cache key generation</td>
+<td>pytest</td>
+<td>No mocking (pure function)</td>
+<td><code>test_cache_key_md5_hash_consistency()</code></td>
+</tr>
+<tr>
+<td>Retry backoff calculation</td>
+<td>pytest</td>
+<td>Mock random.uniform() for jitter</td>
+<td><code>test_exponential_backoff_with_jitter()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Isolation Strategy:</strong>
+- Mock external dependencies (<code>aiohttp.ClientSession</code>, filesystem, time)
+- Use dependency injection where possible (pass session as parameter)
+- Test pure functions first (cache_key generation, normalization logic)</p>
+<h3 id="42-integration-tests">4.2 Integration Tests<a class="headerlink" href="#42-integration-tests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Approach</th>
+<th>Environment</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FMP API (mocked)</strong></td>
+<td>aioresponses library</td>
+<td>Mock HTTP server</td>
+<td><code>test_fmp_provider_handles_429_rate_limit()</code></td>
+</tr>
+<tr>
+<td><strong>Polygon API (mocked)</strong></td>
+<td>aioresponses library</td>
+<td>Mock HTTP server</td>
+<td><code>test_polygon_retry_on_503_server_error()</code></td>
+</tr>
+<tr>
+<td><strong>FRED API (mocked)</strong></td>
+<td>aioresponses library</td>
+<td>Mock HTTP server</td>
+<td><code>test_fred_circuit_breaker_opens_after_failures()</code></td>
+</tr>
+<tr>
+<td><strong>Filesystem cache</strong></td>
+<td>tempfile.TemporaryDirectory</td>
+<td>Isolated temp dir</td>
+<td><code>test_cache_atomic_write_concurrent_safety()</code></td>
+</tr>
+<tr>
+<td><strong>Health monitor integration</strong></td>
+<td>pytest-asyncio</td>
+<td>In-memory counters</td>
+<td><code>test_health_report_aggregates_all_providers()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mocking Rationale:</strong>
+- No real API calls in CI (cost, rate limits, reliability)
+- Faster test execution (&lt;2 min target)
+- Deterministic test results (no flaky tests from network issues)</p>
+<h3 id="43-e2e-tests">4.3 E2E Tests<a class="headerlink" href="#43-e2e-tests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Priority</th>
+<th>Automation</th>
+<th>Components Involved</th>
+<th>Expected Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Happy path: Cache miss → API → Cache hit</strong></td>
+<td>HIGH</td>
+<td>Yes</td>
+<td>DataLoader, Provider, Cache, HTTP Client</td>
+<td>- 1st call: API fetch + cache write<br>- 2nd call: Cache hit (no API)</td>
+</tr>
+<tr>
+<td><strong>Circuit breaker opens after failures</strong></td>
+<td>HIGH</td>
+<td>Yes</td>
+<td>Circuit Breaker, Provider, Health Monitor</td>
+<td>- 3 failures → circuit OPEN<br>- Subsequent calls fail immediately</td>
+</tr>
+<tr>
+<td><strong>READ-ONLY mode (no API calls)</strong></td>
+<td>HIGH</td>
+<td>Yes</td>
+<td>DataLoader, Cache</td>
+<td>- Cache hit: success<br>- Cache miss: error (no API call)</td>
+</tr>
+<tr>
+<td><strong>QoS limits concurrent requests</strong></td>
+<td>MEDIUM</td>
+<td>Yes</td>
+<td>QoS Router, Provider</td>
+<td>- FMP: max 3 concurrent (10 attempted)<br>- Verify semaphore enforcement</td>
+</tr>
+<tr>
+<td><strong>Rate limit handling (HTTP 429)</strong></td>
+<td>MEDIUM</td>
+<td>Yes</td>
+<td>Retry Handler, Provider</td>
+<td>- Mock 429 response<br>- Parse Retry-After header<br>- Exponential backoff</td>
+</tr>
+<tr>
+<td><strong>Parallel multi-provider fetch</strong></td>
+<td>MEDIUM</td>
+<td>Yes</td>
+<td>DataLoader, All Providers</td>
+<td>- Fetch FMP + Polygon + FRED concurrently<br>- Verify total time ≈ slowest request</td>
+</tr>
+<tr>
+<td><strong>Graceful degradation (1 provider down)</strong></td>
+<td>LOW</td>
+<td>Manual</td>
+<td>DataLoader, Circuit Breaker</td>
+<td>- FMP down (circuit OPEN)<br>- Polygon/FRED still work</td>
+</tr>
+<tr>
+<td><strong>Cache TTL expiration</strong></td>
+<td>LOW</td>
+<td>Manual</td>
+<td>Cache Manager</td>
+<td>- Cache entry older than TTL<br>- Refetch from API</td>
+</tr>
+</tbody>
+</table>
+<p><strong>E2E Test Environment:</strong>
+- Mocked HTTP responses (aioresponses)
+- Temporary filesystem cache
+- Isolated asyncio event loop per test</p>
+<hr />
+<h2 id="5-test-environment">5. Test Environment<a class="headerlink" href="#5-test-environment" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Purpose</th>
+<th>API Behavior</th>
+<th>Data Source</th>
+<th>Config</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Local Development</strong></td>
+<td>Manual testing, debugging</td>
+<td>Mocked (aioresponses) OR real API (opt-in via .env.local)</td>
+<td>Test fixtures</td>
+<td><code>.env.test</code> (mock keys)</td>
+</tr>
+<tr>
+<td><strong>CI/CD (GitHub Actions)</strong></td>
+<td>Automated testing</td>
+<td>Mocked only (no real API calls)</td>
+<td>Test fixtures</td>
+<td>Environment variables (mock keys)</td>
+</tr>
+<tr>
+<td><strong>Manual Testing</strong></td>
+<td>Exploratory testing, one-off scenarios</td>
+<td>Real API calls (user's keys)</td>
+<td>Real API responses</td>
+<td><code>.env</code> (real keys)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Test Data Strategy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Source</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FMP responses</strong></td>
+<td>JSON fixtures in <code>tests/fixtures/fmp/</code></td>
+<td><code>profile_AAPL.json</code>, <code>balance_sheet_MSFT.json</code></td>
+</tr>
+<tr>
+<td><strong>Polygon responses</strong></td>
+<td>JSON fixtures in <code>tests/fixtures/polygon/</code></td>
+<td><code>aggs_daily_SPY.json</code>, <code>options_snapshot_AAPL.json</code></td>
+</tr>
+<tr>
+<td><strong>FRED responses</strong></td>
+<td>JSON fixtures in <code>tests/fixtures/fred/</code></td>
+<td><code>CPIAUCSL.json</code>, <code>UNRATE.json</code></td>
+</tr>
+<tr>
+<td><strong>Error responses</strong></td>
+<td>Inline JSON in tests</td>
+<td><code>{"error": "Invalid API key"}</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fixture Management:</strong>
+- Record real API responses once (via manual script)
+- Store as JSON files in version control
+- Update fixtures when API schemas change</p>
+<hr />
+<h2 id="6-quality-gates">6. Quality Gates<a class="headerlink" href="#6-quality-gates" title="Permanent link">&para;</a></h2>
+<h3 id="cicd-pipeline">CI/CD Pipeline<a class="headerlink" href="#cicd-pipeline" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>[Commit] → [Lint] → [Type Check] → [Unit] → [Integration] → [E2E] → [Coverage] → [Security] → [Pass]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>              │          │            │           │             │          │            │
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>              ▼          ▼            ▼           ▼             ▼          ▼            ▼
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>          ruff/flake8   mypy      pytest -m    pytest -m    pytest -m   pytest-cov    Secret scan
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>          0 errors    0 errors     unit      integration     e2e       &gt;80% overall     0 leaks
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>                                 100% pass    100% pass     100% pass   &gt;90% TIER 1
+</code></pre></div>
+<h3 id="gate-definitions">Gate Definitions<a class="headerlink" href="#gate-definitions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Tool</th>
+<th>Threshold</th>
+<th>Blocking?</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Code Style (Lint)</strong></td>
+<td>ruff / flake8</td>
+<td>0 errors</td>
+<td>YES</td>
+<td>Enforces consistency; prevents common bugs</td>
+</tr>
+<tr>
+<td><strong>Type Checking</strong></td>
+<td>mypy</td>
+<td>0 type errors</td>
+<td>YES</td>
+<td>Catches type mismatches before runtime</td>
+</tr>
+<tr>
+<td><strong>Unit Tests</strong></td>
+<td>pytest -m unit</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>Core logic validation; fast feedback</td>
+</tr>
+<tr>
+<td><strong>Integration Tests</strong></td>
+<td>pytest -m integration</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>Provider interactions; resilience patterns</td>
+</tr>
+<tr>
+<td><strong>E2E Tests</strong></td>
+<td>pytest -m e2e</td>
+<td>100% pass</td>
+<td>YES</td>
+<td>Critical user workflows</td>
+</tr>
+<tr>
+<td><strong>Overall Coverage</strong></td>
+<td>pytest-cov</td>
+<td>≥80%</td>
+<td>YES</td>
+<td>Per NFR-006 requirement</td>
+</tr>
+<tr>
+<td><strong>TIER 1 Coverage</strong></td>
+<td>pytest-cov (filtered)</td>
+<td>≥90%</td>
+<td>YES</td>
+<td>High-risk components</td>
+</tr>
+<tr>
+<td><strong>TIER 2 Coverage</strong></td>
+<td>pytest-cov (filtered)</td>
+<td>≥80%</td>
+<td>NO (warning)</td>
+<td>Aspirational, not blocking</td>
+</tr>
+<tr>
+<td><strong>Secret Scanning</strong></td>
+<td>git grep / detect-secrets</td>
+<td>0 API keys found</td>
+<td>YES</td>
+<td>Security: Prevent credential leakage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Coverage Exclusions:</strong>
+- <code>__init__.py</code> files (no logic)
+- Debug/print statements (tagged with <code># pragma: no cover</code>)
+- Defensive error handling for impossible states
+- Deprecated code (marked for removal)</p>
+<hr />
+<h2 id="7-automation-scope">7. Automation Scope<a class="headerlink" href="#7-automation-scope" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Test Category</th>
+<th>Automate?</th>
+<th>Rationale</th>
+<th>CI Execution Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Unit tests</strong></td>
+<td>YES</td>
+<td>Fast (&lt;30s), deterministic, high value</td>
+<td>~20s</td>
+</tr>
+<tr>
+<td><strong>Integration tests (mocked)</strong></td>
+<td>YES</td>
+<td>Medium speed (~1min), validates resilience</td>
+<td>~60s</td>
+</tr>
+<tr>
+<td><strong>E2E tests (critical paths)</strong></td>
+<td>YES</td>
+<td>Slower (~30s), but essential workflows</td>
+<td>~30s</td>
+</tr>
+<tr>
+<td><strong>E2E edge cases</strong></td>
+<td>PARTIAL</td>
+<td>Diminishing returns; manual exploratory testing</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Security tests (key sanitization)</strong></td>
+<td>YES</td>
+<td>Critical security validation</td>
+<td>~5s</td>
+</tr>
+<tr>
+<td><strong>Dependency audit</strong></td>
+<td>YES</td>
+<td>Weekly scheduled run (not per commit)</td>
+<td>~10s</td>
+</tr>
+<tr>
+<td><strong>Real API smoke tests</strong></td>
+<td>NO</td>
+<td>Cost, rate limits; manual validation on release</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Performance benchmarks</strong></td>
+<td>NO</td>
+<td>Personal tool; manual ad-hoc benchmarking</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Exploratory testing</strong></td>
+<td>NO</td>
+<td>Human judgment for edge cases</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total CI Time Budget:</strong> &lt;2 minutes (enables fast iteration)</p>
+<hr />
+<h2 id="8-critical-test-cases">8. Critical Test Cases<a class="headerlink" href="#8-critical-test-cases" title="Permanent link">&para;</a></h2>
+<h3 id="81-resilience-tests-tier-1">8.1 Resilience Tests (TIER 1)<a class="headerlink" href="#81-resilience-tests-tier-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TC-001</strong></td>
+<td>Circuit breaker opens at &gt;20% error rate</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Track 10 requests, 3 errors (30%)<br>- Circuit state = OPEN<br>- Subsequent calls raise CircuitOpenError</td>
+</tr>
+<tr>
+<td><strong>TC-002</strong></td>
+<td>Circuit breaker recovery (HALF-OPEN → CLOSED)</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- Circuit OPEN → wait timeout → HALF-OPEN<br>- Single test request succeeds → CLOSED<br>- Normal operation resumes</td>
+</tr>
+<tr>
+<td><strong>TC-003</strong></td>
+<td>Circuit breaker stays OPEN on recovery failure</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- Circuit HALF-OPEN → test request fails → OPEN<br>- Reset timeout counter</td>
+</tr>
+<tr>
+<td><strong>TC-004</strong></td>
+<td>QoS router enforces FMP concurrency (max 3)</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Launch 10 concurrent FMP requests<br>- Only 3 execute simultaneously<br>- 7 wait in queue</td>
+</tr>
+<tr>
+<td><strong>TC-005</strong></td>
+<td>QoS router enforces Polygon concurrency (max 10)</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Launch 20 concurrent Polygon requests<br>- Only 10 execute simultaneously</td>
+</tr>
+<tr>
+<td><strong>TC-006</strong></td>
+<td>QoS router enforces FRED concurrency (max 1)</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Launch 5 concurrent FRED requests<br>- Serialized execution (1 at a time)</td>
+</tr>
+<tr>
+<td><strong>TC-007</strong></td>
+<td>Exponential backoff with jitter</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- 1st retry: ~1s ± jitter<br>- 2nd retry: ~2s ± jitter<br>- 3rd retry: ~4s ± jitter<br>- Max 3 retries</td>
+</tr>
+<tr>
+<td><strong>TC-008</strong></td>
+<td>Retry only on 5xx/timeout (not 4xx)</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- 400 Bad Request: no retry<br>- 429 Rate Limit: cooldown (not retry)<br>- 503 Service Unavailable: retry up to 3x</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-security-tests-tier-1">8.2 Security Tests (TIER 1)<a class="headerlink" href="#82-security-tests-tier-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TC-101</strong></td>
+<td>API keys not logged in error messages</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Trigger error with <code>FMP_KEY</code> in URL<br>- Log output contains <code>***REDACTED***</code><br>- Regex match fails for actual key</td>
+</tr>
+<tr>
+<td><strong>TC-102</strong></td>
+<td>API keys not logged in success messages</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Successful API call<br>- Log output contains endpoint/symbol<br>- No API key in log</td>
+</tr>
+<tr>
+<td><strong>TC-103</strong></td>
+<td>API keys not in cache files</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- Fetch data with API key in URL<br>- Inspect cached JSON file<br>- Verify no key present</td>
+</tr>
+<tr>
+<td><strong>TC-104</strong></td>
+<td>.env file in .gitignore</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Parse .gitignore file<br>- Assert <code>.env</code> entry exists</td>
+</tr>
+<tr>
+<td><strong>TC-105</strong></td>
+<td>HTTPS enforcement (reject HTTP)</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Attempt HTTP URL: <code>http://api.example.com</code><br>- Raises ValueError</td>
+</tr>
+<tr>
+<td><strong>TC-106</strong></td>
+<td>TLS certificate validation enabled</td>
+<td>Integration</td>
+<td>SHOULD</td>
+<td>- Mock invalid certificate<br>- Verify aiohttp raises SSLError</td>
+</tr>
+</tbody>
+</table>
+<h3 id="83-cache-integrity-tests-tier-1">8.3 Cache Integrity Tests (TIER 1)<a class="headerlink" href="#83-cache-integrity-tests-tier-1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TC-201</strong></td>
+<td>Atomic write (temp + rename pattern)</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Call cache.set()<br>- Verify temp file created first<br>- Verify rename to final path<br>- No partial file remains</td>
+</tr>
+<tr>
+<td><strong>TC-202</strong></td>
+<td>Concurrent writes (no corruption)</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- 10 threads write to same cache key<br>- All writes succeed<br>- Final file is valid JSON (not partial)</td>
+</tr>
+<tr>
+<td><strong>TC-203</strong></td>
+<td>Rollback on write error</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Mock filesystem error during write<br>- Verify temp file deleted<br>- Original cache (if any) unchanged</td>
+</tr>
+<tr>
+<td><strong>TC-204</strong></td>
+<td>Cache miss returns None</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Request non-existent cache key<br>- Returns None (not error)</td>
+</tr>
+<tr>
+<td><strong>TC-205</strong></td>
+<td>Cache TTL expiration</td>
+<td>Integration</td>
+<td>SHOULD</td>
+<td>- Cache entry older than TTL<br>- get_cached() returns None<br>- Triggers API refetch</td>
+</tr>
+</tbody>
+</table>
+<h3 id="84-provider-tests-tier-2">8.4 Provider Tests (TIER 2)<a class="headerlink" href="#84-provider-tests-tier-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TC-301</strong></td>
+<td>FMP profile endpoint normalization</td>
+<td>Unit</td>
+<td>MUST</td>
+<td>- Mock FMP profile response<br>- Verify normalized fields (symbol, companyName, sector)<br>- Handle missing fields gracefully</td>
+</tr>
+<tr>
+<td><strong>TC-302</strong></td>
+<td>Polygon aggs_daily date range</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- Request SPY data for 2024-01-01 to 2024-12-31<br>- Verify all days present<br>- Handle weekends/holidays</td>
+</tr>
+<tr>
+<td><strong>TC-303</strong></td>
+<td>FRED series fetch (CPIAUCSL)</td>
+<td>Integration</td>
+<td>MUST</td>
+<td>- Request CPIAUCSL time series<br>- Verify dates + values<br>- Handle FRED-specific date format</td>
+</tr>
+<tr>
+<td><strong>TC-304</strong></td>
+<td>FMP handles HTTP 429 rate limit</td>
+<td>Integration</td>
+<td>SHOULD</td>
+<td>- Mock 429 response with Retry-After: 60<br>- Verify 60s cooldown<br>- Retry after cooldown</td>
+</tr>
+</tbody>
+</table>
+<h3 id="85-end-to-end-tests-tier-2">8.5 End-to-End Tests (TIER 2)<a class="headerlink" href="#85-end-to-end-tests-tier-2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Scenario</th>
+<th>Type</th>
+<th>Priority</th>
+<th>Acceptance Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TC-401</strong></td>
+<td>Happy path: Cache miss → API → Cache hit</td>
+<td>E2E</td>
+<td>MUST</td>
+<td>- 1st call: Cache miss → API fetch → Cache write<br>- 2nd call: Cache hit (no API call)<br>- Verify same data returned</td>
+</tr>
+<tr>
+<td><strong>TC-402</strong></td>
+<td>READ-ONLY mode (no API calls)</td>
+<td>E2E</td>
+<td>MUST</td>
+<td>- Set mode = READ_ONLY<br>- Cache hit: returns data<br>- Cache miss: raises ReadOnlyError (no API call)</td>
+</tr>
+<tr>
+<td><strong>TC-403</strong></td>
+<td>Parallel multi-provider fetch</td>
+<td>E2E</td>
+<td>SHOULD</td>
+<td>- Fetch FMP profile + Polygon aggs + FRED CPIAUCSL<br>- All 3 return data<br>- Total time ≈ slowest single request</td>
+</tr>
+<tr>
+<td><strong>TC-404</strong></td>
+<td>Health report aggregation</td>
+<td>E2E</td>
+<td>SHOULD</td>
+<td>- Execute 10 FMP calls (8 success, 2 fail)<br>- get_api_health_report()<br>- Verify: total=10, errors=2, error_rate=0.2, circuit=CLOSED</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-tools">9. Tools<a class="headerlink" href="#9-tools" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>Tool</th>
+<th>Version</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Test Framework</strong></td>
+<td>pytest</td>
+<td>≥7.0</td>
+<td>Industry standard; excellent async support</td>
+</tr>
+<tr>
+<td><strong>Async Testing</strong></td>
+<td>pytest-asyncio</td>
+<td>≥0.21</td>
+<td>Enables <code>@pytest.mark.asyncio</code> decorator</td>
+</tr>
+<tr>
+<td><strong>Coverage Reporting</strong></td>
+<td>pytest-cov</td>
+<td>≥3.0</td>
+<td>Integrated with pytest; generates HTML reports</td>
+</tr>
+<tr>
+<td><strong>HTTP Mocking</strong></td>
+<td>aioresponses</td>
+<td>≥0.7</td>
+<td>Mocks <code>aiohttp.ClientSession</code> responses</td>
+</tr>
+<tr>
+<td><strong>Temporary Files</strong></td>
+<td>tempfile (built-in)</td>
+<td>-</td>
+<td>Isolated cache directories for tests</td>
+</tr>
+<tr>
+<td><strong>Fixtures</strong></td>
+<td>pytest fixtures</td>
+<td>-</td>
+<td>Reusable test setup (sessions, mock data)</td>
+</tr>
+<tr>
+<td><strong>Parametrization</strong></td>
+<td>pytest.mark.parametrize</td>
+<td>-</td>
+<td>Test multiple inputs efficiently</td>
+</tr>
+<tr>
+<td><strong>Secret Scanning</strong></td>
+<td>detect-secrets</td>
+<td>≥1.4</td>
+<td>Pre-commit hook for API key detection</td>
+</tr>
+<tr>
+<td><strong>Type Checking</strong></td>
+<td>mypy</td>
+<td>≥1.0</td>
+<td>Static type analysis</td>
+</tr>
+<tr>
+<td><strong>Linting</strong></td>
+<td>ruff / flake8</td>
+<td>Latest</td>
+<td>Fast Python linter</td>
+</tr>
+<tr>
+<td><strong>CI/CD</strong></td>
+<td>GitHub Actions</td>
+<td>-</td>
+<td>Automated test execution on push</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-execution-commands">Test Execution Commands<a class="headerlink" href="#test-execution-commands" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Run all tests</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>pytest
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># Run unit tests only</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>pytest<span class="w"> </span>-m<span class="w"> </span>unit
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># Run integration tests only</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>pytest<span class="w"> </span>-m<span class="w"> </span>integration
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># Run E2E tests only</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>pytest<span class="w"> </span>-m<span class="w"> </span>e2e
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="c1"># Run with coverage report</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>html<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># Run TIER 1 tests (critical components)</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>pytest<span class="w"> </span>-m<span class="w"> </span>tier1
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="c1"># Run fast tests only (exclude slow integration)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>pytest<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;not slow&quot;</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="c1"># Run specific test file</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>pytest<span class="w"> </span>tests/test_circuit_breaker.py
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="c1"># Run with verbose output</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>pytest<span class="w"> </span>-v
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="c1"># Run with detailed failure output</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>pytest<span class="w"> </span>-vv
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1"># Parallel execution (optional, for speed)</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>pytest<span class="w"> </span>-n<span class="w"> </span>auto<span class="w">  </span><span class="c1"># Requires pytest-xdist</span>
+</code></pre></div>
+<h3 id="coverage-reporting">Coverage Reporting<a class="headerlink" href="#coverage-reporting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Generate HTML coverage report</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>html
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>open<span class="w"> </span>htmlcov/index.html
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1"># Terminal coverage summary</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-report<span class="o">=</span>term-missing
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># Coverage by component (TIER 1)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>pytest<span class="w"> </span>--cov<span class="o">=</span>src/data_loader/circuit_breaker.py<span class="w"> </span>--cov-report<span class="o">=</span>term
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># Fail if coverage below threshold</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>pytest<span class="w"> </span>--cov<span class="o">=</span>src<span class="w"> </span>--cov-fail-under<span class="o">=</span><span class="m">80</span>
+</code></pre></div>
+<hr />
+<h2 id="10-test-pyramid-breakdown">10. Test Pyramid Breakdown<a class="headerlink" href="#10-test-pyramid-breakdown" title="Permanent link">&para;</a></h2>
+<h3 id="unit-tests-150-tests-20s-execution">Unit Tests (~150 tests, ~20s execution)<a class="headerlink" href="#unit-tests-150-tests-20s-execution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Test Count</th>
+<th>Key Scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Circuit Breaker</td>
+<td>15</td>
+<td>State transitions, threshold calculations, timeout reset</td>
+</tr>
+<tr>
+<td>QoS Semaphore Router</td>
+<td>12</td>
+<td>Concurrency limits per provider, acquire/release, timeout</td>
+</tr>
+<tr>
+<td>Retry Handler</td>
+<td>10</td>
+<td>Exponential backoff, jitter, max retries, 5xx only</td>
+</tr>
+<tr>
+<td>Cache Manager</td>
+<td>20</td>
+<td>Atomic writes, TTL expiration, cache key generation, file I/O</td>
+</tr>
+<tr>
+<td>Config Manager</td>
+<td>8</td>
+<td>.env parsing, defaults, validation, missing keys</td>
+</tr>
+<tr>
+<td>FMP Provider (normalization)</td>
+<td>25</td>
+<td>All 13 endpoints, field mapping, missing data handling</td>
+</tr>
+<tr>
+<td>Polygon Provider</td>
+<td>15</td>
+<td>4 endpoints, hash-based cache keys, date ranges</td>
+</tr>
+<tr>
+<td>FRED Provider</td>
+<td>20</td>
+<td>32 series (sample), time series parsing, date formats</td>
+</tr>
+<tr>
+<td>Health Monitor</td>
+<td>10</td>
+<td>Counter increments, error rate calculation, reset</td>
+</tr>
+<tr>
+<td>API Key Sanitization</td>
+<td>10</td>
+<td>Regex redaction, log output, error messages</td>
+</tr>
+<tr>
+<td>DataLoader (routing)</td>
+<td>5</td>
+<td>Provider selection, mode switching, health aggregation</td>
+</tr>
+</tbody>
+</table>
+<h3 id="integration-tests-40-tests-60s-execution">Integration Tests (~40 tests, ~60s execution)<a class="headerlink" href="#integration-tests-40-tests-60s-execution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Integration Point</th>
+<th>Test Count</th>
+<th>Key Scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FMP API (mocked)</td>
+<td>10</td>
+<td>429 handling, 5xx retry, circuit breaker, cache integration</td>
+</tr>
+<tr>
+<td>Polygon API (mocked)</td>
+<td>8</td>
+<td>Timeout retry, malformed JSON, cache integration</td>
+</tr>
+<tr>
+<td>FRED API (mocked)</td>
+<td>8</td>
+<td>Series fetch, date range, circuit breaker</td>
+</tr>
+<tr>
+<td>Cache + Filesystem</td>
+<td>8</td>
+<td>Concurrent writes, temp file cleanup, permissions</td>
+</tr>
+<tr>
+<td>Circuit Breaker + Provider</td>
+<td>6</td>
+<td>Error accumulation, recovery, state persistence</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e2e-tests-10-tests-30s-execution">E2E Tests (~10 tests, ~30s execution)<a class="headerlink" href="#e2e-tests-10-tests-30s-execution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Test Count</th>
+<th>Key Scenarios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cache miss → API → Cache hit</td>
+<td>3</td>
+<td>FMP, Polygon, FRED happy paths</td>
+</tr>
+<tr>
+<td>READ-ONLY mode</td>
+<td>2</td>
+<td>Cache hit success, cache miss error</td>
+</tr>
+<tr>
+<td>Multi-provider parallel</td>
+<td>2</td>
+<td>All providers succeed, partial failure</td>
+</tr>
+<tr>
+<td>Circuit breaker full cycle</td>
+<td>2</td>
+<td>Open → Half-Open → Closed</td>
+</tr>
+<tr>
+<td>QoS limits enforcement</td>
+<td>1</td>
+<td>Concurrent request throttling</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-what-this-test-strategy-doesnt-cover-and-why-thats-ok">11. What This Test Strategy Doesn't Cover (And Why That's OK)<a class="headerlink" href="#11-what-this-test-strategy-doesnt-cover-and-why-thats-ok" title="Permanent link">&para;</a></h2>
+<h3 id="excluded-from-testing-proportionate-to-solo-developer-tool">Excluded from Testing (Proportionate to Solo Developer Tool)<a class="headerlink" href="#excluded-from-testing-proportionate-to-solo-developer-tool" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Test Type</th>
+<th>Why Excluded</th>
+<th>Alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Real API integration tests</strong></td>
+<td>Cost, rate limits, reliability</td>
+<td>Mock all API calls; manual smoke test on release</td>
+</tr>
+<tr>
+<td><strong>Load/stress testing</strong></td>
+<td>Personal tool, not production service</td>
+<td>Manual ad-hoc benchmarking if needed</td>
+</tr>
+<tr>
+<td><strong>UI/UX testing</strong></td>
+<td>No graphical interface</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Multi-user concurrency</strong></td>
+<td>Single-user system</td>
+<td>Document limitation</td>
+</tr>
+<tr>
+<td><strong>Security penetration testing</strong></td>
+<td>No external attack surface</td>
+<td>Pre-commit secret scanning + manual review</td>
+</tr>
+<tr>
+<td><strong>Database testing</strong></td>
+<td>No database (filesystem cache)</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Cross-platform testing</strong></td>
+<td>macOS/Linux only (POSIX assumed)</td>
+<td>Document Windows compatibility as out of scope</td>
+</tr>
+<tr>
+<td><strong>Internationalization</strong></td>
+<td>English only</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>No UI</td>
+<td>N/A</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-test-organization">12. Test Organization<a class="headerlink" href="#12-test-organization" title="Permanent link">&para;</a></h2>
+<h3 id="directory-structure">Directory Structure<a class="headerlink" href="#directory-structure" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>tests/
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── conftest.py                 # Shared fixtures (mock sessions, temp cache dirs)
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├── fixtures/                   # Mock API responses
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│   ├── fmp/
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│   │   ├── profile_AAPL.json
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│   │   ├── balance_sheet_MSFT.json
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│   │   └── ...
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│   ├── polygon/
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>│   │   ├── aggs_daily_SPY.json
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>│   │   └── options_snapshot_AAPL.json
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>│   └── fred/
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>│       ├── CPIAUCSL.json
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>│       ├── UNRATE.json
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>│       └── ...
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>├── unit/                       # Unit tests (75%)
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>│   ├── test_circuit_breaker.py
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>│   ├── test_qos_router.py
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>│   ├── test_retry_handler.py
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>│   ├── test_cache_manager.py
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>│   ├── test_config_manager.py
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>│   ├── test_fmp_provider.py
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>│   ├── test_polygon_provider.py
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>│   ├── test_fred_provider.py
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>│   ├── test_health_monitor.py
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>│   └── test_sanitization.py
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>├── integration/                # Integration tests (20%)
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>│   ├── test_fmp_integration.py
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>│   ├── test_polygon_integration.py
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>│   ├── test_fred_integration.py
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>│   ├── test_cache_filesystem.py
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>│   └── test_circuit_breaker_integration.py
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>└── e2e/                        # End-to-end tests (5%)
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>    ├── test_happy_path.py
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>    ├── test_readonly_mode.py
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>    ├── test_parallel_fetch.py
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>    └── test_resilience.py
+</code></pre></div>
+<h3 id="pytest-markers">Pytest Markers<a class="headerlink" href="#pytest-markers" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># In conftest.py</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">pytest_configure</span><span class="p">(</span><span class="n">config</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;unit: Unit tests (fast, isolated)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;integration: Integration tests (mocked HTTP)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;e2e: End-to-end tests (full workflows)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;tier1: TIER 1 components (&gt;90</span><span class="si">% c</span><span class="s2">overage required)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;tier2: TIER 2 components (&gt;80</span><span class="si">% c</span><span class="s2">overage required)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;slow: Slow tests (&gt;1s execution)&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">config</span><span class="o">.</span><span class="n">addinivalue_line</span><span class="p">(</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="s2">&quot;security: Security-critical tests&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="13-test-maintenance-strategy">13. Test Maintenance Strategy<a class="headerlink" href="#13-test-maintenance-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="when-to-update-tests">When to Update Tests<a class="headerlink" href="#when-to-update-tests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Test Update Required</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API schema change</strong></td>
+<td>Update fixtures + normalization tests</td>
+<td>FMP adds new field to profile response</td>
+</tr>
+<tr>
+<td><strong>New endpoint added</strong></td>
+<td>Add provider tests</td>
+<td>FRED adds new series</td>
+</tr>
+<tr>
+<td><strong>Requirement change</strong></td>
+<td>Update acceptance criteria</td>
+<td>Circuit breaker threshold changes to 30%</td>
+</tr>
+<tr>
+<td><strong>Bug fix</strong></td>
+<td>Add regression test</td>
+<td>Cache corruption bug → add test for that scenario</td>
+</tr>
+<tr>
+<td><strong>Refactoring</strong></td>
+<td>Update mocks/fixtures if interfaces change</td>
+<td>Provider base class signature changes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="test-fixture-refresh">Test Fixture Refresh<a class="headerlink" href="#test-fixture-refresh" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Manual script to record real API responses (run locally, not in CI)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>python<span class="w"> </span>scripts/record_fixtures.py<span class="w"> </span>--provider<span class="w"> </span>fmp<span class="w"> </span>--endpoint<span class="w"> </span>profile<span class="w"> </span>--symbol<span class="w"> </span>AAPL
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>python<span class="w"> </span>scripts/record_fixtures.py<span class="w"> </span>--provider<span class="w"> </span>polygon<span class="w"> </span>--endpoint<span class="w"> </span>aggs_daily<span class="w"> </span>--symbol<span class="w"> </span>SPY
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>python<span class="w"> </span>scripts/record_fixtures.py<span class="w"> </span>--provider<span class="w"> </span>fred<span class="w"> </span>--series<span class="w"> </span>CPIAUCSL
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="c1"># Stores responses in tests/fixtures/{provider}/</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="c1"># Commit updated fixtures to version control</span>
+</code></pre></div>
+<hr />
+<h2 id="14-success-metrics">14. Success Metrics<a class="headerlink" href="#14-success-metrics" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Target</th>
+<th>Current</th>
+<th>Status</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overall line coverage</td>
+<td>&gt;80%</td>
+<td>TBD</td>
+<td>☐</td>
+<td>pytest-cov</td>
+</tr>
+<tr>
+<td>TIER 1 coverage</td>
+<td>&gt;90%</td>
+<td>TBD</td>
+<td>☐</td>
+<td>pytest-cov (filtered)</td>
+</tr>
+<tr>
+<td>Test pass rate</td>
+<td>100%</td>
+<td>TBD</td>
+<td>☐</td>
+<td>CI pipeline</td>
+</tr>
+<tr>
+<td>Test execution time</td>
+<td>&lt;2 min</td>
+<td>TBD</td>
+<td>☐</td>
+<td>CI pipeline</td>
+</tr>
+<tr>
+<td>Security test coverage</td>
+<td>100% critical</td>
+<td>TBD</td>
+<td>☐</td>
+<td>Manual checklist</td>
+</tr>
+<tr>
+<td>Flaky test rate</td>
+<td>&lt;5%</td>
+<td>TBD</td>
+<td>☐</td>
+<td>CI re-runs</td>
+</tr>
+<tr>
+<td>Bug escape rate</td>
+<td>&lt;10%</td>
+<td>TBD</td>
+<td>☐</td>
+<td>Post-release issues</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Definition of "Done" for Testing:</strong>
+- [ ] All TIER 1 components have &gt;90% coverage
+- [ ] All critical test cases (TC-001 through TC-105) passing
+- [ ] No API keys detected in logs/cache (TC-101 through TC-106)
+- [ ] CI pipeline green on main branch
+- [ ] Test execution time &lt;2 minutes
+- [ ] All E2E workflows validated</p>
+<hr />
+<h2 id="approval">Approval<a class="headerlink" href="#approval" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>QA Agent</td>
+<td>2026-01-31</td>
+<td>✅ Generated</td>
+</tr>
+<tr>
+<td>Technical Review</td>
+<td>Architect Agent</td>
+<td></td>
+<td>☐ Pending</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Solo Developer</td>
+<td></td>
+<td>☐ Pending</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="revision-history">Revision History<a class="headerlink" href="#revision-history" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-01-31</td>
+<td>QA Agent</td>
+<td>Initial test strategy for OmniData Nexus Core</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>Testing Philosophy:</strong> Scale-appropriate for a solo developer research tool. Focus on high-risk components (Circuit Breaker, QoS, Security) while accepting manual testing for low-risk utilities. All external APIs mocked in CI to ensure fast, reliable, cost-effective testing.</p>
+<hr />
+<p><em>Test strategy aligned with NFR-006 (&gt;80% coverage) and designed for fast iteration (&lt;2 min CI time).</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Maeshowe/Nexus_Core" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

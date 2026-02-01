@@ -1,0 +1,2975 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Modular, asynchronous DataLoader framework for financial data">
+      
+      
+      
+        <link rel="canonical" href="https://maeshowe.github.io/Nexus_Core/ARCHITECTURE/">
+      
+      
+        <link rel="prev" href="../api/health/">
+      
+      
+        <link rel="next" href="../TEST_STRATEGY/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Architecture - OmniData Nexus Core</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#architecture-design" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="OmniData Nexus Core" class="md-header__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            OmniData Nexus Core
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Architecture
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="OmniData Nexus Core" class="md-nav__button md-logo" aria-label="OmniData Nexus Core" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    OmniData Nexus Core
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Maeshowe/Nexus_Core" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Maeshowe/Nexus_Core
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User Guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/dataloader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/caching/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../guide/error-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Error Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/loader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataLoader
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/providers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Providers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/cache/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cache
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/health/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Health
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Development
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Development
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-architecture-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Architecture Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-architecture-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Architecture Style
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. System Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. System Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Component Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Component Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Descriptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Data Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-storage-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Storage Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Data Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Technology Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Technology Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-architecture-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Architecture Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-deployment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Deployment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Environments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cross-cutting-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cross-Cutting Concerns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quality-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quality Attributes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-risks-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Risks &amp; Mitigations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-future-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Future Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-constraints-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Constraints &amp; Assumptions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Constraints &amp; Assumptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TEST_STRATEGY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Overview
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-purpose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 Purpose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-architecture-goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 Architecture Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-architecture-style" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Architecture Style
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-system-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. System Context
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. System Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        External Interfaces
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-component-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Component Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Component Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#component-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Component Descriptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-data-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Data Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Data Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-storage-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Storage Decisions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-data-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Data Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-technology-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Technology Stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Technology Stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dependencies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependencies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-architecture-decisions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Architecture Decisions
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-deployment-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Deployment Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-environments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Environments
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-cross-cutting-concerns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Cross-Cutting Concerns
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-quality-attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Quality Attributes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-risks-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Risks &amp; Mitigations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-future-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Future Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-constraints-assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Constraints &amp; Assumptions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="12. Constraints &amp; Assumptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constraints" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Constraints
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assumptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assumptions
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Approval
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revision History
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="architecture-design">Architecture Design<a class="headerlink" href="#architecture-design" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>Project:</strong> OmniData Nexus Core
+<strong>Version:</strong> 1.0
+<strong>Date:</strong> 2026-01-31
+<strong>Status:</strong> Draft
+<strong>Based on:</strong> MoneyFlows Data Loader v2.7.0</p>
+</blockquote>
+<hr />
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
+<h3 id="11-purpose">1.1 Purpose<a class="headerlink" href="#11-purpose" title="Permanent link">&para;</a></h3>
+<p>OmniData Nexus Core is a modular asynchronous Python framework providing a unified Data Access Layer for aggregating financial and macroeconomic data from heterogeneous API sources (FMP Ultimate, Polygon, FRED). It abstracts away provider-specific complexity, implements production-grade resilience patterns (circuit breaker, exponential backoff, QoS semaphore routing), and provides intelligent caching with atomic writes to enable fast, reliable quantitative research for a solo developer.</p>
+<h3 id="12-architecture-goals">1.2 Architecture Goals<a class="headerlink" href="#12-architecture-goals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Priority</th>
+<th>Goal</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Simplicity</td>
+<td>Solo dev environment - prioritize maintainability over abstraction; avoid over-engineering</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Resilience</td>
+<td>Production-grade error handling (circuit breaker, backoff) to survive API failures without manual intervention</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Performance</td>
+<td>Maximize throughput via async I/O and provider-specific concurrency limits (QoS semaphore routing)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Extensibility</td>
+<td>Plugin-style data sources allow easy addition of new APIs without core modifications</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Transparency</td>
+<td>Clear separation of concerns - caching, circuit breaking, rate limiting as orthogonal layers</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-architecture-style">1.3 Architecture Style<a class="headerlink" href="#13-architecture-style" title="Permanent link">&para;</a></h3>
+<p><strong>Selected:</strong> Modular Monolith with Plugin Architecture</p>
+<p><strong>Rationale:</strong>
+- <strong>Single developer:</strong> No operational overhead of distributed systems (no service mesh, no message brokers, no container orchestration)
+- <strong>Research workload:</strong> Request patterns are batch-oriented, not requiring microservice-style independent scaling
+- <strong>Shared infrastructure:</strong> Circuit breaker, caching, QoS router are common concerns - better centralized than duplicated
+- <strong>Deployment simplicity:</strong> Single Python process, no network latency between components
+- <strong>Fast iteration:</strong> Refactoring within a monolith is easier than coordinating across service boundaries</p>
+<p><strong>Alternatives Considered:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Alternative</th>
+<th>Pros</th>
+<th>Cons</th>
+<th>Why Rejected</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Microservices (per provider)</td>
+<td>Independent deployment, language flexibility</td>
+<td>Operational complexity, network latency, distributed state management</td>
+<td>Overkill for solo dev; no need for independent scaling</td>
+</tr>
+<tr>
+<td>Serverless (AWS Lambda per endpoint)</td>
+<td>Auto-scaling, pay-per-use</td>
+<td>Cold start latency, vendor lock-in, difficult local testing</td>
+<td>Research workload doesn't match serverless burst pattern</td>
+</tr>
+<tr>
+<td>Pure Library (no framework)</td>
+<td>Maximum flexibility</td>
+<td>No standardization, repeated implementation of resilience patterns</td>
+<td>Would duplicate circuit breaker/cache logic across consumers</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-system-context">2. System Context<a class="headerlink" href="#2-system-context" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                        EXTERNAL SYSTEMS                              │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│                                                                      │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      │
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│  │  FMP Ultimate│      │  Polygon.io  │      │  FRED API    │      │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│  │              │      │              │      │              │      │
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│  │ 13 endpoints │      │ 4 endpoints  │      │ 32 series    │      │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│  │ Rate: Plan   │      │ Rate: 5-10/m │      │ Rate: ~120/m │      │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│  └──────┬───────┘      └──────┬───────┘      └──────┬───────┘      │
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│         │                     │                     │              │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│         └─────────────────────┼─────────────────────┘              │
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│                               │                                    │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│                     HTTPS/REST over Internet                        │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│                               │                                    │
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│                               ▼                                    │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│              ┌────────────────────────────────┐                     │
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│              │   OmniData Nexus Core          │                     │
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│              │   (Python 3.9+ Framework)      │                     │
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>│              │                                │                     │
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│              │  Unified DataLoader Interface  │                     │
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│              │  + Circuit Breaker             │                     │
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│              │  + QoS Semaphore Router        │                     │
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│              │  + Intelligent Cache           │                     │
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│              └────────────────┬───────────────┘                     │
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│                               │                                    │
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│                               ▼                                    │
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│                ┌───────────────────────────┐                        │
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>│                │  Quantitative Researcher  │                        │
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>│                │  (Primary User)           │                        │
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>│                │  - Jupyter Notebooks      │                        │
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>│                │  - Python Scripts         │                        │
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>│                └───────────────────────────┘                        │
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>│                                                                      │
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>└─────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="external-interfaces">External Interfaces<a class="headerlink" href="#external-interfaces" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>Protocol</th>
+<th>Direction</th>
+<th>Purpose</th>
+<th>Rate Limit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FMP Ultimate</td>
+<td>HTTPS REST (JSON)</td>
+<td>OUT</td>
+<td>Company fundamentals, insider trading, financials</td>
+<td>Plan-dependent (3 concurrent via QoS)</td>
+</tr>
+<tr>
+<td>Polygon.io</td>
+<td>HTTPS REST (JSON)</td>
+<td>OUT</td>
+<td>Market data, trades, options snapshots</td>
+<td>5 req/min (free), 10 concurrent via QoS</td>
+</tr>
+<tr>
+<td>FRED</td>
+<td>HTTPS REST (JSON)</td>
+<td>OUT</td>
+<td>Macroeconomic indicators (32 series)</td>
+<td>~120 req/min recommended, 1 concurrent via QoS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-component-architecture">3. Component Architecture<a class="headerlink" href="#3-component-architecture" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>┌──────────────────────────────────────────────────────────────────────┐
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│                       OmniData Nexus Core                             │
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├──────────────────────────────────────────────────────────────────────┤
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│                                                                       │
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>│  ┌─────────────────────────────────────────────────────────┐         │
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>│  │              DataLoader (Unified Interface)              │         │
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│  │  - get_fmp_data(session, endpoint, **params)            │         │
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│  │  - get_polygon_data(session, endpoint, **params)        │         │
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│  │  - get_fred_data(session, series_id, **params)          │         │
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>│  │  - get_api_health_report() → dict                       │         │
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>│  │  - set_operating_mode(mode: LIVE | READ_ONLY)           │         │
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>│  └────────────┬──────────────────────────────┬──────────────┘         │
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>│               │                              │                        │
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>│               ▼                              ▼                        │
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>│  ┌─────────────────────┐        ┌─────────────────────────┐          │
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>│  │  QoS Semaphore      │        │   Circuit Breaker       │          │
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>│  │  Router             │        │   Manager               │          │
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>│  │                     │        │                         │          │
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>│  │  - FMP: max=3       │        │  - threshold: 20%       │          │
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>│  │  - Polygon: max=10  │        │  - states: CLOSED/      │          │
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>│  │  - FRED: max=1      │        │    OPEN/HALF-OPEN       │          │
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>│  │  - acquire(provider)│        │  - per-provider state   │          │
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>│  └─────────┬───────────┘        └──────────┬──────────────┘          │
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>│            │                               │                         │
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>│            └───────────┬───────────────────┘                         │
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>│                        ▼                                             │
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>│       ┌────────────────────────────────────────┐                     │
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>│       │      Provider Abstraction Layer        │                     │
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>│       │  (Base class: BaseDataProvider)        │                     │
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>│       └────────────────┬───────────────────────┘                     │
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>│                        │                                             │
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>│        ┌───────────────┼───────────────┐                             │
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>│        ▼               ▼               ▼                             │
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>│  ┌──────────┐   ┌──────────┐   ┌──────────────┐                     │
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>│  │   FMP    │   │ Polygon  │   │    FRED      │                     │
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>│  │ Provider │   │ Provider │   │  Provider    │                     │
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>│  │          │   │          │   │              │                     │
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>│  │ - 13 EPs │   │ - 4 EPs  │   │ - 32 series  │                     │
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>│  │ - auth() │   │ - auth() │   │ - auth()     │                     │
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>│  │ - fetch()│   │ - fetch()│   │ - fetch()    │                     │
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a>│  │ - norm() │   │ - norm() │   │ - norm()     │                     │
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a>│  └────┬─────┘   └────┬─────┘   └─────┬────────┘                     │
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a>│       │              │               │                              │
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a>│       └──────────────┼───────────────┘                              │
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a>│                      ▼                                              │
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a>│         ┌────────────────────────────┐                              │
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>│         │  Retry &amp; Backoff Handler   │                              │
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a>│         │  - Exponential delay       │                              │
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a>│         │  - Jitter randomization    │                              │
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a>│         │  - Max retries: 3          │                              │
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a>│         │  - Retry only 5xx/timeout  │                              │
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a>│         └────────────┬───────────────┘                              │
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a>│                      ▼                                              │
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a>│         ┌────────────────────────────┐                              │
+<a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a>│         │     HTTP Client Layer      │                              │
+<a id="__codelineno-1-56" name="__codelineno-1-56" href="#__codelineno-1-56"></a>│         │  (aiohttp.ClientSession)   │                              │
+<a id="__codelineno-1-57" name="__codelineno-1-57" href="#__codelineno-1-57"></a>│         │  - Connection pooling      │                              │
+<a id="__codelineno-1-58" name="__codelineno-1-58" href="#__codelineno-1-58"></a>│         │  - Timeout management      │                              │
+<a id="__codelineno-1-59" name="__codelineno-1-59" href="#__codelineno-1-59"></a>│         │  - API key sanitization    │                              │
+<a id="__codelineno-1-60" name="__codelineno-1-60" href="#__codelineno-1-60"></a>│         └────────────┬───────────────┘                              │
+<a id="__codelineno-1-61" name="__codelineno-1-61" href="#__codelineno-1-61"></a>│                      │                                              │
+<a id="__codelineno-1-62" name="__codelineno-1-62" href="#__codelineno-1-62"></a>│         ┌────────────┴───────────────┐                              │
+<a id="__codelineno-1-63" name="__codelineno-1-63" href="#__codelineno-1-63"></a>│         ▼                            ▼                              │
+<a id="__codelineno-1-64" name="__codelineno-1-64" href="#__codelineno-1-64"></a>│  ┌──────────────┐            ┌──────────────────┐                   │
+<a id="__codelineno-1-65" name="__codelineno-1-65" href="#__codelineno-1-65"></a>│  │ Cache Manager│            │ Health Monitor   │                   │
+<a id="__codelineno-1-66" name="__codelineno-1-66" href="#__codelineno-1-66"></a>│  │              │            │                  │                   │
+<a id="__codelineno-1-67" name="__codelineno-1-67" href="#__codelineno-1-67"></a>│  │ - get_cached()│            │ - request_count  │                   │
+<a id="__codelineno-1-68" name="__codelineno-1-68" href="#__codelineno-1-68"></a>│  │ - set_cache()│            │ - error_count    │                   │
+<a id="__codelineno-1-69" name="__codelineno-1-69" href="#__codelineno-1-69"></a>│  │ - TTL: 7d    │            │ - error_rate     │                   │
+<a id="__codelineno-1-70" name="__codelineno-1-70" href="#__codelineno-1-70"></a>│  │ - atomic     │            │ - rate_limit_%   │                   │
+<a id="__codelineno-1-71" name="__codelineno-1-71" href="#__codelineno-1-71"></a>│  │   writes     │            │ - circuit_state  │                   │
+<a id="__codelineno-1-72" name="__codelineno-1-72" href="#__codelineno-1-72"></a>│  └──────┬───────┘            └──────────────────┘                   │
+<a id="__codelineno-1-73" name="__codelineno-1-73" href="#__codelineno-1-73"></a>│         │                                                           │
+<a id="__codelineno-1-74" name="__codelineno-1-74" href="#__codelineno-1-74"></a>│         ▼                                                           │
+<a id="__codelineno-1-75" name="__codelineno-1-75" href="#__codelineno-1-75"></a>│  ┌──────────────────────────────────────┐                           │
+<a id="__codelineno-1-76" name="__codelineno-1-76" href="#__codelineno-1-76"></a>│  │      Filesystem (JSON Cache)         │                           │
+<a id="__codelineno-1-77" name="__codelineno-1-77" href="#__codelineno-1-77"></a>│  │  data/                               │                           │
+<a id="__codelineno-1-78" name="__codelineno-1-78" href="#__codelineno-1-78"></a>│  │  ├── fmp_cache/{endpoint}/{date}/    │                           │
+<a id="__codelineno-1-79" name="__codelineno-1-79" href="#__codelineno-1-79"></a>│  │  │   └── {symbol}.json               │                           │
+<a id="__codelineno-1-80" name="__codelineno-1-80" href="#__codelineno-1-80"></a>│  │  ├── polygon_cache/{endpoint}/       │                           │
+<a id="__codelineno-1-81" name="__codelineno-1-81" href="#__codelineno-1-81"></a>│  │  │   └── {hash}.json                 │                           │
+<a id="__codelineno-1-82" name="__codelineno-1-82" href="#__codelineno-1-82"></a>│  │  └── fred_cache/{series_id}/         │                           │
+<a id="__codelineno-1-83" name="__codelineno-1-83" href="#__codelineno-1-83"></a>│  │      └── {date_range}.json           │                           │
+<a id="__codelineno-1-84" name="__codelineno-1-84" href="#__codelineno-1-84"></a>│  └──────────────────────────────────────┘                           │
+<a id="__codelineno-1-85" name="__codelineno-1-85" href="#__codelineno-1-85"></a>│                                                                       │
+<a id="__codelineno-1-86" name="__codelineno-1-86" href="#__codelineno-1-86"></a>└──────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="component-descriptions">Component Descriptions<a class="headerlink" href="#component-descriptions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Responsibility</th>
+<th>Dependencies</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DataLoader</strong></td>
+<td>Unified entry point for all data sources; orchestrates QoS, circuit breaker, provider selection</td>
+<td>All components</td>
+<td><code>src/data_loader/loader.py</code></td>
+</tr>
+<tr>
+<td><strong>QoS Semaphore Router</strong></td>
+<td>Enforces provider-specific concurrency limits; prevents rate limit violations</td>
+<td>Config Manager</td>
+<td><code>src/data_loader/qos_router.py</code></td>
+</tr>
+<tr>
+<td><strong>Circuit Breaker Manager</strong></td>
+<td>Monitors error rates; halts requests when threshold exceeded (&gt;20%); manages recovery</td>
+<td>Health Monitor</td>
+<td><code>src/data_loader/circuit_breaker.py</code></td>
+</tr>
+<tr>
+<td><strong>BaseDataProvider</strong></td>
+<td>Abstract base class defining provider interface (auth, fetch, normalize, cache_key)</td>
+<td>None</td>
+<td><code>src/data_loader/providers/base.py</code></td>
+</tr>
+<tr>
+<td><strong>FMP Provider</strong></td>
+<td>FMP-specific implementation; 13 endpoints (screener, profile, financials, etc.)</td>
+<td>BaseDataProvider, HTTP Client</td>
+<td><code>src/data_loader/providers/fmp.py</code></td>
+</tr>
+<tr>
+<td><strong>Polygon Provider</strong></td>
+<td>Polygon-specific implementation; 4 endpoints (aggs, trades, options, snapshot)</td>
+<td>BaseDataProvider, HTTP Client</td>
+<td><code>src/data_loader/providers/polygon.py</code></td>
+</tr>
+<tr>
+<td><strong>FRED Provider</strong></td>
+<td>FRED-specific implementation; 32 economic series</td>
+<td>BaseDataProvider, HTTP Client</td>
+<td><code>src/data_loader/providers/fred.py</code></td>
+</tr>
+<tr>
+<td><strong>Retry &amp; Backoff Handler</strong></td>
+<td>Implements exponential backoff with jitter; retries transient failures (5xx, timeouts)</td>
+<td>HTTP Client</td>
+<td><code>src/data_loader/retry.py</code></td>
+</tr>
+<tr>
+<td><strong>HTTP Client Layer</strong></td>
+<td>Async HTTP requests via aiohttp; connection pooling; timeout management</td>
+<td>aiohttp.ClientSession</td>
+<td><code>src/data_loader/http_client.py</code></td>
+</tr>
+<tr>
+<td><strong>Cache Manager</strong></td>
+<td>Read/write JSON cache; provider-specific paths; TTL management; atomic writes (temp+rename)</td>
+<td>Filesystem</td>
+<td><code>src/data_loader/cache.py</code></td>
+</tr>
+<tr>
+<td><strong>Health Monitor</strong></td>
+<td>Tracks request counts, error rates, rate limit consumption; generates health reports</td>
+<td>None</td>
+<td><code>src/data_loader/health.py</code></td>
+</tr>
+<tr>
+<td><strong>Config Manager</strong></td>
+<td>Loads API keys from environment; manages settings (TTLs, concurrency limits, timeouts)</td>
+<td>python-dotenv</td>
+<td><code>src/data_loader/config.py</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-data-architecture">4. Data Architecture<a class="headerlink" href="#4-data-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="41-data-model">4.1 Data Model<a class="headerlink" href="#41-data-model" title="Permanent link">&para;</a></h3>
+<p><strong>Domain Entities:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>┌─────────────────────────┐
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│   DataRequest           │
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├─────────────────────────┤
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>│ provider: str           │  (fmp | polygon | fred)
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│ endpoint: str           │  (profile, aggs_daily, CPIAUCSL)
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│ params: dict            │  (symbol, start_date, etc.)
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│ cache_key: str          │  MD5(provider+endpoint+params)
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>└─────────────────────────┘
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>           │
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>           │ 1:1
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>           ▼
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>┌─────────────────────────┐
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>│   DataResponse          │
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>├─────────────────────────┤
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>│ data: dict | list       │  Normalized response
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>│ source: str             │  (cache | api)
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>│ timestamp: datetime     │  Fetch time
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>│ provider: str           │
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>│ error: str | None       │  Error message if failed
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>└─────────────────────────┘
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>           │
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>           │ 1:N
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>           ▼
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>┌─────────────────────────┐
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>│   CacheEntry            │
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>├─────────────────────────┤
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>│ cache_key: str          │  Unique identifier
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>│ data: dict              │  Response payload
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>│ created_at: datetime    │  Cache creation time
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>│ ttl_seconds: int        │  Time to live (default 604800)
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>│ provider: str           │
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>│ endpoint: str           │
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>└─────────────────────────┘
+</code></pre></div>
+<p><strong>Health Monitoring Model:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>┌─────────────────────────┐       ┌─────────────────────────┐
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>│   HealthReport          │       │   ProviderHealth        │
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>├─────────────────────────┤       ├─────────────────────────┤
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>│ timestamp: datetime     │───1:N─│ provider: str           │
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>│ overall_status: str     │       │ total_requests: int     │
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>│ providers: list[...]    │       │ errors: int             │
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>└─────────────────────────┘       │ error_rate: float       │
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>                                  │ circuit_state: str      │
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>                                  │ rate_limit_pct: float   │
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>                                  │ last_error: str | None  │
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>                                  └─────────────────────────┘
+</code></pre></div>
+<h3 id="42-storage-decisions">4.2 Storage Decisions<a class="headerlink" href="#42-storage-decisions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>Storage</th>
+<th>Format</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API Responses</td>
+<td>Filesystem (JSON)</td>
+<td><code>data/{provider}_cache/{path}/{file}.json</code></td>
+<td>Simple, versioned, human-readable; no DB overhead</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Environment variables + <code>.env</code> file</td>
+<td>Key-value pairs</td>
+<td>Standard practice; keeps secrets out of code</td>
+</tr>
+<tr>
+<td>API Keys</td>
+<td>Environment variables</td>
+<td><code>FMP_KEY</code>, <code>POLYGON_KEY</code>, <code>FRED_KEY</code></td>
+<td>Security best practice; never in version control</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>Filesystem (rotating)</td>
+<td><code>logs/nexus_core.log</code></td>
+<td>Standard Python logging; rotation prevents disk fill</td>
+</tr>
+<tr>
+<td>Metrics (future)</td>
+<td>In-memory counters</td>
+<td>Python dicts</td>
+<td>Lightweight; no persistence needed for research workload</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Cache Path Strategy:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Path Pattern</th>
+<th>Example</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FMP</td>
+<td><code>data/fmp_cache/{endpoint}/{date}/{symbol}.json</code></td>
+<td><code>data/fmp_cache/profile/2026-01-31/AAPL.json</code></td>
+<td>Date-based expiration; easy manual inspection</td>
+</tr>
+<tr>
+<td>Polygon</td>
+<td><code>data/polygon_cache/{endpoint}/{hash}.json</code></td>
+<td><code>data/polygon_cache/aggs_daily/a3f2e9d1b8c4.json</code></td>
+<td>Hash handles complex query params (date ranges)</td>
+</tr>
+<tr>
+<td>FRED</td>
+<td><code>data/fred_cache/{series_id}/{date_range}.json</code></td>
+<td><code>data/fred_cache/CPIAUCSL/2020-01-01_2026-01-31.json</code></td>
+<td>Series-centric; date range in filename</td>
+</tr>
+</tbody>
+</table>
+<h3 id="43-data-flow">4.3 Data Flow<a class="headerlink" href="#43-data-flow" title="Permanent link">&para;</a></h3>
+<p><strong>Happy Path (Cache Miss):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>User Request
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>     │
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>     ▼
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>[DataLoader.get_fmp_data(&quot;profile&quot;, symbol=&quot;AAPL&quot;)]
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>     │
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>     ├─────▶ [Check Operating Mode] ──READONLY──▶ [Cache.get()] ──MISS──▶ [Raise Error]
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>     │                                   │
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>     │                                  LIVE
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>     ▼                                   │
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>[Cache.get(key)] ──HIT──▶ [Return cached data]
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>     │                                   │
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    MISS                                 │
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>     │                                   │
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>     ▼                                   │
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>[Circuit Breaker.check()] ──OPEN──▶ [Raise CircuitOpenError]
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>     │                                   │
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>   CLOSED                                │
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>     │                                   │
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>     ▼                                   │
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>[QoS Semaphore.acquire(fmp)] ──max=3────┤
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>     │                                   │
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>     ▼                                   │
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>[FMPProvider.fetch(endpoint, params)]   │
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a>     │                                   │
+<a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a>     ├──▶ [HTTP GET] ──429──▶ [Parse Retry-After] ──▶ [Sleep] ──▶ [Retry]
+<a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a>     │                 │
+<a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a>     │                5xx
+<a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a>     │                 │
+<a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a>     ├──▶ [Retry Handler] ──▶ [Exponential Backoff + Jitter] ──▶ [Retry up to 3x]
+<a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a>     │                 │
+<a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a>     │                200
+<a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a>     ▼                 │
+<a id="__codelineno-4-33" name="__codelineno-4-33" href="#__codelineno-4-33"></a>[Validate Schema]      │
+<a id="__codelineno-4-34" name="__codelineno-4-34" href="#__codelineno-4-34"></a>     │                 │
+<a id="__codelineno-4-35" name="__codelineno-4-35" href="#__codelineno-4-35"></a>     ▼                 │
+<a id="__codelineno-4-36" name="__codelineno-4-36" href="#__codelineno-4-36"></a>[Normalize Data]       │
+<a id="__codelineno-4-37" name="__codelineno-4-37" href="#__codelineno-4-37"></a>     │                 │
+<a id="__codelineno-4-38" name="__codelineno-4-38" href="#__codelineno-4-38"></a>     ▼                 │
+<a id="__codelineno-4-39" name="__codelineno-4-39" href="#__codelineno-4-39"></a>[Cache.set(key, data, ttl=7d)] ──atomic write──▶ [temp.json] ──rename──▶ [final.json]
+<a id="__codelineno-4-40" name="__codelineno-4-40" href="#__codelineno-4-40"></a>     │                 │
+<a id="__codelineno-4-41" name="__codelineno-4-41" href="#__codelineno-4-41"></a>     ▼                 │
+<a id="__codelineno-4-42" name="__codelineno-4-42" href="#__codelineno-4-42"></a>[QoS Semaphore.release(fmp)]
+<a id="__codelineno-4-43" name="__codelineno-4-43" href="#__codelineno-4-43"></a>     │
+<a id="__codelineno-4-44" name="__codelineno-4-44" href="#__codelineno-4-44"></a>     ▼
+<a id="__codelineno-4-45" name="__codelineno-4-45" href="#__codelineno-4-45"></a>[Return DataResponse]
+</code></pre></div>
+<p><strong>Error Path (Circuit Breaker Opens):</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Multiple Failures (&gt;20% error rate)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>     │
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>     ▼
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>[Circuit Breaker] ──error_rate &gt; 0.2──▶ [State = OPEN]
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>     │
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>     ▼
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>[Subsequent Requests] ──▶ [Immediate Failure: CircuitOpenError]
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>     │
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>     ▼
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>[After timeout period] ──▶ [State = HALF-OPEN]
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>     │
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>     ▼
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>[Single test request] ──SUCCESS──▶ [State = CLOSED] ──▶ [Normal operation]
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>                       │
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>                     FAILURE
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>                       │
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>                       ▼
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>                  [State = OPEN]
+</code></pre></div>
+<hr />
+<h2 id="5-technology-stack">5. Technology Stack<a class="headerlink" href="#5-technology-stack" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Technology</th>
+<th>Version</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Language</strong></td>
+<td>Python</td>
+<td>3.9+</td>
+<td>Async/await improvements; widespread in quant research; asyncio stability</td>
+</tr>
+<tr>
+<td><strong>Async HTTP</strong></td>
+<td>aiohttp</td>
+<td>≥3.8</td>
+<td>Production-ready async HTTP client; connection pooling; timeout control</td>
+</tr>
+<tr>
+<td><strong>Environment</strong></td>
+<td>python-dotenv</td>
+<td>≥0.19</td>
+<td>Standard .env file loading; keeps secrets out of code</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>pytest</td>
+<td>≥7.0</td>
+<td>Industry standard; excellent async support via pytest-asyncio</td>
+</tr>
+<tr>
+<td><strong>Coverage</strong></td>
+<td>pytest-cov</td>
+<td>≥3.0</td>
+<td>Coverage reporting; integrated with pytest</td>
+</tr>
+<tr>
+<td><strong>Type Hints</strong></td>
+<td>typing (built-in)</td>
+<td>-</td>
+<td>Improved IDE support; runtime type validation possible</td>
+</tr>
+<tr>
+<td><strong>Logging</strong></td>
+<td>logging (built-in)</td>
+<td>-</td>
+<td>Standard library; rotating file handlers; no external deps</td>
+</tr>
+<tr>
+<td><strong>JSON</strong></td>
+<td>json (built-in)</td>
+<td>-</td>
+<td>Sufficient for cache; no serialization edge cases</td>
+</tr>
+<tr>
+<td><strong>Hashing</strong></td>
+<td>hashlib (built-in)</td>
+<td>-</td>
+<td>MD5 for cache keys (speed prioritized over crypto security)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+<th>License</th>
+<th>Risk Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>aiohttp</td>
+<td>Async HTTP client</td>
+<td>Apache 2.0</td>
+<td>Low - mature, widely used</td>
+</tr>
+<tr>
+<td>python-dotenv</td>
+<td>Environment variable loading</td>
+<td>BSD-3</td>
+<td>Low - simple, no network calls</td>
+</tr>
+<tr>
+<td>pytest</td>
+<td>Testing framework</td>
+<td>MIT</td>
+<td>Low - dev dependency only</td>
+</tr>
+<tr>
+<td>pytest-cov</td>
+<td>Coverage reporting</td>
+<td>MIT</td>
+<td>Low - dev dependency only</td>
+</tr>
+<tr>
+<td>pytest-asyncio</td>
+<td>Async test support</td>
+<td>Apache 2.0</td>
+<td>Low - dev dependency only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No database dependencies</strong> - Filesystem cache sufficient for research workload.</p>
+<hr />
+<h2 id="6-architecture-decisions">6. Architecture Decisions<a class="headerlink" href="#6-architecture-decisions" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Context</th>
+<th>Consequences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AD-001</strong></td>
+<td>Use Modular Monolith over Microservices</td>
+<td>Solo developer; research workload (batch-oriented, not user-facing); shared infrastructure (circuit breaker, cache, QoS)</td>
+<td>(+) Simple deployment, fast iteration, no network overhead<br>(-) All components share failure domain</td>
+</tr>
+<tr>
+<td><strong>AD-002</strong></td>
+<td>Filesystem JSON cache (not Redis/DB)</td>
+<td>Single user; dataset fits in memory; human-readable cache aids debugging</td>
+<td>(+) Zero external dependencies, simple backups, inspectable<br>(-) No TTL auto-expiration, manual cleanup needed</td>
+</tr>
+<tr>
+<td><strong>AD-003</strong></td>
+<td>Provider-specific concurrency limits (QoS Semaphore)</td>
+<td>Each API has different rate limits (FMP:3, Polygon:10, FRED:1)</td>
+<td>(+) Prevents rate limit violations, maximizes throughput<br>(-) Requires tuning per API subscription tier</td>
+</tr>
+<tr>
+<td><strong>AD-004</strong></td>
+<td>Circuit Breaker per provider (not global)</td>
+<td>API failures are independent (FMP down ≠ Polygon down)</td>
+<td>(+) Isolates failures, allows partial service<br>(-) More complex state management</td>
+</tr>
+<tr>
+<td><strong>AD-005</strong></td>
+<td>Atomic cache writes (temp + rename)</td>
+<td>Concurrent reads during writes could read partial JSON</td>
+<td>(+) Guarantees consistency, prevents corruption<br>(-) Extra filesystem operation per write</td>
+</tr>
+<tr>
+<td><strong>AD-006</strong></td>
+<td>Plugin architecture (BaseDataProvider)</td>
+<td>Need to add new APIs (Alpha Vantage, IEX) without core changes</td>
+<td>(+) Extensibility, separation of concerns<br>(-) Slight abstraction overhead</td>
+</tr>
+<tr>
+<td><strong>AD-007</strong></td>
+<td>Exponential backoff with jitter (not linear)</td>
+<td>Prevent thundering herd on API recovery</td>
+<td>(+) Better distribution of retries, faster recovery<br>(-) More complex retry logic</td>
+</tr>
+<tr>
+<td><strong>AD-008</strong></td>
+<td>Operating modes (LIVE vs READ-ONLY)</td>
+<td>Support offline analysis; prevent accidental API calls during testing</td>
+<td>(+) Explicit control, enables airplane mode<br>(-) Mode management adds complexity</td>
+</tr>
+<tr>
+<td><strong>AD-009</strong></td>
+<td>Schema validation (warn, don't fail)</td>
+<td>API schemas evolve; prefer partial data over total failure</td>
+<td>(+) Robustness to API changes, research continuity<br>(-) May mask breaking changes</td>
+</tr>
+<tr>
+<td><strong>AD-010</strong></td>
+<td>Async/await (not threading)</td>
+<td>I/O-bound workload; Python GIL limits thread scaling</td>
+<td>(+) Efficient concurrency, single-threaded simplicity<br>(-) All code must be async-compatible</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="7-deployment">7. Deployment<a class="headerlink" href="#7-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="71-deployment-model">7.1 Deployment Model<a class="headerlink" href="#71-deployment-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>┌─────────────────────────────────────────────────────────────┐
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>│                  Local Development Environment               │
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>│                      (macOS / Linux)                         │
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>├─────────────────────────────────────────────────────────────┤
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>│                                                              │
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>│  ┌────────────────────────────────────────────────────────┐ │
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>│  │  Python 3.9+ Virtual Environment                       │ │
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>│  │  (venv / conda)                                        │ │
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>│  ├────────────────────────────────────────────────────────┤ │
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>│  │                                                         │ │
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>│  │  ┌──────────────────────────────────────────────────┐  │ │
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>│  │  │  OmniData Nexus Core (src/)                      │  │ │
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>│  │  │  - DataLoader                                    │  │ │
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>│  │  │  - Providers (FMP, Polygon, FRED)                │  │ │
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>│  │  │  - Circuit Breaker, QoS Router, Cache            │  │ │
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>│  │  └──────────────────────────────────────────────────┘  │ │
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>│  │                                                         │ │
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>│  │  ┌──────────────────────────────────────────────────┐  │ │
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>│  │  │  Consumer Applications                           │  │ │
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>│  │  │  - Jupyter Notebooks (analysis/)                 │  │ │
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>│  │  │  - Python Scripts (scripts/)                     │  │ │
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>│  │  └──────────────────────────────────────────────────┘  │ │
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>│  │                                                         │ │
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>│  └────────────────────────────────────────────────────────┘ │
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>│                                                              │
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>│  ┌────────────────────────────────────────────────────────┐ │
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>│  │  Filesystem Storage                                    │ │
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>│  │  - data/fmp_cache/                                     │ │
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>│  │  - data/polygon_cache/                                 │ │
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>│  │  - data/fred_cache/                                    │ │
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>│  │  - logs/nexus_core.log                                 │ │
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>│  │  - .env (API keys)                                     │ │
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>│  └────────────────────────────────────────────────────────┘ │
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>│                                                              │
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>└─────────────────────────────────────────────────────────────┘
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>                         │
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>                         │ HTTPS
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>                         ▼
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>         ┌───────────────────────────────┐
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>         │  External APIs (Internet)     │
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>         │  - FMP Ultimate               │
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>         │  - Polygon.io                 │
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>         │  - FRED                       │
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>         └───────────────────────────────┘
+</code></pre></div>
+<h3 id="72-environments">7.2 Environments<a class="headerlink" href="#72-environments" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Purpose</th>
+<th>Configuration</th>
+<th>API Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Development</strong></td>
+<td>Local testing, research analysis</td>
+<td><code>.env</code> file with real API keys</td>
+<td>Real (rate-limited tier)</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Unit/integration tests</td>
+<td><code>.env.test</code> with mock API keys</td>
+<td>Mock/test keys</td>
+</tr>
+<tr>
+<td><strong>CI (future)</strong></td>
+<td>Automated testing</td>
+<td>Environment variables, mock HTTP responses</td>
+<td>No real API calls</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No Production Environment</strong> - Research tool runs locally only.</p>
+<h3 id="73-installation">7.3 Installation<a class="headerlink" href="#73-installation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># 1. Clone repository</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>git<span class="w"> </span>clone<span class="w"> </span>&lt;repo_url&gt;<span class="w"> </span>nexus_core
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">cd</span><span class="w"> </span>nexus_core
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># 2. Create virtual environment</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>python3.9<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nb">source</span><span class="w"> </span>venv/bin/activate
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1"># 3. Install dependencies</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="c1"># 4. Configure API keys</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>cp<span class="w"> </span>.env.example<span class="w"> </span>.env
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="c1"># Edit .env with real API keys:</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="c1"># FMP_KEY=your_fmp_key</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="c1"># POLYGON_KEY=your_polygon_key</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="c1"># FRED_KEY=your_fred_key</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="c1"># 5. Create cache directories</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>data/fmp_cache<span class="w"> </span>data/polygon_cache<span class="w"> </span>data/fred_cache<span class="w"> </span>logs
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22" href="#__codelineno-7-22"></a><span class="c1"># 6. Verify installation</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23" href="#__codelineno-7-23"></a>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;from src.data_loader import DataLoader; print(&#39;OK&#39;)&quot;</span>
+</code></pre></div>
+<p><strong>Target:</strong> &lt;5 minutes to first successful fetch.</p>
+<hr />
+<h2 id="8-cross-cutting-concerns">8. Cross-Cutting Concerns<a class="headerlink" href="#8-cross-cutting-concerns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Approach</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Error Handling</strong></td>
+<td>Layered strategy: retry transient (5xx), circuit break persistent (&gt;20%), fail fast permanent (4xx)</td>
+<td>Try/except in each layer; custom exceptions (CircuitOpenError, CacheMissError, ValidationError)</td>
+</tr>
+<tr>
+<td><strong>Logging</strong></td>
+<td>Structured logging with provider/endpoint context; API key sanitization</td>
+<td>Python <code>logging</code> module; rotating file handler (10MB, 5 backups); log level configurable via env</td>
+</tr>
+<tr>
+<td><strong>Configuration</strong></td>
+<td>Environment variables for secrets; Python module for defaults</td>
+<td><code>config.py</code> loads from <code>.env</code>; fallback defaults for non-secrets (TTL=7d, max_retries=3)</td>
+</tr>
+<tr>
+<td><strong>Monitoring</strong></td>
+<td>In-memory counters for requests/errors; health report API</td>
+<td><code>HealthMonitor</code> class tracks per-provider metrics; exposed via <code>get_api_health_report()</code></td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>API key sanitization in logs; no keys in cache files or errors</td>
+<td>Regex-based key redaction in log formatter; validate no keys in JSON before cache write</td>
+</tr>
+<tr>
+<td><strong>Concurrency</strong></td>
+<td>Async/await for I/O; semaphores for rate limiting</td>
+<td><code>asyncio.Semaphore</code> per provider; single event loop per process</td>
+</tr>
+<tr>
+<td><strong>Testing</strong></td>
+<td>Unit tests (mocked HTTP), integration tests (real HTTP), coverage &gt;80%</td>
+<td>pytest with pytest-asyncio; <code>aioresponses</code> for HTTP mocking; separate test fixtures per provider</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>Inline docstrings (Google style); architecture docs; API reference</td>
+<td>Sphinx-ready docstrings; <code>docs/</code> folder for ADRs and guides</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-quality-attributes">9. Quality Attributes<a class="headerlink" href="#9-quality-attributes" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Target</th>
+<th>How Achieved</th>
+<th>Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Performance</strong></td>
+<td>Single API request &lt;2s p95</td>
+<td>Async I/O, connection pooling, cache hits</td>
+<td>Timer wrapper on fetch methods</td>
+</tr>
+<tr>
+<td><strong>Scalability</strong></td>
+<td>50+ concurrent requests (within QoS limits)</td>
+<td>asyncio.gather(), semaphore-controlled concurrency</td>
+<td>Benchmark script with varying concurrency</td>
+</tr>
+<tr>
+<td><strong>Reliability</strong></td>
+<td>&gt;95% success rate (excluding API outages)</td>
+<td>Circuit breaker, exponential backoff, retry logic</td>
+<td>success_count / total_count metric</td>
+</tr>
+<tr>
+<td><strong>Maintainability</strong></td>
+<td>&gt;80% test coverage; clear separation of concerns</td>
+<td>Modular design, plugin architecture, comprehensive tests</td>
+<td>pytest-cov report</td>
+</tr>
+<tr>
+<td><strong>Extensibility</strong></td>
+<td>Add new provider in &lt;4 hours</td>
+<td>BaseDataProvider abstract class with template</td>
+<td>Time-to-implement new source metric</td>
+</tr>
+<tr>
+<td><strong>Usability</strong></td>
+<td>&lt;5 minute setup; single-method API calls</td>
+<td>Minimal dependencies, clear examples, unified interface</td>
+<td>Timed installation by new user</td>
+</tr>
+<tr>
+<td><strong>Security</strong></td>
+<td>No API keys in logs/cache/git</td>
+<td>Sanitization filters, .gitignore, env var validation</td>
+<td>Automated grep in CI</td>
+</tr>
+<tr>
+<td><strong>Availability</strong></td>
+<td>Partial service during single API outage</td>
+<td>Per-provider circuit breaker, independent failure domains</td>
+<td>Health check during simulated outage</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-risks-mitigations">10. Risks &amp; Mitigations<a class="headerlink" href="#10-risks-mitigations" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Probability</th>
+<th>Impact</th>
+<th>Mitigation</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>API schema breaking change</strong></td>
+<td>Medium</td>
+<td>High</td>
+<td>Schema validation with warnings; graceful degradation; version pinning in provider</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td><strong>Rate limit exhaustion</strong></td>
+<td>Medium</td>
+<td>Medium</td>
+<td>QoS semaphore enforces limits; 429 handling; warning at 80% consumption</td>
+<td>Framework (automated)</td>
+</tr>
+<tr>
+<td><strong>API service outage</strong></td>
+<td>Medium</td>
+<td>Medium</td>
+<td>Circuit breaker halts requests; cache serves stale data; clear error messages</td>
+<td>Framework (automated)</td>
+</tr>
+<tr>
+<td><strong>Cache corruption</strong></td>
+<td>Low</td>
+<td>Medium</td>
+<td>Atomic writes (temp+rename); validate JSON before write; backup strategy</td>
+<td>Framework (automated)</td>
+</tr>
+<tr>
+<td><strong>Dependency vulnerability</strong></td>
+<td>Low</td>
+<td>Medium</td>
+<td>Minimal dependencies; regular <code>pip audit</code>; version pinning in requirements.txt</td>
+<td>Developer</td>
+</tr>
+<tr>
+<td><strong>Thundering herd on recovery</strong></td>
+<td>Low</td>
+<td>Low</td>
+<td>Exponential backoff with jitter; circuit breaker half-open state (single test request)</td>
+<td>Framework (automated)</td>
+</tr>
+<tr>
+<td><strong>Memory exhaustion (large datasets)</strong></td>
+<td>Low</td>
+<td>High</td>
+<td>Not mitigated in v1.0; future: streaming/pagination; document memory limits</td>
+<td>Developer (docs)</td>
+</tr>
+<tr>
+<td><strong>API key leakage</strong></td>
+<td>Low</td>
+<td>Critical</td>
+<td>.gitignore for .env; sanitization in logs; no keys in cache; pre-commit hook validation</td>
+<td>Developer + Framework</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="11-future-considerations">11. Future Considerations<a class="headerlink" href="#11-future-considerations" title="Permanent link">&para;</a></h2>
+<p><strong>Not in v1.0, but architectural support planned:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Architectural Preparation</th>
+<th>Effort Estimate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Plugin Discovery</strong></td>
+<td>BaseDataProvider already abstract; add registry pattern</td>
+<td>8h</td>
+</tr>
+<tr>
+<td><strong>Metrics Export (Prometheus)</strong></td>
+<td>HealthMonitor counters ready; add exposition endpoint</td>
+<td>12h</td>
+</tr>
+<tr>
+<td><strong>Request Batching</strong></td>
+<td>Provider interface supports batch methods; add batch scheduler</td>
+<td>16h</td>
+</tr>
+<tr>
+<td><strong>Streaming/Pagination</strong></td>
+<td>Add async iterator support to provider interface</td>
+<td>20h</td>
+</tr>
+<tr>
+<td><strong>Database Cache Backend</strong></td>
+<td>Cache abstraction layer ready; implement SQLite/Postgres backend</td>
+<td>24h</td>
+</tr>
+<tr>
+<td><strong>Dark Pool Detection</strong></td>
+<td>Polygon trades endpoint fetched; add filter logic</td>
+<td>8h</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="12-constraints-assumptions">12. Constraints &amp; Assumptions<a class="headerlink" href="#12-constraints-assumptions" title="Permanent link">&para;</a></h2>
+<h3 id="constraints">Constraints<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Python 3.9+</strong> required (async/await, type hints)</li>
+<li><strong>Single user</strong> - no multi-tenancy, no authentication</li>
+<li><strong>Local execution</strong> - no distributed deployment</li>
+<li><strong>Internet required</strong> - no offline mode beyond cache (READ-ONLY mode)</li>
+<li><strong>Concurrency limits</strong> - FMP (3), Polygon (10), FRED (1) enforced</li>
+</ul>
+<h3 id="assumptions">Assumptions<a class="headerlink" href="#assumptions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Assumption</th>
+<th>Validation</th>
+<th>Risk if Wrong</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-001</td>
+<td>Datasets fit in memory (&lt;10GB per request)</td>
+<td>Monitor memory usage during testing</td>
+<td>Need streaming/pagination (20h effort)</td>
+</tr>
+<tr>
+<td>A-002</td>
+<td>API schemas stable for 6+ months</td>
+<td>Version detection in provider</td>
+<td>Manual normalization updates needed</td>
+</tr>
+<tr>
+<td>A-003</td>
+<td>Solo developer has valid API keys for all 3 providers</td>
+<td>Check at startup</td>
+<td>Graceful degradation to available providers</td>
+</tr>
+<tr>
+<td>A-004</td>
+<td>Filesystem cache sufficient (no concurrency from multiple processes)</td>
+<td>Document limitation</td>
+<td>Need file locking or DB backend</td>
+</tr>
+<tr>
+<td>A-005</td>
+<td>Research workload tolerates 7-day stale data</td>
+<td>User configurable TTL</td>
+<td>Reduce TTL or invalidate cache manually</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="approval">Approval<a class="headerlink" href="#approval" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Date</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Author</td>
+<td>Architect Agent</td>
+<td>2026-01-31</td>
+<td>✅ Generated</td>
+</tr>
+<tr>
+<td>Reference</td>
+<td>MoneyFlows Data Loader v2.7.0</td>
+<td>-</td>
+<td>✅ Integrated</td>
+</tr>
+<tr>
+<td>Owner</td>
+<td>Solo Developer</td>
+<td></td>
+<td>☐ Pending Review</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="revision-history">Revision History<a class="headerlink" href="#revision-history" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Date</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2026-01-31</td>
+<td>Architect Agent</td>
+<td>Initial architecture design based on approved requirements</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Architecture designed for simplicity, resilience, and extensibility. Built on proven patterns from MoneyFlows Data Loader v2.7.0.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/Maeshowe/Nexus_Core" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
