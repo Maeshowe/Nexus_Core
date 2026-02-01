@@ -308,7 +308,7 @@ class DataLoader:
                 self._stats.api_calls += 1
 
                 # Execute with retry handler
-                response = await self._retry_handler.execute(
+                response: ProviderResponse = await self._retry_handler.execute(
                     provider.get, session, endpoint, use_cache=False, **params
                 )
 

@@ -59,7 +59,7 @@ class SanitizingFormatter(logging.Formatter):
             style: Format style ('%', '{', or '$')
             additional_patterns: Additional (pattern, replacement) tuples to apply
         """
-        super().__init__(fmt, datefmt, style)
+        super().__init__(fmt, datefmt, style)  # type: ignore[arg-type]
         self.additional_patterns = additional_patterns or []
 
     def format(self, record: logging.LogRecord) -> str:
@@ -72,7 +72,7 @@ class SanitizingFormatter(logging.Formatter):
             if callable(replacement):
                 formatted = pattern.sub(replacement, formatted)
             else:
-                formatted = pattern.sub(replacement, formatted)
+                formatted = pattern.sub(replacement, formatted)  # type: ignore[call-overload]
 
         # Apply additional patterns
         for pattern, replacement in self.additional_patterns:
@@ -135,7 +135,7 @@ def sanitize_message(message: str) -> str:
         if callable(replacement):
             result = pattern.sub(replacement, result)
         else:
-            result = pattern.sub(replacement, result)
+            result = pattern.sub(replacement, result)  # type: ignore[call-overload]
 
     return result
 

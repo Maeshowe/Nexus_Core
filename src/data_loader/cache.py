@@ -412,7 +412,7 @@ class CacheManager:
                     except (OSError, json.JSONDecodeError, KeyError):
                         prov_stats["expired_entries"] += 1
 
-            stats["providers"][prov] = prov_stats
+            stats["providers"][prov] = prov_stats  # type: ignore[index]
 
         return stats
 

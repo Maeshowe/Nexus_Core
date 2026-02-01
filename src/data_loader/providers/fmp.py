@@ -121,14 +121,14 @@ class FMPProvider(BaseDataProvider):
         if not endpoint_config:
             raise ValueError(f"Unknown endpoint: {endpoint}")
 
-        path = endpoint_config["path"]
+        path: str = str(endpoint_config["path"])
 
         # Replace path parameters (e.g., {symbol})
         if "{symbol}" in path:
             symbol = params.get("symbol")
             if not symbol:
                 raise ValueError(f"Endpoint '{endpoint}' requires 'symbol' parameter")
-            path = path.replace("{symbol}", symbol)
+            path = path.replace("{symbol}", str(symbol))
 
         return f"{self.base_url}{path}"
 

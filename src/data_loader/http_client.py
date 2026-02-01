@@ -131,6 +131,10 @@ class HttpClient:
         self.timeout = timeout
         self.default_headers = default_headers or {}
 
+    async def close(self) -> None:
+        """Close the HTTP client. Currently a no-op as sessions are managed externally."""
+        pass
+
     async def request(
         self,
         session: aiohttp.ClientSession,

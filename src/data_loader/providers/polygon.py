@@ -77,32 +77,32 @@ class PolygonProvider(BaseDataProvider):
         if not endpoint_config:
             raise ValueError(f"Unknown endpoint: {endpoint}")
 
-        path = endpoint_config["path"]
+        path: str = str(endpoint_config["path"])
 
         # Replace path parameters
         if "{symbol}" in path:
             symbol = params.get("symbol")
             if not symbol:
                 raise ValueError(f"Endpoint '{endpoint}' requires 'symbol' parameter")
-            path = path.replace("{symbol}", symbol)
+            path = path.replace("{symbol}", str(symbol))
 
         if "{underlyingAsset}" in path:
             asset = params.get("underlyingAsset") or params.get("symbol")
             if not asset:
                 raise ValueError(f"Endpoint '{endpoint}' requires 'underlyingAsset' or 'symbol' parameter")
-            path = path.replace("{underlyingAsset}", asset)
+            path = path.replace("{underlyingAsset}", str(asset))
 
         if "{start}" in path:
             start = params.get("start")
             if not start:
                 raise ValueError(f"Endpoint '{endpoint}' requires 'start' parameter")
-            path = path.replace("{start}", start)
+            path = path.replace("{start}", str(start))
 
         if "{end}" in path:
             end = params.get("end")
             if not end:
                 raise ValueError(f"Endpoint '{endpoint}' requires 'end' parameter")
-            path = path.replace("{end}", end)
+            path = path.replace("{end}", str(end))
 
         return f"{self.base_url}{path}"
 

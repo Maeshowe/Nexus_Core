@@ -269,7 +269,7 @@ class HealthMonitor:
         statuses = []
         for provider in ["fmp", "polygon", "fred"]:
             metrics = self.get_provider_metrics(provider)
-            report["providers"][provider] = metrics.to_dict()
+            report["providers"][provider] = metrics.to_dict()  # type: ignore[index]
             statuses.append(metrics.status)
 
         # Overall status is the worst of all providers
