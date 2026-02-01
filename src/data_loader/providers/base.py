@@ -198,9 +198,9 @@ class BaseDataProvider(ABC):
 
         key = f"{prefix}_{param_str}" if param_str else prefix
 
-        # Hash if too long
+        # Hash if too long (MD5 used only for cache keys, not security)
         if len(key) > 200:
-            hash_val = hashlib.md5(key.encode()).hexdigest()[:16]
+            hash_val = hashlib.md5(key.encode(), usedforsecurity=False).hexdigest()[:16]
             key = f"{prefix}_{hash_val}"
 
         return key
