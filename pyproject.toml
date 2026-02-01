@@ -1,25 +1,69 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "nexus-core"
-version = "1.0.0"
+name = "omnidata-nexus-core"
+version = "1.1.0"
 description = "Modular, asynchronous DataLoader framework for financial and macroeconomic data aggregation"
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "MIT"}
+license = "MIT"
 authors = [
     {name = "OmniData Nexus Core Team"}
 ]
-keywords = ["finance", "data", "async", "api", "fmp", "polygon", "fred"]
+keywords = ["finance", "data", "async", "api", "fmp", "polygon", "fred", "dataloader"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Framework :: AsyncIO",
+    "Typing :: Typed",
 ]
+
+dependencies = [
+    "aiohttp>=3.9.0,<4.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+    "pandas>=2.0.0,<3.0.0",
+    "typing-extensions>=4.0.0,<5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0,<9.0.0",
+    "pytest-asyncio>=0.21.0,<1.0.0",
+    "pytest-cov>=4.1.0,<6.0.0",
+    "aioresponses>=0.7.4,<1.0.0",
+    "mypy>=1.5.0,<2.0.0",
+    "ruff>=0.1.0,<1.0.0",
+    "detect-secrets>=1.4.0,<2.0.0",
+]
+docs = [
+    "mkdocs>=1.5.0,<2.0.0",
+    "mkdocs-material>=9.4.0,<10.0.0",
+    "mkdocstrings[python]>=0.24.0,<1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Maeshowe/Nexus_Core"
+Documentation = "https://maeshowe.github.io/Nexus_Core/"
+Repository = "https://github.com/Maeshowe/Nexus_Core.git"
+Issues = "https://github.com/Maeshowe/Nexus_Core/issues"
+Changelog = "https://github.com/Maeshowe/Nexus_Core/blob/main/docs/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["py.typed"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -92,4 +136,4 @@ ignore = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["src"]
+known-first-party = ["data_loader"]
