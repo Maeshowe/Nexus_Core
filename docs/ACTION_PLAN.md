@@ -2328,20 +2328,29 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
   - Docstring-ek ellenőrzése
   - Hosted docs (GitHub Pages / ReadTheDocs)
 
-### 11.2 Csomagolás és publikálás
+### 11.2 CI/CD és PyPI publikálás
 **Prioritás:** Magas | **Komplexitás:** Közepes
+**Státusz:** ⏳ Folyamatban
 
-- [ ] pyproject.toml kiegészítése
-  - Build system (hatchling/setuptools)
-  - Entry points
+- [x] pyproject.toml kiegészítése
+  - Build system (setuptools)
   - Dependencies specifikáció
-- [ ] PyPI feltöltés előkészítése
-  - Package name ellenőrzés
-  - Verziókezelés stratégia (semver)
-  - CHANGELOG.md létrehozása
-- [ ] Distribution tesztelés
-  - TestPyPI feltöltés
-  - Clean install teszt
+  - Package name: `omnidata-nexus-core`
+- [x] GitHub Actions publish workflow
+  - `.github/workflows/publish.yml`
+  - TestPyPI/PyPI target választás
+  - Trusted Publishing (OIDC)
+- [ ] **PyPI Trusted Publisher konfigurálás**
+  - TestPyPI: https://test.pypi.org/manage/account/publishing/
+  - PyPI: https://pypi.org/manage/account/publishing/
+  - Beállítások:
+    - Owner: `Maeshowe`
+    - Repository: `Nexus_Core`
+    - Workflow: `publish.yml`
+    - Environment: `testpypi` / `pypi`
+- [ ] TestPyPI teszt feltöltés
+  - GitHub Actions → Publish workflow → testpypi
+  - Clean install teszt: `pip install -i https://test.pypi.org/simple/ omnidata-nexus-core`
 
 ### 11.3 Integrációs tesztek valós API-kkal
 **Prioritás:** Közepes | **Komplexitás:** Közepes
