@@ -2331,7 +2331,7 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
 
 ### 11.2 CI/CD és PyPI publikálás
 **Prioritás:** Magas | **Komplexitás:** Közepes
-**Státusz:** ⏳ Folyamatban
+**Státusz:** ⏳ Részben kész (PyPI pending)
 
 - [x] pyproject.toml kiegészítése
   - Build system (setuptools)
@@ -2341,7 +2341,10 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
   - `.github/workflows/publish.yml`
   - TestPyPI/PyPI target választás
   - Trusted Publishing (OIDC)
-- [ ] **PyPI Trusted Publisher konfigurálás**
+- [x] GitHub Pages dokumentáció
+  - https://maeshowe.github.io/Nexus_Core/
+  - Repo publikus
+- [ ] **PyPI Trusted Publisher konfigurálás** ⏸️ FÜGGŐBEN
   - TestPyPI: https://test.pypi.org/manage/account/publishing/
   - PyPI: https://pypi.org/manage/account/publishing/
   - Beállítások:
@@ -2349,9 +2352,7 @@ A projekt alapvető funkcionalitása kész (M1-M4 ✅). A következő opcionáli
     - Repository: `Nexus_Core`
     - Workflow: `publish.yml`
     - Environment: `testpypi` / `pypi`
-- [ ] TestPyPI teszt feltöltés
-  - GitHub Actions → Publish workflow → testpypi
-  - Clean install teszt: `pip install -i https://test.pypi.org/simple/ omnidata-nexus-core`
+  - *Megjegyzés: Hozzáférési probléma miatt elhalasztva*
 
 ### 11.3 Integrációs tesztek valós API-kkal
 **Prioritás:** Közepes | **Komplexitás:** Közepes
@@ -2413,3 +2414,4 @@ A projekt production-ready:
 | 1.0 | 2026-01-31 | Lead Agent | Initial action plan with realistic effort estimates |
 | 1.1 | 2026-01-31 | Claude | Updated status: M1-M4 COMPLETE, added Next Steps section |
 | 1.2 | 2026-02-01 | Claude | 11.1 docs ✅, 11.3 examples ✅, 11.4 benchmarks ✅ |
+| 1.3 | 2026-02-01 | Claude | GitHub Pages live, CI green, PyPI pending |
